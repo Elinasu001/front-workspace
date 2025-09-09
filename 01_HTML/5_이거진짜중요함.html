@@ -130,8 +130,223 @@
     <h4> text와 관련된 input 요소의 type들</h4>
     <form action="마음대로" method="get">
         <h5>type : "text"</h5>
-        <li>- 한줄 텍스트를 입력할 수 있는 상자(기본값)</li>
+        <a href="https://syntaxsugar.tistory.com/entry/%ED%8A%B9%EC%88%98-%EA%B8%B0%ED%98%B8-%EB%AA%85%EC%B9%AD%EC%9D%B4%EB%A6%84" title="특수 기호 명칭 이름" _blank>특수 기호 명칭 이름</a>
+        <p>- 한줄 텍스트를 입력할 수 있는 상자(기본값)</p>
+        아이디 : <input type="text" placeholder="꼭 적기" required/>
+        <!--
+            - required
+
+            while(){
+                if(아이디를 입력을 안했다면?) {
+                    continue;
+                }
+            
+            }
+        -->
+
+        <h5>type = "password"</h5>
+        <p>
+            -비밀번호를 입력할 수 있는 텍스트 박스
+        </p>
+        비밀번호 : <input type="password" placeholder="최대 5글자" maxlength="5" required>
+        <!--
+            - maxlength="5"
+
+            if(비밀번호.length() > 5){continue;}
+        -->
+
+        <h5>type="search/url/email"</h5>
+        <p>- 겉모습은 텍스트상자와 비슷하지만 세분화된 기능을 제공</p>
+        검색 : <input type="search">
+        <br>
+        URL : <input type="url">
+        <br>
+        EAMIL : <input type="email"/>
+
+        <!--
+            required : 필수 입력사항일 경우
+            placeholder : 입력을 유도하는 꾸밈요소
+            maxlength : 작성할 수 있는 최대길이
+
+            name : 요청 시 key 값 지정, 의미를 부여해서 짓는게 좋음
+            (form 태그 내부에 input 요소에는 반드시 name 속성을 달자 꼭!)
+
+            value : input 요소에 실세 입력된 값
+        -->
+
+        <br><br>
         <input type="submit" />
     </form>
+        
+    <hr>
+    <h4>textarea</h4>
+    <p>- 텍스트 상자인데 여러 줄을 쓸 수 있음</p>
+    <!--
+        System.out.println("게시글 작성 서비스입니다!");
+
+        System.out.print("제목을 입력하세요 > ");
+        String boardTitle = sc.nextLine();
+
+        System.out.print("내용을 입력하세요 > ");
+        String boardContent = sc.nextLine();
+
+        bc.insertBoard(boardTitle, boardContent);
+    -->
+
+    <form action="콘트롤러주소">
+        <fieldset>
+            <legend>게시글 작성 서비스입니다.</legend>
+            제목 : <input type="text" name="boardTitle" size="50">
+            <br>
+            내용 : <br>
+            <textarea type="text" name="boardContent" cols="59" rows="30" style="resize: none" placeholder="내용을 입력해주세요"></textarea>
+            <br><br>
+            <input type="submit" value="글작성">
+        </fieldset>
+    </form>
+
+    <hr>
+    <h4>숫자와 관련된 input요소의 type</h4>
+
+    <form action="number">
+
+        <!--
+            System.out.print("나이를 입력하시오 > ");
+            int age = sc.nextInt();
+            sc.nextLine();
+
+            int 형식으로 안 받을 경우 inputTypeMisMatch발생했었음
+        -->
+
+        <h5>type = "number"</h5>
+
+        나이 : <input type="number" name="age"/>
+
+        <p>
+            - 숫자값만 입력할 수 있는 텍스트 상자인데<br>
+            - 스핀박스(위/아래 화살표 버튼)
+        </p>
+
+        수량 : <input type="number" name="amount" value="0" step="5" min="0" max="20"/>
+        <!--
+            value : value값
+            min : 최소값
+            max : 최대값
+            step: 증가하거나 감소할 수 있는 값의 크기
+        -->
+
+        <h5>type = "range"</h5>
+
+        <p>
+            - 슬라이드바를 이용해서 숫자 쓰기
+        </p>
+
+        슬라이드바 : <input type="range" name="range" />
+
+
+        <br><br><br>
+        <input type="reset" value="초기화버튼">
+        <input type="submit" value="발루버튼">
+    </form>
+
+    <hr>
+    <h4>날짜 및 시간과 관련된 input 요소의 type</h4>
+    <form action="날짜">
+        <h5>type="date/moth/week/time/datetime-local"</h5>
+        date : <input type="date" name="date">
+        <!--연도, 월, 일-->
+        <br>
+        month :  <input type="month" name="month"/>
+        <!--연도, 월-->
+        <br>
+        week : <input type="week" name="week">
+        <!--연도, 해당 년도에 몇 번째 주-->
+        <br>
+        time : <input type="time" name="time">
+        <!--오전 / 오후 , 시, 분-->
+        <br>
+        datetime-local : <input type="datetime-local" name="dt">
+        <!--다사용!-->
+
+        <br><br>
+        <!--
+        <input type="submit">
+        -->
+        <button>버튼이요~</button>
+        <!--
+            button 요소는 form 태그 내부에 위치하고 있다면,
+            기본값(default)는 type="submit"이다.
+            만약, button을 사용하고 싶을 경우 type="button" 을 적어준다
+        -->
+        <br><br>
+        <button style="border:none; background: none; " ><img src="./resources/image/chu01.png" alt="추성훈" style="width:200px;" /></button>
+    </form>
+
+    <h4>radio button 과 checkbox</h4>
+    < action="checked">
+        <h5>radio button (type="radio")</h5>
+        <p>
+            - 여러 개의 선택지를 중에서 오로지 한 개만 선택하게 하고 싶을 때<br>
+            - name속성 값이 똑같은 것들끼리 하나의 그룹으로 묶임<br>
+            - 제출 시 현재 선택된(checked) value가 넘어감
+        </p>
+
+        숙소 위치 평가 :
+        <br>
+        <input type="radio" name="location" value="9"/> 9+ 우수<br>
+        <input type="radio" name="location" value="8"/> 8+ 좋음<br>
+        <input type="radio" name="location" value="7"/> 7+ 일반<br>
+        <!--
+            value: 내가 넘기고 싶은 값을 적어준다(넣지 않을 경우, on이 넘어간다.)
+        -->
+
+        <br>
+        <h5>type="checkbox"</h5>
+        <p>
+            - 여러 개의 선택지들 중에서 여러 개를 선택 가능하게 하고 싶을 때 씀 <br>
+            - 넘기고자 하는 값을 value속성의 값으로 넣어주어야함
+        </p>
+        객실 편의 시설 / 서비스
+        <br><br>
+        <input type="checkbox" name="service" value="에어컨" id="에어컨">
+        <label for="에어컨">에어컨</label>
+        <br>
+        <input type="checkbox" name="service" value="난방" id="난방">
+        <label for="난방">난방</label>
+        <br>
+        <input type="checkbox" name="service" value="TV" id="TV">
+        <label for="TV">TV</label>
+        <br>
+
+        <input type="submit" value="선택">
+        <br><br><br>
+    </form>
+
+
+
+    <h4>그 외 등등..</h4>
+    <form action="etc">
+        <h5>type= "color"</h5>
+        <p>
+            - 선택할 수 있는 type<br>
+            골라골라 : <input type="color"/>
+        </p>
+        
+
+        <h5>type="file"</h5>
+        <p>
+            - 첨부파일을 선택할 수 있는 type<br/>
+            첨부파일 : <input type="file" />
+        </p>
+
+        <h5>type="hidden"</h5>
+        <p>
+            - 사용자한테는 보여주고싶지 않는 값을,
+            화면에 노출시키지도 안혹
+            몰래 넘겨주고 싶을 경우
+        </p>
+        <input type="hidden" value="1235" name="hidden">
+    </form>
+
 </body>
 </html>
