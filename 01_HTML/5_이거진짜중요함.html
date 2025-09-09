@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력양식 및 폼 관련 태그</title>
+</head>
+
+<body>
+
+    <!--
+        당분간 Java에서의 Scanner역할을 대신
+    -->
+    <!--
+        System.out.print("아이디를 입력해주세요 >  ");
+        Scanner sc = new Scanner(System.in);
+        String userId = sc.nextLine();
+    -->
+
+    <label for="">아이디를 입력해주세요 ></label>
+    <input type="text" placeholder="최대 15자 이내로 작성바람."/>
+    <textarea name="" id=""></textarea>
+    <br/>
+    <hr>
+
+    <h1>입력 양식 관련 태그</h1>
+    <h2>input 태그</h2>
+
+    <p>
+        사용자에게 값을 입력받을 수 있는 텍스트상자, 체크박스 등을 만들 수 있는 태그 <br/>
+        type속성으로 지정 가능
+    </p>
+
+    아이디 : <input type="text"> <br/>
+    비밀번호 : <input type="password"> <br/>
+    먹고싶은 거 다 골라보세요 : <br/>
+    <input type="checkbox"> 마이쮸</input>
+    <input type="checkbox"> ABC 초콜렛</input>
+    <br/>
+    <input type="radio"> 주황색</input>
+    <input type="radio"> 분홍색</input>
+    <br/>
+    <input type="submit">
+    <hr>
+
+    <h2>Form 태그 ==> 요친구 당분간 아주 아주 중요한 친구</h2>
+    <!--
+        Form 태그 : 입력양식들이 들어갈 틀을 의미
+        form 태그 내부에 위치한 submit버튼을 클릭 시
+        해당 form 태그에 작성한(선택한) 사용자가 입렵한 값들을
+        요청을 받아주는 서버로 넘기면서 요청하는 역할을 하는 것이
+        form 태그 & submit 버튼 !
+    -->
+
+    <!--
+        form action="" :  form 태그의 action 속성은 꼭 사용
+        method="" : method 속성은 필요하면 꼭 써줘야겠다. 근데 필요하면 써줘야한다
+        
+        * action : 해당 form 안에 사용자가 입력한 값들을 전달하면서 요청 보낼 URL을 작성<br>
+
+        * method : 요청 방식 지정하는 속성(GET방식(기본값)/POST방식)
+                    > GET 방식 : 요청 시 사용자가 입력한 값들이 URL에 노출
+                    > POST 방식 : 요청 시 사용자가 입력한 값들이 URL에 안보임
+
+            form 태그 내부에 존재하는 submit 버튼을 클릭 시,
+            action 속성에 작성한 url로
+            method 속성에 작성한 요청 방식을 통해
+            사용자가 input요소에 입력한 값들이 key=value 세트로 전달된다.
+    -->
+
+    <!--
+        System.out.print("검색할 키워드를 입력해주세요 > ");
+        String keyword = sc.nextLine();
+        controller.findByKeyword(keyword);
+    -->
+    <h4>get 방식</h4>
+    <form action="findByKeyword" method="get">
+        검색할 키워드 : <input type="text" name="keyword"/> <!--name 속성(key)을 적어줘야 get방식 입력한 값(value)들이 url에 노출이 된다.-->
+        <br>
+        보너스로 하나 더 : <input type="text" name="bonus"><input type="submit" />
+        <li>127.0.0.1:5500/01_HTML/findByKeyword?keyword=키워드&bonus=뽀나스</li>
+        <li>이렇게 나온 이유는?</li>
+        <li>요청받아주는 값이 없기 때문이다.</li>
+        <p><b>구글 예시 ) https://www.google.com/search?q=검색함 == action?name(key)=사용자가입력한값(value)</b></p>
+    </form>
+    <br><br>
+    <form action="https://search.naver.com/search.naver" method="get">
+        검색할 키워드 : <input type="text" name="keyword"/>
+        <br>
+        보너스로 하나 더 : <input type="text" name="bonus">
+        <br>
+        <input type="submit" />
+        <p><b>네이버 예시 ) https://search.naver.com/search.naver?keyword=키워드키작성&bonus=보너스밸류값작성</b></p>
+    </form>
+
+    <hr>
+    <h4>post 방식</h4>
+    <form action="postgo" method="post">
+        요청 시 전달 값 : <input type="text" name="test"/>
+        <input type="submit"/>
+        <p><b>예시 ) http://127.0.0.1:5500/01_HTML/postgo : 작성한 값이 보이지 않음</b></p>
+    </form>
+    
+    <h3>form 태그 중요하니 꼭 잊지말고 다음주에 한 번 더 보기!!!</h3>
+
+    <hr>
+
+    <h4>form 태그 세트세트</h4>
+    <!--
+        form 태그 세트세트
+
+        fieldset : 그룹을 묶는 태그
+        legend : 묶은 그룹에다가 제목을 붙여주는 태그(없어도 무방)
+    -->
+
+    <form action="legend">
+        <fieldset>
+            <legend>회원가입</legend>
+            <br>
+            필수정보 : 사용자 정보 <input type="text">
+        </fieldset>
+        <fieldset>
+            <br>
+            추가정보 : 추천인 정보 <input type="text">
+        </fieldset>
+    </form>
+
+    <hr>
+
+    <h4> text와 관련된 input 요소의 type들</h4>
+    <form action="마음대로" method="get">
+        <h5>type : "text"</h5>
+        <li>- 한줄 텍스트를 입력할 수 있는 상자(기본값)</li>
+        <input type="submit" />
+    </form>
+</body>
+</html>

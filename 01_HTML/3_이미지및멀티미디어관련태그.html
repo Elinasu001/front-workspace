@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹페이지에 이미지를 넣어보기</title>
+</head>
+<style>
+    #police:hover { cursor:pointer; transition:transform 0.5s ease-in-out; transform: scale(1.1);}
+</style>
+<body>
+    <h2>이미지 관련 태그</h2>
+    <!--
+        <img src="이미지의 경로(필수)" alt="이미지 설명" width="이미지의 가로길이" height="이미지의 세로길이"/>
+    -->
+
+    <h3>src속성, alt속성</h3>
+    <img src="https://dimg.donga.com/wps/SPORTS/IMAGE/2025/05/20/131645368.1.jpg" alt="추성훈" width="300" height="auto" id="police">
+        
+
+    <img src="./resources/image/chu01.png" alt="추성훈1" width="300" height="auto">
+    <p>
+        * alt <br/>
+        - 사진의 경로가 존재하지 않거나 표현할 수 없는 경우 대체 텍스트<br/>
+        - 스크린리더(화면낭독기)에서 이미지 읽어주는 설명문구<br/>
+
+        웹접근성 => 사용자의 신체적, 지역, 나이, 지식수준등을 고려하여 <br/>
+        가능한 최대한 많은 사용자가 불편함 없이 이용할 수 있도록 웹을 만드는 것
+    </p>
+
+    <hr/>
+
+
+    <h4> * width 와 height 속성</h4>
+    <p>
+        요소의 가로, 세로길이를 조절할 수 있는 속성 <br/>
+        고정길이(px), 가변길이(%)로 조정이 가능하다.
+    </p>
+
+
+    <h5>고정길이 단위(px) == 기본값</h5>
+    <img src="./resources/image/chu01.png" alt="꽃" height="150" width="150"/>
+    <img src="./resources/image/chu02.png" alt="꽃" height="150" width="800"/>
+    <img src="./resources/image/chu03.png" alt="꽃" height="150" width="200"/>
+    <img src="./resources/image/img01.png" alt="꽃" height="150" width="230"/>
+    <img src="./resources/image/img02.png" alt="꽃" height="150" width="170"/>
+    <!--기본값 : 화면사이즈가 바뀌더라도 크기에 변동이 일어나지 않는다.-->
+
+    <H4>가변길이 단위(%)</H4>
+    <img src="./resources/image/chu01.png" alt="꽃" height="150" width="15%">
+    <img src="./resources/image/chu02.png" alt="꽃" height="150" width="15%">
+    <img src="./resources/image/chu03.png" alt="꽃" height="150" width="15%">
+    <img src="./resources/image/img01.png" alt="꽃" height="150" width="15%">
+    <img src="./resources/image/img02.png" alt="꽃" height="150" width="15%">
+
+
+    <h3>미디어 관련태그</h3>
+    <!--
+        <audio src="" controls autoplay loop />
+        <video src="" controls autoplay loop width, hegiht, potser/>
+
+        src : 미디어파일 및 오디오파일의 경로
+        controls : 플레이어를 보일것인지 아니면 숨길것인지
+        autoplay :자동재생 여부 지정
+        loop : 반복재생 여부 지정
+        poster : 썸네일 이미지 지정
+    -->
+    <audio src="./resources/audio/major.mp3" controls autoplay></audio>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_표태그</title>
+</head>
+<style>
+    table{border:1px solid rgb(205, 99, 50);}
+    tr{border:1px solid greenyellow;}
+    th{border:1px solid green;}
+    td{border:1px solid rgb(98, 0, 255);}
+</style>
+<body>
+    <!--
+        표(table) : row + cell로 구성됨
+        웹페이지에서 많은 데이터를 정리해서 표현하고자 할 때 사용
+
+        표를 구성하는 요소 : <table> <tr>, <th>, <td> + <thead>, <tbody>, <tfoot>
+            
+        <table></table> : 기본적으로 표를 하나 만들어주는 요소
+        <tr></tr> : 표의 한 행(가로로 한 줄)을 나타내는 요소
+        <td></td> : 표의 일반 셀(한 칸)을 나타내는 요소
+
+    -->
+
+    <table>
+        <thead>
+            <tr>
+                <!--
+                    셀태그의 속성을 이용해서 합칠 수 있음
+                    (td, th)
+
+                    colspan="2" 2개의 셀을 합치겠다.
+                    rowspan="2" 2개의 행을 합치겠다.
+                -->
+                <th colspan="2">제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회수</th>
+                <th>좋아요</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>734629</td>
+                <td>레드매직 10pro 유플러스</td>
+                <td>NSLab</td>
+                <td>00:04</td>
+                <td>73</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>734629</td>
+                <td>아이패드 11 기본으로 살까요...</td>
+                <td>첨이중하다</td>
+                <td>2025.09.08</td>
+                <td>70</td>
+                <td>0</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
