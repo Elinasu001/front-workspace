@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 기본선택자</title>
+</head>
+<style>
+    /*1. 전체 선택자*/
+    * { color: blue;}
+    /*2. 태그 선택자*/
+    pre{color:lightcoral;}
+    /*3. 아이디 선택자(#아이디속성값)*/
+    #pre-3,
+    #list-2 {color:red;}
+    /*4. 클래스 선택자*/
+    .class-1{ color: salmon; }
+    .class-2{ color:aqua; }
+</style>
+<body>
+    <!--
+        CSS(Cascading Style Sheets)
+        HTML로 잡은 구조에, style이라는 태그를 이용해서 꾸미는 역할을 하는 언어 -> W3C(WWW Consortium)에서 지정
+
+        * CSS스타일 부여 방식
+        1. 인라인 방식 : 스타일 부여하려고 하는 요소에 style속성에 직접 기입
+        2. 내부 방식 : 현재 HTML문서에 적용하려고 하는 스타일 정보들을 <head>콘텐츠 영역에 <style>태그를 이용해서 기입하는 방식
+        3. 외부 방식 : 스타일 정보만을 따로 관리하는 .css 파일을 만들어서 <link> 태그로 연결하는 방식
+    -->
+
+    <h1>선택자(Selector)란? ★★★</h1>
+    <!--
+        특정 html요소를 선택하려고 할 때 사요하는 기능
+        선택자를 이용해서 원하는 요소만 선택해서 style속성을 부여
+    -->
+
+    <!--인라인 스타일 방식-->
+    <div  style="background-color: red;">인라인 스타일 방식</div>
+
+    <h3>1. 전체(모든 요소) 선택자</h3>
+    <pre>
+        [표현법]
+        * {
+            스타일 속성 : 스타일속성 값;
+        }
+        => 현재 이 html 문서 내의 모든 요소를 다 선택할 때 사용
+    </pre>
+    
+    <h3>2. 태그 선택자</h3>
+    <pre>
+        [표현법]
+        태그명{
+            스타일속성 : 스타일속성 값;
+            스타일속성 : 스타일속성 값;
+        }
+        => 문서 내에 같은 태그들을 전부 선택할 떄 사용
+    </pre>
+
+    <h3>3. 아이디 선택자(#아이디속성값)</h3>
+    <pre id="pre-3">
+        [표현법]
+        #아이디속성값{스타일속성 : 스타일속성값;}
+
+        => 이 문서 내에서 특정 HTML 요소 딱 하나만을 선택할 때 사용
+        단, 해당요소에 반드시 ID속성을 이용해서 이 문서내에 고유한 아이디값이 부여되어 있어야한다
+        동일한 태그더라도 부분적으로 다르게 스타일을 부여하고 싶을 때 사용
+    </pre>
+
+    <ol>
+        <li>아이디선택자</li>
+        <li id="list-2">아이디선택자</li>
+        <li>아이디선택자</li>
+        <li>아이디선택자</li>
+    </ol>
+
+    <hr>
+
+    <h3>4. 클래스 선택자(.클래스 속성값)</h3>
+    <pre>
+        [표현법]
+        .클래스속성값{
+            스타일 속성 : 값;
+        }
+        => 현재 html문서에서 여러 개의 요소 선택할 때 사용
+    </pre>
+
+    <!--
+        id, class : 모든 요소가 공통으로 사용할 수 있는 속성
+
+        id: 문서 내의 고유한 갑으로 딱 하나만 작성(중복이 발생하면 안됨)
+
+        class:별명을 지어주는 속성, 여러 개 작성가능, 중복값 작성 가능
+        ul>li.class-1{클래스선택자$}*6
+    -->
+    <ul>
+        <li class="class-1">클래스선택자1</li>
+        <li class="class-2">클래스선택자2</li>
+        <li class="class-1">클래스선택자3</li>
+        <li class="class-2">클래스선택자4</li>
+        <li class="class-1">클래스선택자5</li>
+        <li class="class-2">클래스선택자6</li>
+        <li class="class-1 class-2">클래스선택자6</li>
+    </ul>
+
+</body>
+</html>

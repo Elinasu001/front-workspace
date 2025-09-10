@@ -127,6 +127,25 @@
 
     <hr>
 
+    <!-- 특수문자
+    ` : grave
+    ~ : tilde
+    ! : bang
+    @ : at
+    # : hash
+    ^ : carrot
+    & : andpercent
+    * : asterisk
+    (): parenthesis
+    {}: brace
+    []: bracket
+    '': single quote
+    "": double quote
+    . : dot, period (Java: reference)
+    < : less than lt
+    > : greater than gt
+    -->
+
     <h4> text와 관련된 input 요소의 type들</h4>
     <form action="마음대로" method="get">
         <h5>type : "text"</h5>
@@ -228,6 +247,7 @@
         </p>
 
         수량 : <input type="number" name="amount" value="0" step="5" min="0" max="20"/>
+        
         <!--
             value : value값
             min : 최소값
@@ -247,6 +267,7 @@
         <br><br><br>
         <input type="reset" value="초기화버튼">
         <input type="submit" value="발루버튼">
+
     </form>
 
     <hr>
@@ -283,7 +304,7 @@
     </form>
 
     <h4>radio button 과 checkbox</h4>
-    < action="checked">
+    <form action="checked">
         <h5>radio button (type="radio")</h5>
         <p>
             - 여러 개의 선택지를 중에서 오로지 한 개만 선택하게 하고 싶을 때<br>
@@ -320,7 +341,7 @@
 
         <input type="submit" value="선택">
         <br><br><br>
-    </form>
+    </for>
 
 
 
@@ -347,6 +368,81 @@
         </p>
         <input type="hidden" value="1235" name="hidden">
     </form>
+
+
+    <h5>버튼을 만드는 방법</h5>
+
+        <h5>input 요소를 이용해서 버튼만들기</h5>
+
+        <p>
+            -type : "submit" / "reset" / "button"
+
+            <br>
+            <input type="submit">
+            <input type="reset" >
+            <input type="button" value="버튼">
+
+        </p>
+
+        <h5>button 요소를 이용해서 버튼만들기</h5>
+
+        <p>
+            -type : "submit" / "reset" / "button"
+
+            <br>
+            <button type="submit">제출버튼</button>
+            <button type="reset">초기화버튼</button>
+            <button type="button">그냥버튼</button>
+
+            <!-- 
+            button요소가 form태그 내부에 존재할 경우
+            type속성을 생략했을 때 기본값이 submit!!
+            form태그 내부에 작성할 때는 항상 type속성을
+            잊지말고 꼭 적어주는 것이 중요함
+            -->
+        </p>
+
+        <hr>
+
+        <h4>select 태그와 option태그</h4>
+
+        <p>
+            - 사용자에게 키보드로 직접 입력받는 것이 아니라
+            제시한 여러 개의 옵션 중에서 한 가지를 선택할 수 있게끔
+            해주는 태그 <br>
+
+            - 제출 시 현재 선택된(selected)값이 넘어감 <br>
+
+            - 각각의 option요소에 value를 기술했을 경우
+            value속성이 존재하지 않는다면 option의 content영역의 값이
+            value로 넘어감
+        </p>
+
+
+        
+        <form action="요청보낼URL">
+
+            고냉지김치찌개 :
+            <select name="kimchi_ziigae">
+                <option value="normal">김치찌개</option>
+                <option value="chamchi">참치김치찌개</option>
+                <option value="zzuggumi">쭈꾸미김치찌개</option>
+            </select>
+
+            <br><br>
+
+            <h5>datalist</h5>
+            <!-- select + textbox -->
+            김치찌개 : <input type="text" list="menus">
+            <datalist id="menus">
+                <option value="basic">김치</option>
+                <option value="mandu">만두</option>
+                <option value="ggumi">쭈꾸미</option>
+            </datalist>
+
+            <br><br>
+            <input type="submit">
+        </form>
 
 </body>
 </html>

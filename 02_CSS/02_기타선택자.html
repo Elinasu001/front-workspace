@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기타 선택자</title>
+    <link rel="stylesheet" href="./resources/css/02_selector.css">
+</head>
+<body>
+    <h2>1. 속성 선택자</h2>
+    <p>
+        스타일 부여하고자하는 요소에 작성되어있는 속성을 이요하는 방법<br/>
+
+        기본선택자 뒤에[] 를 이용해서 속성과 속성값을 적어서 선택할 수 있다.
+
+        .div-class[name=name$]{div$}*4
+    </p>
+
+    <div class="div-class" name="name1">div1</div>
+    <div class="div-class" name="name2">div2</div>
+    <div class="div-class" name="name3 name1">div3</div>
+    <div class="class-div" name="name4">div4</div>
+
+
+    <h2>2. 자식 선택자 / 후손 선택자</h2>
+
+    <pre>
+        [표현법]
+        - 자식 선택자 (>)
+        a>b{
+            스타일 속성 : 값;
+        }
+
+        - 후손 선택자 ( )
+        a b{
+            스타일 속성 : 값;
+        }
+        #test1>(h4*2)(ul>li*2)li>ul>li
+    </pre>
+    
+    <div id="test1">
+        <h4 id="title">div의 자식이면서 후손입니다.</h4>
+        <h4>div의 자식이면서 후손입니다.</h4>
+        <ul>div의 자식이면서 후손입니다.
+            <li>ul의 자식이면서 후손이면서 div의 후손입니다.</li>
+            <li>ul의 자식이면서 후손이면서 div의 후손입니다.</li>
+        </ul>
+        <h4>흐흐 나는 갑자기 끼어들어옴</h4>
+        <li>div의 자식이면서 후손입니다. </li>
+    </div>
+    <ul>
+        <li>안녕 나는 리스트야</li>
+    </ul>
+    
+
+    <h3>3. 동위(같은레벨) 선택자</h3>
+    <p>동위 관계에 있는 특정 요소를 선택할 때 사용</p>
+
+    <pre>
+        [표현법]
+        - a요소 뒤에 있는 b요소 딱 하나만을 선택
+        a + b{
+            스타일 속성  : 값;
+        }
+
+        - a요소 뒤에 있는 모든 b요소를 선택
+        a ~ b {
+            스타일 속성 : 값;
+        }
+    </pre>
+    
+    <div id="test2">div1</div>
+    <div>div2</div>
+    <ul>ul요소</ul>
+    <div>div3</div>
+    <div>div4</div>
+
+
+    <h3>4. 반응 선택자</h3>
+    <p>
+        사용자의 움직임에 따라서 요소를 선택
+    </p>
+
+    <pre>
+        [표현법]
+        - 해당 요소를 클릭하고 있을 때 스타일 선택
+
+        선택자 :active{
+            스타일 속성 : 값;
+        }
+        - 해당 요소(border)에 마우스커서가 올라가는 순간 선택
+        선택자:hover{
+            스타일 속성 : 값;
+        }
+    </pre>
+
+    <div id="test" class="area"></div>
+    <br>
+    <div id="test" class="area"></div>
+
+    <hr>
+
+    <h3>5. 상태 선택자</h3>
+
+    <pre>
+        요소의 상태에 따라 선택을 할 수 있는 선택자<br><br>
+
+        선택할 수 있는 상태의 종류 <br/>
+        1. checked 상태 <br/>
+        2. focus 상태 <br/>
+        3. enabled 상태<br/>
+        4. disabled 상태<br/>
+    </pre>
+
+    <div id="chk">
+        <input type="checkbox" id="corn">
+        <label for="corn">옥수수젤리</label>
+        <input type="checkbox" id="redbean">
+        <label for="redbean">팥맛사탕</label>
+        <input type="checkbox" id="my-chu">
+        <label for="my-chu">마이쮸</label>
+    </div>
+
+
+    <hr>
+
+    <pre>
+        2) focus 가 맞춰진 input요소 선택
+
+        선택자:focus{
+            스타일 속성 : 값;
+        }
+    </pre>
+
+    입력해보아요 : <input type="text" id="input-el">
+
+    <pre>
+        3) enabled : 활성상태
+        4) disabled : 비활성상태
+    </pre>
+
+    <button>활성화 버튼</button>
+    <button disabled>비활성화 버튼</button>
+    <br>
+</body>
+</html>

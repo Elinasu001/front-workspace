@@ -1,0 +1,71 @@
+/*css 파일 이 문서 전체가 스타일 정보 기술할 수 있는 영역*/
+
+/*1. 속성 선택자*/
+
+/*div 요소들 중 name 속성의 속성값이 name1관 "일치"하는 요소만 선택*/
+div[name="name1"]{color:goldenrod;}
+
+/*div 요소들 중 name속성의 속성값에 name1 "포함" 되어있는 요소만 선택*/
+div[name~="name1"]{background-color: red;} /*속성값이 정확하게 일치해야 함.*/
+
+
+/*div 요소들 중 class 속성값에 i가 "포함" 되어있는 요소만 선택 */
+div[class*="i"]{background-color: tomato;}
+
+
+/*div 요소들 중 class속성값이 div로 "시작"하는 요소만 선택*/
+div[class|="div"]{color:green; }
+
+/*div 요소들 중 name 속성값이 name3으로 "시작"하는 요소만 선택 */
+div[name^="name3"]{background-color: aliceblue;}
+
+/*div 요소들 중 class속성값이 ss로 "끝"나는 요소만 선택*/
+div[class$="ss"] {background-color: darkgoldenrod;}
+
+/*class속성값이 div-class인 요소들 중에서 name 속성값에 name3이 "포함"되어있는 요소의 배경색 변경*/
+.div-class[name~="name3"]{background-color: red;}
+
+/*2. 자식선택자와 후손선택자*/
+/*- 자식선택자 a>b : a요소의 자식들 중 b요소만을 선택 */
+/*id속성값이 test1인 요소의 자식들 중에서 h4요소만 선택*/
+#test1>h4{color:aliceblue;}
+
+/*후손 선택자 a b : a요소의 후손 (모든 하위 요소)들 중 b요소 선택*/
+#test li{background-color: firebrick;}
+
+/*id 속성값이 test1인 요소의 자식들 중 ul요소의 자시귿ㄹ 중 li요소를 선택*/
+#test>ul>li{color:white;}
+
+
+#title {background-color: green;}
+
+#test1>h4:first-child { color:forestgreen; }
+#test1>h4:last-child { color:rgb(18, 68, 68); }
+#test1>h4:nth-child(3){color:black;}
+
+
+/*a + b : a요소 뒤에 있는 b요소 딱 하나만 선택*/
+
+/*id 속성값이 test2인 요소 뒤에 있는 div 요소 딱 하나만 선택*/
+#test2 + div { border: 1px solid red; }
+div + ul {color:red;}
+
+/*a ~ b :  a요소 뒤에 있는 모든 b요소 선택*/
+#test ~ ul {color:bisque;}
+
+/*반응 선택자*/
+.area{width:100px; height:100px; background-color: pink; }
+
+#active-test:active{background-color: blueviolet; cursor: pointer;}
+
+#hober-test:hover{background-color: orangered;}
+
+/*5. 상태 선택자*/
+input[type=checkbox]:checked{width:20px; height: 20px;}
+
+input[type=checkbox]:checked + label {font-size:20px; }
+
+#input-el:focus{background-color: powderblue;}
+
+button:enabled {background-color: blanchedalmond;}
+button:disabled {background-color: red; color: white;}

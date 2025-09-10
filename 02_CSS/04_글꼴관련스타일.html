@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글꼴 변경</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<style>
+    /*font-family :스타일 적용*/
+    #ff1 {font-family: 궁성체;}
+    #ff2{font-family:Helvetica;}
+    #ff2{font-family: "Noto Sans", sans-serif; font-weight: 400; font-style: normal;}
+
+    #fs1 {font-size:12px;}
+    #f2 {font-size:2em;}
+    #f3 {font-size:112%;}
+
+    #fw1 {font-weight: bold;}
+    #fw2 {font-weight: bolder;}
+    #fw3 {font-weight: lighter;}
+</style>
+<body>
+    <h1>글꼴 관련 스타일 속성</h1>
+
+    <h3>fon-family: 글꼴을 지정할 때 사용</h3>
+
+    <pre>
+        [표현법]
+        선택자{font-famly :바꾸고 싶은 글꼴명;}
+    </pre>
+
+    <p id="ff1">글꼴테스트1</p>
+    <p id="ff2">글꼴테스트2</p>
+    <p id="ff3">글꼴테스트3</p>
+
+    <h2>* 외부 웹 폰트 사용법</h2>
+    <p>
+        웹 폰트 제공 사이트
+        <a href="http://fonts.google.com" target="_blank">구글웹폰트</a>
+    </p>
+
+    <hr>
+    <h3>font-size: 글꼴의 크기를 조절할 때 사용</h3>
+    <pre>
+        [표현법]
+        선택자 {font-size: 크기에 해당하는 숫자(단위 : px/em/%);}
+    </pre>
+
+    <ul>
+        <li id="fs1">사이즈테스트</li>
+        <li id="fs2">사이즈테스트</li>
+        <li id="fs3">사이즈테스트</li>
+    </ul>
+
+    <h3>font-weight: 글꼴의 두께를 표현할 때 사용</h3>
+    <pre>
+        [표현법]
+        선택자 {
+            font-weight: normal/bold/bolder/lighter
+                        100~ 900
+        }
+    </pre>
+    <ul>
+        <li id="fw1">굵은 글꼴로 변경</li>
+        <li id="fw2">원래 굵기보다 더 굵게</li>
+        <li id="fw3">3</li>
+    </ul>
+
+    <hr>
+    <h3>font-style : 기울이고 싶을 경우</h3>
+    <pre>
+        [표현법]
+
+        선택자 {
+            font-style : normal / italic / oblique;
+        }
+        -> italic : 기울임 그꼴, oblique : 원래 폰트를 기울임
+    </pre>
+
+    <ul>
+        <li sytle="font-style:italic">italic</li>
+        <li style="font-style: oblique;">oblique</li>
+    </ul>
+
+</body>
+</html>

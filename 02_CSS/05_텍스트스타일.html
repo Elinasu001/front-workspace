@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>색상</title>
+</head>
+<style>
+    #color{color:blue; color:#3e0703;/*16진수*/color:rgb(225, 114, 20);/*0 ~ 225*/ color:rgb(225, 114, 20, 0.8); color:hsl(200, 50%, 70%);/*색상값(0 ~ 260), 채도%, 명도%*/ color:hsl(200, 50%, 70%, 0.5); }
+
+    /*text-decoration*/
+    #td1 {text-decoration: underline;}
+    #td2 {text-decoration: overline;}
+    #td3 {text-decoration: line-through;}
+    a{text-decoration: none; color:rgb(50, 50, 50)};
+    &:hover{text-decoration: underline; font-size: 17px; color:red;}
+</style>
+<body>
+    <h1>텍스트 색상</h1>
+    <pre id="color">
+        [표현법]
+
+        선택자 {
+            color:색상값;
+        }
+    </pre>
+
+    <h3>text-decoration : 텍스트에 줄을 긋거나 지울 때 사용</h3>
+    <pre>
+        [표현법]
+        선택자 {
+            text-decoration: none / underline / overline / line-through;
+        }
+    </pre>
+
+    <ul>
+        <li id="td1">아래 선 긋기</li>
+        <li id="td2">위에 선 긋기</li>
+        <li id="td3">중간에 선 긋기</li>
+    </ul>
+
+    <a href="http:www.naver.com">네이버로</a>
+
+    <h3>text-align :텍스트 정렬</h3>
+
+    <pre>
+        [표현법]
+        선택자{
+            text-align: left / right / center / justify;
+        }
+    </pre>
+
+   <h4>
+    <p style="text-align: right;">가나다라마바사</p>
+   </h4>
+   <h4>
+    <p style="text-align: center;">가나다라마바사</p>
+   </h4>
+   <h4>
+    <p style="text-align: justify;">가나다라마바사</p>
+   </h4>
+</body>
+</html>

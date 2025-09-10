@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        HyperLink
+        비선형적인 구조로 웹문서에서 또 다른 문서로 이동할 수 있게
+        연결시켜주는 기능
+    -->
+    <h1 id="list">a 태그를 이용한 하이퍼링크</h1>
+    <a href="6_영역관련태그.html">영역이다!</a>
+
+    <!--
+        현재 인터넷이 연결된 상황이라면
+        서비스하고있는 웹페이지로 링크 가능
+    -->
+    <a href="http://www.google.com">네이버로!ㅋㅋ</a>
+
+    <ul>
+        <li><a href="http://www.naver.com" target="_self">네이버로</a></li>
+        <li><a href="http://www.google.com" target="_blank" title="새창 열기">구글로</a></li>
+    </ul>
+
+    <h3>이미지 클릭해서 링크로 연결해보기</h3>
+    <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EB%8B%A8%ED%92%8D%EA%B0%9C%ED%99%94%EC%8B%9C%EA%B8%B0&ackey=dkpd9pim">
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMDRfMTMy%2FMDAxNzI4MDM2NTc2MjI1.22mzr-K_SCRJlpnEeRstaDFTIyveO86S5f09eYXgZu4g.XoMnwxJlwfb9KMW4dx0fvoAWzMHthQ8hsssCe1QqrYAg.JPEG%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5.jpg&type=sc960_832" alt="단풍">
+    </a>
+
+
+    <style>
+        #btn{
+            text-decoration: none;
+            :hover{
+                text-decoration: underline;
+                background-color: blue;
+                transition: 0.2s;
+            }
+        }
+        #btn span{
+            display:block;
+            width:300px;
+            height:80px;
+            background-color: gray;
+            color:#FFFFFF;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+    </style>
+    <a href="2_표관련태그.html" target="_blank" id="btn">
+        <span>표관련태그 보러가기</span>
+    </a>
+
+    <h4>한 페이지 내에서 점프점프 시키기</h4>
+    <a href="#list">
+        위로가기
+    </a>
+</body>
+</html>
