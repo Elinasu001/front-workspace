@@ -1,59 +1,161 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>검색창</title>
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GNB + 검색</title>
 <style>
-    * {box-sizing: border-box;}
-    /* div, form{border: 1px solid red;} */
-    #header_2{display: flex; width:650px; height:160px;}
-    #search-form { position: relative; display:flex; gap:16px; width:65%; height: 40%; margin: auto;}
-    #search-text {width: 100%;}
-    #search-text input {border:2px solid #2c5ae9;  font-size: 18px;}
-    #search-form input{width:100%; height:100%; border-radius: 30px; }
-    #search-form input::placeholder {padding-left:16px;}
-    #search-form input:focus,
-    #search-form input:hover{outline: 2px solid rgb(0, 162, 255); transition: 0.3s;}
-    
-    #search-btn {position: absolute; width:50px; height: 90%; right:16px; top:50%; transform: translateY(-50%);}
-    #search-btn input {background-color: #fff; border: none; font-size: 0; cursor: pointer;}
-    #search-btn input:hover { outline-offset: #2c5ae9; opacity: 0.8; transition: 0.3s;}
+    *{box-sizing:border-box}
 
-    .mask-image::after{
-        position: absolute;
-        content: '';
-        width: 20px; height: 20px;
-        top: 50%; 
-        left: 50%;
-        transform: translate(-50%, -50%);
+    /* ===== GNB (상단 드롭다운) ===== */
+    #gnbFull{background:#1b1f26}
+    #gnbFull .inner{max-width:1200px;margin:0 auto}
+    #gnbFull .menu-list{display:flex;align-items:center;gap:24px;height:56px;margin:0;padding:0;list-style:none}
+    #gnbFull .menu-item{position:relative}
+    #gnbFull .menu-item>a{display:block;padding:0 8px;line-height:56px;color:#fff;text-decoration:none;font-weight:600}
+    #gnbFull .menu-item.on>a{color:#4fc3f7}
 
-        -webkit-mask-image: url(resources/image/ico_search.svg);
-        mask-image: url(resources/image/ico_search.svg);
-        -webkit-mask-size: 20px auto;
-        mask-size: 20px auto;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-position: center;
-        mask-position: center;
-
-        background-color: #2c5ae9;
+    /* 2뎁스 */
+    #gnbFull .menu-sub{
+        display:none;             /* JS에서 flex로 열림 */
+        position:absolute;left:0;top:56px;z-index:20;
+        background:#fff;border:1px solid #e5e7eb;border-radius:10px;
+        padding:16px;gap:16px;min-width:240px;
+        box-shadow:0 8px 24px rgba(0,0,0,.08);
     }
+    #gnbFull .menu-sub ul{list-style:none;margin:0;padding:0}
+    #gnbFull .menu-sub li a{display:block;padding:8px 10px;color:#111;text-decoration:none;border-radius:6px}
+    #gnbFull .menu-sub li a:hover,#gnbFull .menu-sub li a:focus{background:#eef6ff;outline:none}
 
-
+    /* ===== 기존 검색창 스타일 (질문 코드 유지) ===== */
+    #header_2{display:flex;height:160px}
+    #search-form{position:relative;display:flex;gap:16px;width:40%;height:40%;margin:auto}
+    #search-text{width:100%}
+    #search-text input{border:2px solid #2c5ae9;font-size:18px}
+    #search-form input{width:100%;height:100%;border-radius:30px}
+    #search-form input::placeholder{padding-left:16px}
+    #search-form input:focus,#search-form input:hover{outline:2px solid rgb(0,162,255);transition:.3s}
+    #search-btn{position:absolute;width:50px;height:90%;right:16px;top:50%;transform:translateY(-50%)}
+    #search-btn input{background:#fff;border:none;font-size:0;cursor:pointer}
+    #search-btn input:hover{opacity:.8;transition:.3s}
+    .mask-image::after{
+        position:absolute;content:'';width:20px;height:20px;top:50%;left:50%;transform:translate(-50%,-50%);
+        -webkit-mask-image:url(resources/image/ico_search.svg);mask-image:url(resources/image/ico_search.svg);
+        -webkit-mask-size:20px auto;mask-size:20px auto;
+        -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+        -webkit-mask-position:center;mask-position:center;
+        background-color:#2c5ae9; /* 아이콘 색 */
+    }
 </style>
+</head>
 <body>
-    <!--나랏돈 : search.do / .kh-->
+    <!-- ===== GNB ===== -->
+    <nav id="gnbFull" aria-label="주요 메뉴">
+        <div class="inner">
+        <ul class="menu-list" role="menubar">
+            <li class="menu-item" role="none">
+            <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">회사소개</a>
+            <div class="menu-sub" role="menu" aria-label="회사소개 하위메뉴">
+                <ul>
+                <li><a href="#">인사말</a></li>
+                <li><a href="#">연혁</a></li>
+                <li><a href="#">오시는 길</a></li>
+                </ul>
+            </div>
+            </li>
+            <li class="menu-item" role="none">
+            <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">제품</a>
+            <div class="menu-sub" role="menu" aria-label="제품 하위메뉴" style="min-width:320px;">
+                <ul>
+                <li><a href="#">AI 서비스</a></li>
+                <li><a href="#">클라우드</a></li>
+                <li><a href="#">보안 솔루션</a></li>
+                </ul>
+                <ul>
+                <li><a href="#">가격 안내</a></li>
+                <li><a href="#">도입 사례</a></li>
+                </ul>
+            </div>
+            </li>
+            <li class="menu-item" role="none">
+            <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">고객지원</a>
+            <div class="menu-sub" role="menu" aria-label="고객지원 하위메뉴">
+                <ul>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">자료실</a></li>
+                <li><a href="#">문의하기</a></li>
+                </ul>
+            </div>
+            </li>
+            <li class="menu-item" role="none">
+            <a href="#" role="menuitem">블로그</a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    <!-- ===== 검색창 ===== -->
     <div id="header_2">
-        <form action="search.kh" method="get" id="search-form">
-            <div id="search-text">
-                <input type="text" name="query" placeholder="궁금하신게 있으신가요~~?"/>
-            </div>
-            <div id="search-btn" class="mask-image">
-                <input type="submit" value="검색" />
-            </div>
+        <form action="search.kh" method="get" id="search-form" aria-label="사이트 검색">
+        <div id="search-text">
+            <input type="text" name="query" placeholder="궁금하신게 있으신가요~~?"/>
+        </div>
+        <div id="search-btn" class="mask-image">
+            <input type="submit" value="검색" aria-label="검색"/>
+        </div>
         </form>
     </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var items = document.querySelectorAll('#gnbFull .menu-item');
+
+    function openItem(item) {
+        closeAll();
+        item.classList.add('on');
+        var link = item.querySelector('a');
+        if (link) link.setAttribute('aria-expanded', 'true');
+        var sub  = item.querySelector('.menu-sub');
+        if (sub) sub.style.display = 'flex';
+    }
+
+    function closeItem(item) {
+        item.classList.remove('on');
+        var link = item.querySelector('a');
+        if (link) link.setAttribute('aria-expanded', 'false');
+        var sub  = item.querySelector('.menu-sub');
+        if (sub) sub.style.display = 'none';
+    }
+
+    function closeAll() {
+        var opened = document.querySelectorAll('#gnbFull .menu-item.on');
+        for (var i = 0; i < opened.length; i++) closeItem(opened[i]);
+    }
+
+    for (var i = 0; i < items.length; i++) {
+        (function (item) {
+            var link = item.querySelector('a');
+
+            // 마우스
+            item.addEventListener('mouseenter', function () { openItem(item); });
+            item.addEventListener('mouseleave', function () { closeItem(item); });
+
+            // 키보드
+            if (link) {
+            link.addEventListener('focus', function () { openItem(item); });
+            }
+        })(items[i]);
+    }
+
+    // 내비 밖으로 포커스 이동/ESC 시 닫기
+    document.addEventListener('focusin', function (e) {
+    if (!e.target.closest || !e.target.closest('#gnbFull')) closeAll();
+    });
+    document.addEventListener('keydown', function (e) {
+    if (e.keyCode === 27) closeAll(); // ESC
+    });
+});
+</script>
+
 </body>
 </html>
