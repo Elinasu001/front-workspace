@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GNB + 검색</title>
+<style>
+    *{box-sizing:border-box}
+
+    /* ===== GNB (상단 드롭다운) ===== */
+    #gnbFull{background:#1b1f26}
+    #gnbFull .inner{max-width:1200px;margin:0 auto}
+    #gnbFull .menu-list{display:flex;align-items:center;gap:24px;height:56px;margin:0;padding:0;list-style:none}
+    #gnbFull .menu-item{position:relative}
+    #gnbFull .menu-item>a{display:block;padding:0 8px;line-height:56px;color:#fff;text-decoration:none;font-weight:600;transition:color .2s ease}
+    #gnbFull .menu-item.on>a{color:#4fc3f7}
+
+    /* 2뎁스: CSS 전용 전환 */
+    #gnbFull .menu-sub{
+        display:flex; position:absolute; left:0; top:56px; z-index:20;
+        background:#fff; border:1px solid #e5e7eb; border-radius:10px;
+        padding:16px; gap:16px; min-width:240px; box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+        max-height:0; opacity:0; transform:translateY(8px) scaleY(.98);
+        transform-origin:top; visibility:hidden; overflow:hidden; pointer-events:none;
+        transition: max-height .28s ease, opacity .22s ease, transform .28s ease, visibility 0s linear .28s;
+        will-change:max-height,opacity,transform;
+    }
+    #gnbFull .menu-item.on > .menu-sub{
+        max-height:520px; opacity:1; transform:translateY(0) scaleY(1);
+        visibility:visible; pointer-events:auto;
+        transition: max-height .32s ease, opacity .18s ease, transform .32s ease, visibility 0s;
+    }
+    #gnbFull .menu-sub ul{list-style:none;margin:0;padding:0}
+    #gnbFull .menu-sub li a{display:block;padding:8px 10px;color:#111;text-decoration:none;border-radius:6px}
+    #gnbFull .menu-sub li a:hover,#gnbFull .menu-sub li a:focus{background:#eef6ff;outline:none}
+
+    @media (prefers-reduced-motion: reduce){
+      #gnbFull .menu-sub{transition:none;transform:none}
+      #gnbFull .menu-item.on > .menu-sub{transition:none;transform:none}
+    }
+
+    /* ===== 검색창 ===== */
+    #header_2{display:flex;height:160px}
+    #search-form{position:relative;display:flex;gap:16px;width:40%;height:40%;margin:auto}
+    #search-text{width:100%}
+    #search-text input{border:2px solid #2c5ae9;font-size:18px; padding:0 16px;}
+    #search-form input{width:100%;height:100%;border-radius:30px}
+    #search-form input:focus,#search-form input:hover{outline:2px solid rgb(0,162,255);transition:.3s}
+    #search-btn{position:absolute;width:50px;height:90%;right:16px;top:50%;transform:translateY(-50%)}
+    #search-btn input{background:#fff;border:none;font-size:0;cursor:pointer}
+    #search-btn input:hover{opacity:.8;transition:.3s}
+    .mask-image::after{
+        position:absolute;content:'';width:20px;height:20px;top:50%;left:50%;transform:translate(-50%,-50%);
+        -webkit-mask-image:url(resources/image/ico_search.svg);mask-image:url(resources/image/ico_search.svg);
+        -webkit-mask-size:20px auto;mask-size:20px auto;
+        -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+        -webkit-mask-position:center;mask-position:center;
+        background-color:#2c5ae9;
+    }
+
+    /* ===== 반응형 햄버거 ===== */
+    .hamburger{
+      display:none; position:relative; width:40px; height:40px;
+      border:0; background:transparent; cursor:pointer;
+    }
+    .hamburger:focus-visible{outline:2px solid #4fc3f7; outline-offset:2px}
+    .hamburger .line{position:absolute; left:9px; right:9px; height:2px; background:#fff; border-radius:2px}
+    .hamburger .l1{top:12px}.hamburger .l2{top:19px}.hamburger .l3{top:26px}
+
+    /* 모바일: GNB 숨기고 햄버거 노출, 정렬 */
+    @media (max-width:960px){
+      #gnbFull .inner{display:flex; align-items:center; justify-content:space-between; padding:0 8px}
+      #gnbFull .menu-list{display:none}
+      .hamburger{display:inline-flex}
+    }
+
+    /* 오프캔버스 모바일 메뉴 */
+    #mobileMenu{position:fixed; inset:0; display:none; z-index:1000}
+    #mobileMenu[aria-hidden="false"]{display:block}
+    #mobileMenu .backdrop{position:absolute; inset:0; background:rgba(0,0,0,.4)}
+    #mobileMenu .sheet{
+      position:absolute; top:0; right:0; height:100vh; width:86%; max-width:420px; background:#fff;
+      box-shadow:-8px 0 24px rgba(0,0,0,.12);
+      transform:translateX(100%); transition:transform .28s ease;
+      display:flex; flex-direction:column;
+    }
+    #mobileMenu[aria-hidden="false"] .sheet{transform:translateX(0)}
+    #mobileMenu header{display:flex; align-items:center; justify-content:space-between; padding:16px; border-bottom:1px solid #eee}
+    #mobileMenu .close{border:0; background:#1b1f26; color:#fff; border-radius:8px; height:36px; padding:0 12px; cursor:pointer}
+    #mobileMenu nav{padding:8px 16px 20px; overflow:auto}
+
+    /* 모바일 아코디언 */
+    .m-acc{border-bottom:1px solid #f1f3f5}
+    .m-acc-btn{width:100%; text-align:left; border:0; background:transparent; padding:14px 8px; font-weight:700; cursor:pointer}
+    .m-acc-btn[aria-expanded="true"]{color:#2c5ae9}
+    .m-acc-panel{max-height:0; overflow:hidden; transition:max-height .28s ease}
+    .m-acc.open .m-acc-panel{max-height:400px} /* 필요 시 조절 */
+    .m-link{display:block; padding:14px 8px; text-decoration:none; color:#111}
+    .m-sub a{display:block; padding:10px 8px; text-decoration:none; color:#111; border-radius:6px}
+    .m-sub a:hover, .m-sub a:focus{background:#eef6ff; outline:0}
+
+    .body-lock{overflow:hidden}
+</style>
+</head>
+<body>
+    <!-- ===== GNB ===== -->
+    <nav id="gnbFull" aria-label="주요 메뉴">
+        <div class="inner">
+            <ul class="menu-list" role="menubar">
+                <li class="menu-item" role="none">
+                    <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">회사소개</a>
+                    <div class="menu-sub" role="menu" aria-label="회사소개 하위메뉴">
+                    <ul>
+                        <li><a href="#">인사말</a></li>
+                        <li><a href="#">연혁</a></li>
+                        <li><a href="#">오시는 길</a></li>
+                    </ul>
+                    </div>
+                </li>
+                <li class="menu-item" role="none">
+                    <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">제품</a>
+                    <div class="menu-sub" role="menu" aria-label="제품 하위메뉴" style="min-width:320px;">
+                    <ul>
+                        <li><a href="#">AI 서비스</a></li>
+                        <li><a href="#">클라우드</a></li>
+                        <li><a href="#">보안 솔루션</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">가격 안내</a></li>
+                        <li><a href="#">도입 사례</a></li>
+                    </ul>
+                    </div>
+                </li>
+                <li class="menu-item" role="none">
+                    <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">고객지원</a>
+                    <div class="menu-sub" role="menu" aria-label="고객지원 하위메뉴">
+                    <ul>
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">자료실</a></li>
+                        <li><a href="#">문의하기</a></li>
+                    </ul>
+                    </div>
+                </li>
+                <li class="menu-item" role="none">
+                    <a href="#" role="menuitem">블로그</a>
+                </li>
+            </ul>
+
+            <!-- 모바일용 햄버거 버튼 (<=960px에서 표시) -->
+            <button id="btnMobileMenu" class="hamburger" aria-label="전체 메뉴 열기" aria-controls="mobileMenu" aria-expanded="false">
+                <span class="line l1"></span><span class="line l2"></span><span class="line l3"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== 검색창 ===== -->
+    <div id="header_2">
+        <form action="search.kh" method="get" id="search-form" aria-label="사이트 검색">
+            <div id="search-text">
+                <input type="text" name="query" placeholder="궁금하신게 있으신가요~~?"/>
+            </div>
+            <div id="search-btn" class="mask-image">
+                <input type="submit" value="검색" aria-label="검색"/>
+            </div>
+        </form>
+    </div>
+
+    <!-- ===== 모바일 전체메뉴 (오프캔버스) ===== -->
+    <aside id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mobileMenuTitle">
+        <div class="backdrop" data-close="backdrop"></div>
+        <div class="sheet">
+            <header>
+            <h2 id="mobileMenuTitle" style="margin:0;font-size:18px;">전체 메뉴</h2>
+            <button type="button" class="close" id="mobileClose">닫기</button>
+            </header>
+            <nav aria-label="전체 메뉴">
+            <ul style="list-style:none; margin:0; padding:0">
+                <li class="m-acc">
+                <button class="m-acc-btn" aria-expanded="false">회사소개</button>
+                <div class="m-acc-panel m-sub">
+                    <a href="#">인사말</a>
+                    <a href="#">연혁</a>
+                    <a href="#">오시는 길</a>
+                </div>
+                </li>
+                <li class="m-acc">
+                <button class="m-acc-btn" aria-expanded="false">제품</button>
+                <div class="m-acc-panel m-sub">
+                    <a href="#">AI 서비스</a>
+                    <a href="#">클라우드</a>
+                    <a href="#">보안 솔루션</a>
+                    <a href="#">가격 안내</a>
+                    <a href="#">도입 사례</a>
+                </div>
+                </li>
+                <li class="m-acc">
+                <button class="m-acc-btn" aria-expanded="false">고객지원</button>
+                <div class="m-acc-panel m-sub">
+                    <a href="#">공지사항</a>
+                    <a href="#">자료실</a>
+                    <a href="#">문의하기</a>
+                </div>
+                </li>
+                <li><a class="m-link" href="#">블로그</a></li>
+            </ul>
+            </nav>
+        </div>
+    </aside>
+
+<script>
+/* ===== 데스크톱 GNB: 기존 로직 유지 (CSS 전환 활용) ===== */
+document.addEventListener('DOMContentLoaded', function () {
+    var items = document.querySelectorAll('#gnbFull .menu-item');
+
+    function openItem(item) {
+        closeAll();
+        item.classList.add('on');
+        var link = item.querySelector('a');
+        if (link) link.setAttribute('aria-expanded', 'true');
+        // CSS 전환 사용 → display 제어 없음
+    }
+
+    function closeItem(item) {
+        item.classList.remove('on');
+        var link = item.querySelector('a');
+        if (link) link.setAttribute('aria-expanded', 'false');
+    }
+
+    function closeAll() {
+        var opened = document.querySelectorAll('#gnbFull .menu-item.on');
+        for (var i = 0; i < opened.length; i++) closeItem(opened[i]);
+    }
+
+    for (var i = 0; i < items.length; i++) {
+        (function (item) {
+            var link = item.querySelector('a');
+            item.addEventListener('mouseenter', function () { openItem(item); });
+            item.addEventListener('mouseleave', function () { closeItem(item); });
+            if (link) { link.addEventListener('focus', function () { openItem(item); }); }
+        })(items[i]);
+    }
+
+    document.addEventListener('focusin', function (e) {
+        if (!e.target.closest || !e.target.closest('#gnbFull')) closeAll();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.keyCode === 27) closeAll(); // ESC
+    });
+});
+</script>
+
+<script>
+/* ===== 모바일 햄버거: 오프캔버스 + 아코디언 ===== */
+(function(){
+    var btn = document.getElementById('btnMobileMenu');
+    var sheetWrap = document.getElementById('mobileMenu');
+    var closeBtn = document.getElementById('mobileClose');
+
+    if(!btn || !sheetWrap) return;
+
+    function openMenu(){
+        sheetWrap.setAttribute('aria-hidden','false');
+        btn.setAttribute('aria-expanded','true');
+        document.body.classList.add('body-lock');
+        var first = sheetWrap.querySelector('.m-acc-btn, .close, a, button, [tabindex]');
+        if(first && first.focus) first.focus();
+    }
+    function closeMenu(){
+        sheetWrap.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+        document.body.classList.remove('body-lock');
+        if(btn && btn.focus) btn.focus();
+    }
+    function toggleMenu(){
+        var hidden = sheetWrap.getAttribute('aria-hidden') !== 'false';
+        if(hidden) openMenu(); else closeMenu();
+    }
+
+    btn.addEventListener('click', function(e){ e.preventDefault(); toggleMenu(); });
+    if(closeBtn){ closeBtn.addEventListener('click', function(){ closeMenu(); }); }
+
+    sheetWrap.addEventListener('click', function(e){
+        var t = e.target;
+        if(t && t.getAttribute && t.getAttribute('data-close') === 'backdrop'){ closeMenu(); }
+    });
+
+    document.addEventListener('keydown', function(e){
+        if(sheetWrap.getAttribute('aria-hidden') === 'false' && (e.key === 'Escape' || e.keyCode === 27)){
+        closeMenu();
+        }
+    });
+
+  // 아코디언
+    var acc = sheetWrap.querySelectorAll('.m-acc');
+    for(var i=0;i<acc.length;i++){
+        (function(item){
+        var btn = item.querySelector('.m-acc-btn');
+        var panel = item.querySelector('.m-acc-panel');
+        if(!btn || !panel) return;
+        btn.addEventListener('click', function(){
+            var isOpen = item.classList.contains('open');
+            // 단일 오픈 원하면 아래 주석 해제:
+            // for(var j=0;j<acc.length;j++){ acc[j].classList.remove('open'); acc[j].querySelector('.m-acc-btn').setAttribute('aria-expanded','false'); }
+            if(isOpen){
+            item.classList.remove('open');
+            btn.setAttribute('aria-expanded','false');
+            }else{
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded','true');
+            }
+        });
+        })(acc[i]);
+    }
+})();
+</script>
+
+</body>
+</html>
