@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이아웃2</title>
+</head>
+<style>
+    .container{border:1px solid red; padding:20px; background-color: rgb(242, 255, 127);}
+    .box{border: 10px solid salmon;}
+    .red{background-color: red;}
+    .blue{background-color: blue;}
+    .green{background-color: green;}
+
+    .box{padding:20px; text-align: center; font-weight: bold; color:aliceblue }
+</style>
+<body>
+    <div class="container" style="display: flex;">
+        <div class="box red" style="display: flex-grow 1;">1111111</div>
+        <div class="box blue" style="display: flex-grow 2;">2222222</div>
+        <div class="box green"style="display: flex-grow 1;">3333333</div>
+    </div>
+    <div class="container" style="display: flex;  flex-direction: column;">
+        <div class="box red">1111111</div>
+        <div class="box blue">2222222</div>
+        <div class="box green">3333333</div>
+    </div>
+
+    <pre>
+        가로정렬
+        justify-content
+        flex-start
+        center
+        flex-end
+        space-around
+        space-evenly
+    </pre>
+    <div class="container" style="display: flex; justify-content: flex-end;">
+        <div class="box red">1111111</div>
+        <div class="box blue">2222222</div>
+        <div class="box green">3333333</div>
+    </div>
+    <pre>
+        세로정렬
+        alin-items
+        stretch : 부모요소 높이에 맞춤(기본값)
+        baseline : 텍스트에 맞춤
+    </pre>
+    <div class="container" style="display: flex; justify-content: center; height:300px; align-items: center;">
+        <div class="box red" style="order:3">1111111</div>
+        <div class="box blue" style="order:1">2222222</div>
+        <div class="box green" style="order:2">3333333</div>
+    </div>
+</body>
+</html>

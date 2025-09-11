@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1번이다 1번</title>
+</head>
+<style>
+    .size-test{border:10px solid rgb(145, 136, 54);}
+    #test1{width:400px; height:200px;}
+    #test2{width:30%;height: 200px;}
+
+
+    .red{background-color: red;}
+    .blue{background-color: blue;}
+    .green{background-color: green;}
+    .yellow{background-color: yellow;}
+    .pink{background-color: pink;}
+
+    .nemo{width:150px; height:150px; border:1px solid black;}
+
+    .inline{display: inline;}
+
+    .inline-block {display: inline-block;}
+</style>
+<body>
+    <!--
+        블럭 요소 : 한 줄 단위로 영역이 잡힘
+        인라인 요소 : content 크기 만큼만 영역이 잡힘
+    -->
+
+    <h1>레이아웃 관련 스타일</h1>
+    <h3>width, height</h3>
+    <p>
+        content 영역의 크기 조절하는 속성
+    </p>
+
+    <P>고정길이</P>
+    <div id="test1" class="size-test"></div>
+    <h4>가변길이</h4>
+    <div id="test2" class="size-test"></div>
+
+    <h3>display: 화면 배치 방법 변경</h3>
+    <p>
+        블럭요소 또는 인라인 요소의 배치 속성을 바꿔줄 수 있음
+    </p>
+    
+    <pre>
+        [표현법]
+        선택자 {
+            display:inline / block / inline-block / hidden / flex / table-cell ...
+        }
+    </pre>
+
+
+    <p>div 기본</p>
+    <div class="nemo red"></div>
+    <div class="nemo blue"></div>
+    <div class="nemo green"></div>
+    <div class="nemo yellow"></div>
+    <div class="nemo pink"></div>
+    
+    <hr>
+    <strong>display : inline == width, height 속성 적용 x</strong>
+    <div class="nemo inline red"></div>
+    <div class="nemo inline blue"></div>
+    <div class="nemo inline green"></div>
+    <div class="nemo inline yellow"></div>
+    <div class="nemo inline pink"></div>
+    
+    <hr>
+    
+    <div class="nemo inline-block red"></div>
+    <div class="nemo inline-block  blue"></div>
+    <div class="nemo inline-block  green"></div>
+    <div class="nemo inline-block  yellow"></div>
+    <div class="nemo inline-block  pink"></div>
+
+    
+    
+    
+    
+    <!--
+    
+    -->
+</body>
+</html>

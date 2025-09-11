@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>footer</title>
+</head>
+<style>
+    * {box-sizing: border-box; padding:0; margin:0;}
+    ul>li{ list-style: none;}
+    ul>li>a{text-decoration: none;}
+    div, footer{ box-sizing: border-box;}
+    footer{ width:100%; }
+    #footer_1,
+    #footer_2{ width:100%;}
+    #footer_1{height:20%; background-color: #485ba6;}
+    #footer_2{height:80%; background-color: #f7f7f7;}
+
+    .list-info{display:flex; align-items: center; gap:20px; padding:16px; border-bottom: 1px solid #BBBBBB;}
+    .list-info li a{position: relative; color: white;}
+    .list-info li a::after {content: ""; position: absolute;  height:16px; width:1px;  background-color: white; top:50%; right:-10px; transform: translate(-50%, -50%); }
+    .list-info li:last-child a::after{content: none;}
+
+    #footer_2 .list-info li a {color: #111111;}
+    #footer_2 .list-info li a::after{background-color: #111111;}
+
+    .info{padding:16px;}
+    .info .p_1{line-height: 1.5; width:80%; font-size:14px; }
+
+    .p_2{padding:16px; font-size:12px; border-bottom: 1px solid #BBBBBB;}
+
+    
+</style>
+
+<body>
+    <footer>
+        <div id="footer_1">
+            <ul class="list-info">
+                <li><a href="#">이용약관</a></li>
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">인재 채용 문의</a></li>
+                <li><a href="#">훈련비 게시</a></li>
+                <li><a href="#">강사 구인</a></li>
+            </ul>
+        </div>
+        <div id="footer_2">
+            <ul class="list-info">
+                <li><a href="#">가가가</a></li>
+                <li><a href="#">나나나</a></li>
+                <li><a href="#">다다다</a></li>
+                <li><a href="#">라라라</a></li>
+                <li><a href="#">마마마</a></li>
+                <li><a href="#">사사사</a></li>
+            </ul>
+            <div class="info">
+                <p class="p_1">
+                    강남점 1관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                </p>
+                <p class="p_1">
+                    강남점 2관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                </p>
+                <p class="p_1">
+                    강남점 1관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                </p>
+            </div>
+            <p class="p_2">Copyright © 1998-2025 KH Information Educational Institute All Right Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgba(25, 27, 40, 0.8);
+        color:white;
+    }
+    #bg-color{ border: 30px solid rgb(95, 158, 187); padding:20px; background-color: gray; width:50%;/*부모 요소의 content 영역 가로길이를 부모 요소의 50% 지정 */ box-sizing: border-box;/*가로 길이 설정을 border영역까지 포함*/ }
+    #bg-image{border: 1px solid red; width:500px; height:10000px; background: url(resources/css/image/chu03.png) no-repeat center center fixed;}
+
+    .test{border:10px dashed; margin:40px; padding:40px; background-color: palegreen;}
+    #div1{background-clip: border-box;}
+    #div2{background-clip: border-box content-box;}
+</style>
+<body>
+    <div id="bg-color">웃을 수 있을 때 웃어~</div>
+    <pre>
+        background-attachment:scroll/fixed;
+    </pre>
+    <div id="bg-image"></div>
+    
+    <h3>background-clip : 배경을 적용하고자하는 범위를 지정할 때 사용</h3>
+
+    <pre>
+        background-clip: border-box / padding-box / content-box;
+    </pre>
+    <div id="div1" class="test">원자성(automicity) : 트랜잭션 정의된 연산들이 모두 성공적으로 실행되거나 전혀 실행되지 않은 상태로 돌아가야 한다.
+일관성(consistency) : 트랜잭션 실행 전에 DB 내용이 잘못되어 있지 않았다면 트랜잭션 실행 이후에도 DB 내용에는 잘못이 있으면 안된다.
+고립성(isolation) : 트랜잭션은 실행 도중 다른 트랜잭션의 영향을 받아 잘못된 결과를 만들면 안된다.
+지속성(durability) : 트랜잭션이 성공적으로 수행하면 갱신한 DB 내용이 영구적으로 저장된다.</div>
+    <div id="div1" class="test">원자성(automicity) : 트랜잭션 정의된 연산들이 모두 성공적으로 실행되거나 전혀 실행되지 않은 상태로 돌아가야 한다.
+일관성(consistency) : 트랜잭션 실행 전에 DB 내용이 잘못되어 있지 않았다면 트랜잭션 실행 이후에도 DB 내용에는 잘못이 있으면 안된다.
+고립성(isolation) : 트랜잭션은 실행 도중 다른 트랜잭션의 영향을 받아 잘못된 결과를 만들면 안된다.
+지속성(durability) : 트랜잭션이 성공적으로 수행하면 갱신한 DB 내용이 영구적으로 저장된다.</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록 관련 스타일</title>
+</head>
+<style>
+    #ul1{
+        list-style: none;
+    }
+    #ul2{
+        list-style-image: url(resources/css/image/chu01.png);
+    }
+</style>
+<body>
+    <h1>리트스</h1>
+    <h3>list-style-type: 불릿 기호 바꾸기</h3>
+    <pre>
+        *순서 없는 목록(ul)
+        선택자 {
+            list-style : disc / circle / square / none;
+        }
+    </pre>
+
+    <pre>
+        *순서 있는 목록(ul)
+        선택자 {
+            list-style :decimal(십진수)
+            list-style: lower-roman / upper-roman (로마 숫자)
+            list-style: lower-alpha / upper-alpha (알파벳)
+        }
+    </pre>
+
+    <ul id="null1">
+        <li>싹</li>
+        <li>싹</li>
+        <li>싹</li>
+    </ul>
+    <ul id="null2">
+        <li>싹</li>
+        <li>싹</li>
+        <li>싹</li>
+    </ul>
+</body>
+</html>
