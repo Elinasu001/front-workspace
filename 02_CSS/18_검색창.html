@@ -7,19 +7,20 @@
 <style>
     *{box-sizing:border-box}
 
-    /* ===== 기존 검색창 스타일 (질문 코드 유지) ===== */
+    /* ===== 기존 검색창 스타일===== */
     #header_2{display:flex;height:160px}
     #search-form{position:relative;display:flex;gap:16px;width:40%;height:40%;margin:auto}
     #search-text{width:100%}
     #search-text input{border:2px solid #2c5ae9;font-size:18pxl; padding:0 16px;}
     #search-form input{width:100%;height:100%;border-radius:30px}
     #search-form input::placeholder{padding-left:16px}
-    #search-form input:focus,#search-form input:hover{outline:2px solid rgb(0,162,255);transition:.3s}
-    #search-btn{position:absolute;width:50px;height:90%;right:16px;top:50%;transform:translateY(-50%)}
-    #search-btn input{background:#fff;border:none;font-size:0;cursor:pointer}
-    #search-btn input:hover{opacity:.8;transition:.3s}
+    #search-form input[type="submit"]:focus,
+    #search-form input:hover{outline:2px solid rgb(0,162,255);transition:.3s}
+    #search-btn {position:absolute;width:50px;height:90%;right:16px;top:50%;transform:translateY(-50%)}
+    #search-btn input[type="submit"]{background:#fff;border:none;font-size:0;cursor:pointer}
+    #search-btn input[type="submit"]:hover{opacity:.8;transition:.3s}
     .mask-image::after{
-        position:absolute;content:'';width:20px;height:20px;top:50%;left:50%;transform:translate(-50%,-50%);
+        position:absolute;content:'';width:20px;height:20px;top:50%;left:50%;transform:translate(-50%,-50%); cursor: pointer;
         -webkit-mask-image:url(resources/image/ico_search.svg);mask-image:url(resources/image/ico_search.svg);
         -webkit-mask-size:20px auto;mask-size:20px auto;
         -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
@@ -34,12 +35,12 @@
     <!-- ===== 검색창 ===== -->
     <div id="header_2">
         <form action="search.kh" method="get" id="search-form" aria-label="사이트 검색">
-        <div id="search-text">
-            <input type="text" name="query" placeholder="궁금하신게 있으신가요~~?"/>
-        </div>
-        <div id="search-btn" class="mask-image">
-            <input type="submit" value="검색" aria-label="검색"/>
-        </div>
+            <div id="search-text">
+                <input type="text" name="query" placeholder="궁금하신게 있으신가요~~?"/>
+            </div>
+            <div id="search-btn" class="mask-image">
+                <input type="submit" value="검색" aria-label="검색"/>
+            </div>
         </form>
     </div>
 

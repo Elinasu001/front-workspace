@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>nav</title>
+</head>
+<style>
+    * {text-decoration: none; list-style: none; box-sizing: border-box; padding:0; margin:0; color:#111111; font-family: "Noto Sans", sans-serif;}
+    /* nav, ul, li {border:1px solid red;} */
+    nav {width: 1000px; height:40px;}
+
+    #navbar{ margin:0; padding:0; height:100%; /*display:flex;*/ border-bottom: 1px solid #DDDDDD; }
+    #navbar > li {height:100%;float:left;width:16%;text-align: center; }
+    #navbar > li > a {font-weight: 700;}
+    #navbar a {width:100%; height:100%; /*a태그 인라인 요소라서 가로세로 안먹음*/ display:block; /*vertical-align:middle : inline요소에 가능*/ line-height: 36px;}
+    #navbar > li > ul {display:none; transition: 0.2s; border: 1px solid rgb(10, 83, 112); border-radius: 5px;  overflow: hidden;}
+    /* #navbar > li:hover > ul {display: block; } */
+    #navbar > li > ul > li a {font-size: 14px;}
+    #navbar > li > ul > li:hover a{background-color: #DDDDDD;}
+
+    #navbar > li > a:hover + ul {display:block;}
+    #navbar > li > ul:hover { display:block;}
+</style>
+<body>
+    <nav>
+        <ul id="navbar">
+            <li>
+                <a href="#">Top</a>
+                <ul>
+                    <li><a href="#">셔츠/블라우스</a></li>
+                    <li><a href="#">나시</a></li>
+                    <li><a href="#">티셔츠</a></li>
+                    <li><a href="#">맨투맨/후드</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Bottom</a>
+                <ul>
+                    <li><a href="#">스커트</a></li>
+                    <li><a href="#">팬츠</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Dress</a></li>
+            <li>
+                <a href="#">Outer</a>
+                <ul>
+                    <li><a href="#">점퍼/자켓</a></li>
+                    <li><a href="#">코트</a></li>
+                    <li><a href="#">패딩</a></li>
+                    <li><a href="#">조끼</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>

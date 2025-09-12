@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/02_CSS/css/footer.css">
+    <link rel="stylesheet" href="/02_CSS/css/search.css">
+    <link rel="stylesheet" href="/02_CSS/css/nav.css">
+    <title>구조3</title>
+</head>
+<style>
+    /* 공통 영역 */
+    *{box-sizing: border-box;}
+    /* div, main, header, footer{ border:1px solid red;} */
+    #wrap{display:flex; flex-direction:column; width:1000px; height: 800px; margin:0 auto; }
+
+    /*3개 영역 : header/container/footer*/
+    header{display: flex; flex-direction:column; flex:1.5;}
+    main{display: flex; flex:5.5;}
+    footer{flex:2;}
+
+    /* 헤더 영역 */
+    header .top{display:flex; flex:7;}
+    header .nav{flex: 3;}
+    header .header_1{flex:2;}
+    header .header_2{flex:6.5;}
+    header .header_3{flex:1.5;}
+
+    /* 컨텐츠 영역 */
+    #content_1{flex:1.5;}
+    #content_2{flex:6;}
+    #content_3{flex:2.5;}
+</style>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="top">
+
+                <!-- <div class="header_1"></div> -->
+
+                <div id="header_2">
+                    <form action="search.kh" method="get" id="search-form" aria-label="사이트 검색">
+                        <div id="search-text">
+                            <input type="text" name="query" placeholder="궁금하신게 있으신가요~~?"/>
+                        </div>
+                        <div id="search-btn" class="mask-image">
+                            <input type="submit" value="검색" aria-label="검색"/>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- <div class="header_3"></div> -->
+            </div>
+            <nav>
+                <ul id="navbar">
+                    <li>
+                        <a href="#">Top</a>
+                        <ul>
+                            <li><a href="#">셔츠/블라우스</a></li>
+                            <li><a href="#">나시</a></li>
+                            <li><a href="#">티셔츠</a></li>
+                            <li><a href="#">맨투맨/후드</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Bottom</a>
+                        <ul>
+                            <li><a href="#">스커트</a></li>
+                            <li><a href="#">팬츠</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Dress</a></li>
+                    <li>
+                        <a href="#">Outer</a>
+                        <ul>
+                            <li><a href="#">점퍼/자켓</a></li>
+                            <li><a href="#">코트</a></li>
+                            <li><a href="#">패딩</a></li>
+                            <li><a href="#">조끼</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div id="content_1"></div>
+            <div id="content_2"></div>
+            <div id="content_3"></div>
+        </main>
+            <footer>
+        <div id="footer_1">
+            <ul class="list-info">
+                <li><a href="#">이용약관</a></li>
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">인재 채용 문의</a></li>
+                <li><a href="#">훈련비 게시</a></li>
+                <li><a href="#">강사 구인</a></li>
+            </ul>
+        </div>
+        <div id="footer_2">
+            <ul class="list-info">
+                <li><a href="#">가가가</a></li>
+                <li><a href="#">나나나</a></li>
+                <li><a href="#">다다다</a></li>
+                <li><a href="#">라라라</a></li>
+                <li><a href="#">마마마</a></li>
+                <li><a href="#">사사사</a></li>
+            </ul>
+            <div class="info">
+                <p class="p_1">
+                    강남점 1관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                </p>
+                <p class="p_1">
+                    강남점 2관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                </p>
+                <p class="p_1">
+                    강남점 1관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                </p>
+            </div>
+            <p class="p_2">Copyright © 1998-2025 KH Information Educational Institute All Right Reserved</p>
+        </div>
+    </footer>
+    </div>
+</body>
+</html>

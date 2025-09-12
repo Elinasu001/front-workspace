@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/02_CSS/css/footer.css">
+    <link rel="stylesheet" href="/02_CSS/css/search.css">
+    <link rel="stylesheet" href="/02_CSS/css/nav.css">
+    <link rel="stylesheet" href="/02_CSS/css/contents.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <title>구조3</title>
+</head>
+<style>
+    /* 공통 영역 */
+    *{box-sizing: border-box;}
+    button {cursor: pointer;}
+    /* div, main, header, footer{ border:1px solid red;} */
+    #wrap{display:flex; flex-direction:column; height: 800px; margin:0 auto; }
+
+    /*3개 영역 : header/container/footer*/
+    header{display: flex; flex-direction:column; flex:1.5; gap:40px;}
+    main{display: flex; flex:5.5;}
+    footer{flex:2;}
+
+    /* 헤더 영역 */
+    header .top{display:flex;justify-content: center; width:100%;}
+    header .nav{flex: 3;}
+    header .header_1{flex:2;}
+    header .header_2{flex:6.5;}
+    header .header_3{flex:1.5;}
+
+    /* 컨텐츠 영역 */
+    main { display: flex; flex-direction: column; gap:60px; padding-bottom:60px; background-color:#f5f5f7; }
+    #content_2,
+    #content_3 {margin: 0 auto;}
+    #content_2 h3,
+    #content_3 h3 {font-size: 28px; margin-bottom:20px;}
+    .mainBanner {width:100%; height:500px; background-image: url(resources/image/chu01.png);}
+    
+    .inner{width:1000px; padding:0 20px;}
+    header .top .inner {display:flex; align-items: center; justify-content: space-between;}
+    #swiperWrap {width:400px; height: 180px;; border-radius: 10px; overflow: hidden;; box-shadow:0px 3px 13px #dddddd;}
+    #swiperWrap .swiper-pagination-bullet-active { width:26px; border-radius: 6px; background-color:white;}
+    
+    
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 110%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    #swiperWrap  .swiper-slide:nth-child(2) img {
+        width: 120%;
+    }
+
+</style>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="top">
+                <div class="inner">
+                    <a href="#" class="logo">
+                        <img src="resources/image/logo.png" alt="사이트아이콘">
+                    </a>
+
+                    <div id="header_2">
+                        <form action="search.kh" method="get" id="search-form" aria-label="사이트 검색">
+                            <div id="search-text">
+                                <input type="text" name="query" placeholder="궁금하신게 있으신가요~~?"/>
+                            </div>
+                            <div id="search-btn" class="mask-image">
+                                <input type="submit" value="검색" aria-label="검색"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <nav>
+                <ul id="navbar">
+                    <li>
+                        <a href="#">Top</a>
+                        <ul>
+                            <li><a href="#">셔츠/블라우스</a></li>
+                            <li><a href="#">나시</a></li>
+                            <li><a href="#">티셔츠</a></li>
+                            <li><a href="#">맨투맨/후드</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Bottom</a>
+                        <ul>
+                            <li><a href="#">스커트</a></li>
+                            <li><a href="#">팬츠</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Dress</a></li>
+                    <li>
+                        <a href="#">Outer</a>
+                        <ul>
+                            <li><a href="#">점퍼/자켓</a></li>
+                            <li><a href="#">코트</a></li>
+                            <li><a href="#">패딩</a></li>
+                            <li><a href="#">조끼</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div id="content_1">
+                <div class="mainBanner">
+                </div>
+            </div>
+            <div id="content_2">
+                <div class="inner">
+                    <h3>아무거나 골라줘</h3>
+                    <ul class="list-view">
+                        <li><a href="#">추성훈 맛집</a></li>
+                        <li><a href="www.youtube.com/@Choosunghoon_ajossi">추성훈 유튜브</a></li>
+                        <li><a href="#">추성훈 굿즈</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="content_3">
+                <div class="inner">
+                    <h3>게시판</h3>
+                    <div class="etc-wrap">
+                        <div class="notice-area">
+                            <ul class="notice">
+                                <li>
+                                    <a href="#">
+                                        <span>오늘의 하루 오늘의 하루 오늘의 하루 오늘의 하루 오늘의 하루 오늘의 하루 오늘의 하루 오늘의 하루</span>
+                                        <span>2025.09.12</span>
+                                    </a>
+                                    
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>맛집 탐방 가즈아 맛집 탐방 가즈아 맛집 탐방 가즈아 맛집 탐방 가즈아 맛집 탐방 가즈아 맛집 탐방 가즈아</span>
+                                        <span>2025.09.12</span>
+                                    </a>
+                                    
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>유튜브 어떰? 유튜브 어떰? 유튜브 어떰? 유튜브 어떰? 유튜브 어떰? 유튜브 어떰?</span>
+                                        <span>2025.09.12</span>
+                                    </a>
+                                    </li>
+                                <li>
+                                    <a href="#">
+                                        <span>굿즈 얼마일까 굿즈 얼마일까 굿즈 얼마일까 굿즈 얼마일까 굿즈 얼마일까 굿즈 </span>
+                                        <span>2025.09.12</span>
+                                    </a>
+                                    </li>
+                                <li>
+                                    <a href="#">
+                                        <span>일본 맛집 많네 일본 맛집 많네 일본 맛집 많네 일본 맛집 많네 일본 맛집 많네 일본 맛집 많네</span>
+                                        <span>2025.09.12</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="swiperWrap">
+                            <div class="swiper mySwiper02">
+                            <div class="swiper-wrapper">
+                            <div class="swiper-slide"><a href="#"><img src="resources/image/mamama.png" alt="추성훈사진"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="resources/image/ham.png" alt="추성훈사진"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="resources/image/gogo.png" alt="추성훈사진"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="resources/image/baaaam.png" alt="추성훈사진"></a></div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+            <footer>
+        <div id="footer_1">
+            <div class="inner">
+                <ul class="list-info">
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">인재 채용 문의</a></li>
+                    <li><a href="#">게시판</a></li>
+                    <li><a href="#">직원 구인</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="footer_2">
+            <div class="inner">
+                <div class="info">
+                    <p class="p_1">
+                        강남점 1관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                    </p>
+                    <p class="p_1">
+                        강남점 2관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                    </p>
+                    <p class="p_1">
+                        강남점 1관 : 서울특별시 강남구 테헨란로 14번길 6 남도빌딩 2F, 3F
+                    </p>
+                </div>
+                <p class="p_2">Copyright © 1998-2025 KH Information Educational Institute All Right Reserved</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+</body>
+<script>
+    var swiper = new Swiper(".mySwiper02", {
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        slidePerview: 1,
+        loop:true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+    });
+</script>
+</html>
