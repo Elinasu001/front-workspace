@@ -5,7 +5,7 @@ div, footer{ box-sizing: border-box;}
 #footer_1,
 #footer_2{display:flex; justify-content: center; align-items: center; width:100%;}
 #footer_1{height:20%; background-color: #111111;}
-#footer_2{height:80%; padding-bottom:30px; background-color: #f7f7f7;}
+#footer_2{height:80%; padding-bottom:60px; background-color: #f7f7f7;}
 
 .list-info{display:flex; align-items: center; gap:20px; padding:20px 0;}
 .list-info li a{position: relative; color: white; font-size: 14px;}
@@ -16,6 +16,6 @@ div, footer{ box-sizing: border-box;}
 #footer_2 .list-info li a::after{background-color: #111111;}
 
 .info{padding-top:16px;}
-.info .p_1{line-height: 1.5; width:80%; font-size:12px; }
+.info .p_1{line-height: 2; width:80%; font-size:12px; }
 
 .p_2{padding-top:16px; font-size:12px;}
