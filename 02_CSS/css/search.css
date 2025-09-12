@@ -8,7 +8,7 @@
 #search-form input:focus,
 #search-form input:hover{outline:2px solid rgb(0,162,255);transition:.3s}
 #search-btn {position:absolute;width:20px;right:16px;top:50%;transform:translateY(-50%)}
-#search-btn input[type="submit"]{background:#fff;border:none;font-size:0;cursor:pointer}
+#search-btn input[type="submit"]{ position: relative; width:20px; height:30px; background:transparent;border:none;font-size:0;cursor:pointer; z-index: 1;}
 #search-btn input[type="submit"]:hover{opacity:.8;transition:.3s}
 .mask-image::after{
     position:absolute;content:'';width:20px;height:20px;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -17,4 +17,5 @@
     -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
     -webkit-mask-position:center;mask-position:center;
     background-color:#111111; /* 아이콘 색 */
+    cursor: pointer;
 }
