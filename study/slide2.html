@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+
+    *{box-sizing: border-box; text-decoration: none; list-style: none; margin: 0; padding:0; color:#333;}
+    *:focus-visible{outline: 1px solid blue;}
+    body{width:100%; margin: 0; padding:0;}
+    .wrap{max-width:1200px; margin: 0 auto; padding:0 20px;}
+    header{height:100px;}
+    .slider-container {height:300px;}
+    .contents{height:200px;}
+    footer{height:100px;}
+    .blind{position: absolute; width:1px; height:1px; padding:0; margin:-1px; clip:rect(0, 0, 0, 0);}
+
+    /* logo */
+    .logo{width:200px; height:40px;}
+    .logo-text{font-weight:bold;}
+
+
+    /* nav */
+    header{display:flex; justify-content: space-between; align-items:center;}
+    .main-nav{position: relative; }
+    /* nav style */
+    .main-menu{display:flex; background-color: #fff;}
+    .main-menu li {flex: 1;}
+
+    .main-menu a {display: block; padding:20px 30px; text-align: center; transition: background-color 0.3s;}
+    .main-menu a:hover{background-color: #555; color:#fff;}
+
+    .sub-menu-area{ z-index:1; display: flex; justify-content: space-between; position: absolute; top:100%; /* 메인 메뉴 아래에 위치 */ left:0; width:100%; height:0; overflow:hidden; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); transition: height 0.3s ease-in-out; }
+    .sub-menu-col {display:flex; flex-direction: column; justify-content: space-between;}
+    .sub-menu-col a{display:block; padding:16px;  color:#333; transition: background-color 0.2s, color 0.2s;}
+    .sub-menu-col a:hover{background-color: #555; color:#fff;}
+    .show-sub-menu .sub-menu-area{height:auto; padding:2px; margin-top:2px;}
+
+    
+    /* slide */
+    /* body{width:100%; height: 100%; margin: 0; padding: 0;} */
+    .swiper{ width:600px; /* 원하는 슬라이드 너비 */height: 400px; /* 슬라이드 하나가 보여질 높이 */overflow: hidden;margin: auto;}
+    .swiper-wrapper { display: flex; flex-direction: column; /* 이미지를 세로로 정렬 */transition: transform 1s ease-in-out; /* 1초 동안 부드럽게 이동 */}
+    .swiper-slide a{ position: relative; display:block; width:600px;height:400px;}
+    .swiper-slide a:focus-visible {border: 3px solid blue;}
+    .swiper-slide img {width: 100%;height: 100%;object-fit: cover;}
+
+    /* 슬라이드 텍스트 스타일 */
+    .slide-text { position: absolute;top: 50%; /* 수직 중앙 정렬 */left: 50%; /* 수평 중앙 정렬 */transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */ color: #fff; /* 글자색 */text-align: center;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 글자 그림자 효과로 가독성 높임 */}
+    .slide-text h2 { font-size: 32px;font-weight: bold;margin-bottom: 10px;color: #fff;font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;}
+    .slide-text p {font-size: 18px;font-weight: normal; color: #fff;font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;}
+
+    /* contents */
+    /* C 영역 전체 레이아웃 */
+    .contents {display: flex; justify-content: space-between; align-items: center; height: 200px;}
+    .tab-wrap {  width: 30%;  height: 100%;}
+    .banner { width: 35%; height: 100%;}
+    .shortcut {width: 35%; height: 100%;}
+
+    /* 탭 메뉴 스타일 */
+    .tab-menu {display: flex; margin-bottom: 10px;border-bottom: 2px solid #ccc;}
+    .tab-menu li { padding: 10px 15px;cursor: pointer;}
+    .tab-menu li.active{border-radius: 5px 5px 0 0;  background-color: #333;}
+    .tab-menu li.active a{color: #fff;}
+    .tab-content {display: none;}
+    .tab-content.active { display: block;}
+
+    /* 공지사항 스타일 */
+    .notice-item a { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed #ccc;}
+    .notice-item:first-child a { font-weight: bold;}
+    .notice-item p {width: 70%; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; }
+    .notice-item span { width: 30%;text-align: right;}
+    
+
+    /* 갤러리 스타일 */
+    .gallery-list {display: flex;justify-content: space-between; }
+    .gallery-list li img { width: 100px; height: 100px; object-fit: cover;}
+
+    /* 레이어 팝업 스타일 (기본 숨김) */
+    .popup-wrap { z-index: 1000;  display: none;justify-content: center; align-items: center; position: fixed; top: 0; left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.5);}
+    .popup {  width: 400px; background: #fff; padding: 20px;border-radius: 5px;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);}
+    .popup-close { float: right;border: 1px solid #ccc;background-color: #eee;padding: 5px 10px;  cursor: pointer;}
+
+    /* 푸터 */
+    footer .logo{flex:2;}
+    footer .footer-text {flex:6; text-align: center;}
+    footer .sns {flex:2;}
+    footer {display:flex; justify-content: space-between;}
+    footer .logo-text {color:grayscale;}
+
+</style>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="logo">
+                <a href="#" class="logo-text">로고</a>
+            </div>
+            <nav class="main-nav">
+                <ul class="main-menu">
+                    <li><a href="#">MENU-1</a></li>
+                    <li><a href="#">MENU-2</a></li>
+                    <li><a href="#">MENU-3</a></li>
+                    <li><a href="#">MENU-4</a></li>
+                </ul>
+
+                <div class="sub-menu-area">
+                    <ul class="sub-menu-col">
+                        <li><a href="#">SubMenu-1</a></li>
+                        <li><a href="#">SubMenu-2</a></li>
+                        <li><a href="#">SubMenu-3</a></li>
+                        <li><a href="#">SubMenu-4</a></li>
+                    </ul>
+                    <ul class="sub-menu-col">
+                        <li><a href="#">SubMenu-1</a></li>
+                        <li><a href="#">SubMenu-2</a></li>
+                        <li><a href="#">SubMenu-3</a></li>
+                        <li><a href="#">SubMenu-4</a></li>
+                    </ul>
+                    <ul class="sub-menu-col">
+                        <li><a href="#">SubMenu-1</a></li>
+                        <li><a href="#">SubMenu-2</a></li>
+                        <li><a href="#">SubMenu-3</a></li>
+                        <li><a href="#">SubMenu-4</a></li>
+                    </ul>
+                    <ul class="sub-menu-col">
+                        <li><a href="#">SubMenu-1</a></li>
+                        <li><a href="#">SubMenu-2</a></li>
+                        <li><a href="#">SubMenu-3</a></li>
+                        <li><a href="#">SubMenu-4</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <section class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="../02_CSS/resources/image/ham.png" alt="Image 1">
+                        <div class="slide-text">
+                            <h2>새로운 시작</h2>
+                            <p>2024년 봄을 맞이하여, 새로운 출발을 준비하세요.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="../02_CSS/resources/image/chu01.png" alt="Image 2">
+                        <div class="slide-text">
+                            <h2>우리들의 이야기</h2>
+                            <p>소중한 순간들을 함께 담아 갑니다.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="../02_CSS/resources/image/chu02.png" alt="Image 3">
+                        <div class="slide-text">
+                            <h2>최고의 순간</h2>
+                            <p>잊을 수 없는 추억을 만들어 드립니다.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contents">
+            <div class="tab-wrap">
+                <ul class="tab-menu">
+                    <li class="active" title="선택됨"><a href="#notice-content">공지사항</a></li>
+                    <li><a href="#gallery-content">갤러리</a></li>
+                </ul>
+
+                <div id="notice-content" class="tab-content active">
+                    <h3 class="content-title blind">공지사항</h3>
+                    <ul class="notice-list">
+                        <li class="notice-item popup-trigger">
+                        <a href="#">
+                            <p>신규 웹사이트 오픈 안내</p>
+                            <span>2024.09.14</span>
+                        </a>
+                        </li>
+                        <li class="notice-item">
+                        <a href="#">
+                            <p>가을 맞이 이벤트 당첨자 발표</p>
+                            <span>2024.09.10</span>
+                        </a>
+                        </li>
+                        <li class="notice-item">
+                        <a href="#">
+                            <p>추석 연휴 고객센터 휴무 안내</p>
+                            <span>2024.09.05</span>
+                        </a>
+                        </li>
+                        <li class="notice-item">
+                        <a href="#">
+                            <p>시스템 점검으로 인한 서비스 일시 중단</p>
+                            <span>2024.09.01</span>
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="gallery-content" class="tab-content">
+                    <h3 class="content-title blind">갤러리</h3>
+                    <ul class="gallery-list">
+                        <li><a href="#"><img src="resources/gallery1.jpg" alt="갤러리 이미지1"></a></li>
+                        <li><a href="#"><img src="resources/gallery2.jpg" alt="갤러리 이미지2"></a></li>
+                        <li><a href="#"><img src="resources/gallery3.jpg" alt="갤러리 이미지3"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="banner">
+                <h3>배너</h3>
+            </div>
+            <div class="shortcut">
+                <a href="#">
+                    <h3>바로가기</h3>
+                </a>
+        </div>
+        </section>
+
+        <div class="popup-wrap">
+            <div class="popup">
+                <h2 class="popup-title">공지사항 제목</h2>
+                <div class="popup-content">
+                <p>공지사항 내용이 여기에 들어갑니다. 사용자가 클릭한 항목에 대한 상세 정보가 표시됩니다.</p>
+                </div>
+                <button class="popup-close">닫기</button>
+            </div>
+        </div>
+        <footer>
+            <div class="logo">
+                <a href="#" class="logo-text">로고</a>
+            </div>
+            <div class="footer-text">
+                <p>CopyRight</p>
+            </div>
+            <div class="sns">
+                <a href="#" class="sns-text">sns</a>
+            </div>
+        </footer>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+
+    //@tag:nextEditSuggestions
+    var swiper = new Swiper(".mySwiper", {
+        direction: "vertical",
+        autoplay: {
+            delay: 3000,
+        }
+    })
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const mainNav = document.querySelector('.main-nav');
+
+        mainNav.addEventListener('mouseenter', () => {
+            mainNav.classList.add('show-sub-menu');
+        });
+
+        mainNav.addEventListener('mouseleave', () => {
+            // 포커스 상태를 확인하여 키보드 사용자는 닫히지 않도록 방지
+            if (!mainNav.contains(document.activeElement)) {
+                mainNav.classList.remove('show-sub-menu');
+            }
+        });
+
+        // 키보드(Tab) 진입 시 메뉴 열기
+        mainNav.addEventListener('focusin', () =>{
+            mainNav.classList.add('show-sub-menu');
+        });
+
+        mainNav.addEventListener('focusout', () => {
+            setTimeout(() => {
+                if(!mainNav.contains(document.activeElement)) {
+                    mainNav.classList.remove('show-sub-menu');
+                }
+            }, 10);
+        });
+
+
+
+        // --- 탭 기능 ---
+        const tabMenus = document.querySelectorAll('.tab-menu li');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabMenus.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // 모든 탭과 콘텐츠의 활성화 클래스 제거
+                // 기존 활성화된 탭에서 'active' 클래스와 'title' 속성 제거
+                tabMenus.forEach(item => {
+                    item.classList.remove('active');
+                    item.removeAttribute('title'); // 기존 탭에서 title 제거
+                });
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // 클릭된 탭과 해당 콘텐츠 활성화
+                const targetContentId = e.currentTarget.querySelector('a').getAttribute('href').substring(1);
+                e.currentTarget.classList.add('active');
+                e.currentTarget.setAttribute('title', '선택됨');
+                document.getElementById(targetContentId).classList.add('active');
+            });
+        });
+
+        // --- 레이어 팝업 기능 ---
+        const popupTrigger = document.querySelector('.popup-trigger');
+        const popupWrap = document.querySelector('.popup-wrap');
+        const popupCloseBtn = document.querySelector('.popup-close');
+
+        popupTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            popupWrap.style.display = 'flex';
+        });
+
+        popupCloseBtn.addEventListener('click', () => {
+            popupWrap.style.display = 'none';
+        });
+
+    });
+
+    
+</script>
+</html>

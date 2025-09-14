@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상업용 풀스크린 스크롤 페이지</title>
+    
+    <!-- 아이콘을 위한 Lucide Icons CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/lucide-js@latest"></script> -->
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            text-rendering: optimizeLegibility;
+        }
+        
+        body.body-lock {
+            overflow: hidden;
+        }
+
+        /* ===== GNB (상단 내비게이션) ===== */
+        #gnbFull {
+            background-color: rgba(29, 29, 31, 0.85); /* 약간 투명한 배경 */
+            backdrop-filter: saturate(180%) blur(20px); /* 블러 효과 */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        #gnbFull .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+        }
+        
+        /* 애플 로고 스타일 */
+        .apple-logo {
+            display: flex;
+            align-items: center;
+            height: 44px;
+            padding: 0 8px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .apple-logo svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        
+        .apple-logo span {
+            display: none;
+        }
+
+        /* 데스크톱 메뉴 리스트 */
+        #gnbFull .menu-list {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            height: 44px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex-grow: 1; /* 중간 메뉴를 중앙으로 밀기 위한 설정 */
+            justify-content: flex-end;
+        }
+        
+        #gnbFull .menu-item {
+            position: relative;
+        }
+        
+        #gnbFull .menu-item > a {
+            display: block;
+            line-height: 44px;
+            padding: 0 8px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color .2s ease;
+        }
+        
+        #gnbFull .menu-item.on > a,
+        #gnbFull .menu-item > a:hover {
+            color: #fff;
+        }
+
+        /* 2뎁스: CSS 전용 전환 (display 고정, 상태는 on 클래스로 제어) */
+        #gnbFull .menu-sub {
+            display: flex;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px) scale(0.98);
+            top: 44px;
+            z-index: 20;
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            gap: 24px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.15);
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+            pointer-events: none;
+            transition: max-height .28s ease, opacity .22s ease, transform .28s ease, visibility 0s linear .28s;
+            will-change: max-height, opacity, transform;
+        }
+        
+        #gnbFull .menu-item.on > .menu-sub {
+            max-height: 520px;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0) scale(1);
+            visibility: visible;
+            pointer-events: auto;
+            transition: max-height .32s ease, opacity .18s ease, transform .32s ease, visibility 0s;
+        }
+
+        #gnbFull .menu-sub ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            min-width: 160px;
+        }
+        
+        #gnbFull .menu-sub li a {
+            display: block;
+            padding: 8px 10px;
+            color: #1d1d1f;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color .2s ease;
+        }
+        
+        #gnbFull .menu-sub li a:hover,
+        #gnbFull .menu-sub li a:focus {
+            background-color: #f5f5f7;
+            outline: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #gnbFull .menu-sub { transition: none; transform: none; }
+            #gnbFull .menu-item.on > .menu-sub { transition: none; transform: none; }
+        }
+
+        /* ===== 반응형 햄버거 (오른쪽) ===== */
+        .hamburger-container {
+            height: 44px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hamburger {
+            display: none;
+            position: relative;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .hamburger:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .hamburger-icon {
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        /* .hamburger.is-open .hamburger-icon {
+            transform: rotate(90deg);
+        } */
+
+        /* 모바일(<=960px): 메뉴 숨기고 햄버거 노출 */
+        @media (max-width: 960px) {
+            #gnbFull .menu-list {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        
+        /* ===== 모바일 전체메뉴 (오프캔버스) ===== */
+        #mobileMenu {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            visibility: hidden;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .28s ease;
+        }
+        
+        #mobileMenu .backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.4);
+            opacity: 0;
+            transition: opacity .28s ease;
+        }
+        
+        #mobileMenu .sheet {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 86%;
+            max-width: 420px;
+            background: #fff;
+            box-shadow: -8px 0 24px rgba(0,0,0,.12);
+            transform: translateX(100%);
+            transition: transform .34s cubic-bezier(.22,.61,.36,1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #mobileMenu[aria-hidden="false"] {
+            visibility: visible;
+            pointer-events: auto;
+            opacity: 1;
+        }
+        
+        #mobileMenu[aria-hidden="false"] .backdrop {
+            opacity: 1;
+        }
+        
+        #mobileMenu[aria-hidden="false"] .sheet {
+            transform: translateX(0);
+        }
+
+        #mobileMenu header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        #mobileMenu .close {
+            border: 0;
+            background: #1d1d1f;
+            color: #fff;
+            border-radius: 8px;
+            height: 36px;
+            padding: 0 12px;
+            cursor: pointer;
+        }
+        
+        #mobileMenu nav {
+            padding: 8px 16px 20px;
+            overflow: auto;
+        }
+
+        /* 모바일 아코디언 */
+        .m-acc {
+            border-bottom: 1px solid #f1f3f5;
+        }
+        
+        .m-acc-btn {
+            width: 100%;
+            text-align: left;
+            border: 0;
+            background: transparent;
+            padding: 14px 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .m-acc-btn[aria-expanded="true"] {
+            color: #007aff;
+        }
+        
+        .m-acc-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .28s ease;
+        }
+        
+        .m-acc.open .m-acc-panel {
+            max-height: 400px;
+        }
+        
+        .m-link {
+            display: block;
+            padding: 14px 8px;
+            text-decoration: none;
+            color: #111;
+        }
+        
+        .m-sub a {
+            display: block;
+            padding: 10px 8px;
+            text-decoration: none;
+            color: #111;
+            border-radius: 6px;
+        }
+        
+        .m-sub a:hover,
+        .m-sub a:focus {
+            background: #eef6ff;
+            outline: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hamburger .line { transition: none; }
+            #mobileMenu, #mobileMenu .backdrop, #mobileMenu .sheet { transition: none !important; }
+            .m-acc-panel { transition: none; }
+        }
+        
+        /* Full-screen section content styles */
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+            scroll-snap-align: start;
+        }
+        
+        .content {
+            margin-top: 44px;
+        }
+
+        .content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .content p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        /* Section backgrounds */
+        .section:nth-child(1) { background-color: #f5f5f7; }
+        .section:nth-child(2) { background-color: #ffffff; }
+        .section:nth-child(3) { background-color: #e8e8ed; }
+
+        /* Footer section */
+        #fourthPage {
+            height: 100vh;
+            position: relative;
+        }
+
+        .site-footer {
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            color: #6e6e73;
+            font-size: 0.8rem;
+            border-top: 1px solid #d2d2d7;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+        
+        /* Scroll to top button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 40px;
+            height: 40px;
+            border: none;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.8;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        #scrollToTopBtn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ===== GNB ===== -->
+    <nav id="gnbFull" aria-label="주요 메뉴">
+        <div class="inner">
+            <!-- 애플 로고 -->
+            <a href="#" class="apple-logo" aria-label="홈으로">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-apple"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.23a4.58 4.58 0 0 0 -4.58 -4.58c-1.45 0-2.83 2.1-3.48 2.1s-1.07-2.1-3.48-2.1c-1.45 0-3.08 2.1-3.08 2.1s-1.45-2.1-3.08-2.1a4.58 4.58 0 0 0 -4.58 4.58c0 4.23 3 12.23 6 12.23s2.5-1.06 4-1.06Z"/><path d="M12 10.94c-1.5 0-2.75 1.06-4 1.06"/></svg>
+                <span>Apple</span>
+            </a>
+
+            <ul class="menu-list" role="menubar">
+                <li class="menu-item" role="none">
+                    <a href="#firstPage" role="menuitem" aria-haspopup="true" aria-expanded="false">회사소개</a>
+                    <div class="menu-sub" role="menu" aria-label="회사소개 하위메뉴">
+                        <ul>
+                            <li><a href="#">인사말</a></li>
+                            <li><a href="#">연혁</a></li>
+                            <li><a href="#">오시는 길</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item" role="none">
+                    <a href="#secondPage" role="menuitem" aria-haspopup="true" aria-expanded="false">제품</a>
+                    <div class="menu-sub" role="menu" aria-label="제품 하위메뉴">
+                        <ul>
+                            <li><a href="#">AI 서비스</a></li>
+                            <li><a href="#">클라우드</a></li>
+                            <li><a href="#">보안 솔루션</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">가격 안내</a></li>
+                            <li><a href="#">도입 사례</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item" role="none">
+                    <a href="#thirdPage" role="menuitem" aria-haspopup="true" aria-expanded="false">고객지원</a>
+                    <div class="menu-sub" role="menu" aria-label="고객지원 하위메뉴">
+                        <ul>
+                            <li><a href="#">공지사항</a></li>
+                            <li><a href="#">자료실</a></li>
+                            <li><a href="#">문의하기</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item" role="none">
+                    <a href="#" role="menuitem">블로그</a>
+                </li>
+            </ul>
+
+            <!-- 모바일용 햄버거 버튼 (오른쪽) -->
+            <div class="hamburger-container">
+                <button id="btnMobileMenu" class="hamburger" aria-label="전체 메뉴 열기" aria-controls="mobileMenu" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu hamburger-icon"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- ===== 모바일 전체메뉴 (오프캔버스) ===== -->
+    <aside id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mobileMenuTitle">
+        <div class="backdrop" data-close="backdrop"></div>
+        <div class="sheet">
+            <header>
+                <h2 id="mobileMenuTitle" style="margin:0;font-size:18px;">전체 메뉴</h2>
+                <button type="button" class="close" id="mobileClose">닫기</button>
+            </header>
+            <nav aria-label="전체 메뉴">
+                <ul style="list-style:none; margin:0; padding:0">
+                    <li class="m-acc">
+                        <button class="m-acc-btn" aria-expanded="false">회사소개</button>
+                        <div class="m-acc-panel m-sub">
+                            <a href="#">인사말</a>
+                            <a href="#">연혁</a>
+                            <a href="#">오시는 길</a>
+                        </div>
+                    </li>
+                    <li class="m-acc">
+                        <button class="m-acc-btn" aria-expanded="false">제품</button>
+                        <div class="m-acc-panel m-sub">
+                            <a href="#">AI 서비스</a>
+                            <a href="#">클라우드</a>
+                            <a href="#">보안 솔루션</a>
+                            <a href="#">가격 안내</a>
+                            <a href="#">도입 사례</a>
+                        </div>
+                    </li>
+                    <li class="m-acc">
+                        <button class="m-acc-btn" aria-expanded="false">고객지원</button>
+                        <div class="m-acc-panel m-sub">
+                            <a href="#">공지사항</a>
+                            <a href="#">자료실</a>
+                            <a href="#">문의하기</a>
+                        </div>
+                    </li>
+                    <li><a class="m-link" href="#">블로그</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main content container -->
+    <main>
+        <section class="section" id="firstPage">
+            <div class="content">
+                <h1>iPhone 15 Pro</h1>
+                <p>티타늄으로 완성. 놀랍도록 강렬함.</p>
+            </div>
+        </section>
+
+        <section class="section" id="secondPage">
+            <div class="content">
+                <h1>iPad</h1>
+                <p>놀라운 성능, 아름다운 디자인.</p>
+            </div>
+        </section>
+
+        <section class="section" id="thirdPage">
+            <div class="content">
+                <h1>Apple Watch</h1>
+                <p>당신의 건강을 위한 최고의 동반자.</p>
+            </div>
+        </section>
+
+        <section class="section" id="fourthPage">
+            <div class="content">
+                <h1>Apple Watch</h1>
+                <p>당신의 건강을 위한 최고의 동반자.</p>
+            </div>
+            <footer class="site-footer">
+                <p>&copy; 2025 Apple Korea. All rights reserved.</p>
+            </footer>
+        </section>
+    </main>
+    
+    <!-- Scroll to top button -->
+    <button id="scrollToTopBtn" title="맨 위로">↑</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            /* ===== 데스크톱 GNB: CSS 전환 활용 ===== */
+            const items = document.querySelectorAll('#gnbFull .menu-item');
+            
+            function openItem(item) {
+                closeAll();
+                item.classList.add('on');
+                const link = item.querySelector('a');
+                if (link) link.setAttribute('aria-expanded', 'true');
+            }
+            
+            function closeItem(item) {
+                item.classList.remove('on');
+                const link = item.querySelector('a');
+                if (link) link.setAttribute('aria-expanded', 'false');
+            }
+            
+            function closeAll() {
+                const opened = document.querySelectorAll('#gnbFull .menu-item.on');
+                for (let i = 0; i < opened.length; i++) closeItem(opened[i]);
+            }
+
+            items.forEach(item => {
+                const link = item.querySelector('a');
+                item.addEventListener('mouseenter', () => openItem(item));
+                item.addEventListener('mouseleave', () => closeItem(item));
+                if (link) {
+                    link.addEventListener('focus', () => openItem(item));
+                }
+            });
+
+            document.addEventListener('focusin', function(e) {
+                if (!e.target.closest || !e.target.closest('#gnbFull')) closeAll();
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeAll();
+            });
+
+            /* ===== 모바일 햄버거: 아이콘 애니메이션 + 오프캔버스(슬라이드 인/아웃) ===== */
+            const btn = document.getElementById('btnMobileMenu');
+            const wrap = document.getElementById('mobileMenu');
+            const closeBtn = document.getElementById('mobileClose');
+
+            if (btn && wrap) {
+                let previousActiveElement = null;
+
+                const trapFocus = (element) => {
+                    const focusableElements = 'button, a[href], [tabindex]:not([tabindex="-1"])';
+                    const focusableContent = element.querySelectorAll(focusableElements);
+                    if (focusableContent.length === 0) return;
+                    
+                    const firstFocusableEl = focusableContent[0];
+                    const lastFocusableEl = focusableContent[focusableContent.length - 1];
+                
+                    const handleKeyDown = (e) => {
+                        let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+                        if (!isTabPressed) return;
+                
+                        if (e.shiftKey) { // Shift + Tab
+                            if (document.activeElement === firstFocusableEl) {
+                                lastFocusableEl.focus();
+                                e.preventDefault();
+                            }
+                        } else { // Tab
+                            if (document.activeElement === lastFocusableEl) {
+                                firstFocusableEl.focus();
+                                e.preventDefault();
+                            }
+                        }
+                    };
+
+                    document.addEventListener('keydown', handleKeyDown);
+                    wrap.addEventListener('transitionend', () => {
+                        if (wrap.getAttribute('aria-hidden') === 'true') {
+                            document.removeEventListener('keydown', handleKeyDown);
+                        }
+                    });
+
+                    firstFocusableEl.focus();
+                };
+
+                function openMenu() {
+                    previousActiveElement = document.activeElement;
+                    wrap.setAttribute('aria-hidden', 'false');
+                    btn.setAttribute('aria-expanded', 'true');
+                    btn.classList.add('is-open');
+                    document.body.classList.add('body-lock');
+                    trapFocus(wrap);
+                }
+
+                function closeMenu() {
+                    wrap.setAttribute('aria-hidden', 'true');
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.classList.remove('is-open');
+                    document.body.classList.remove('body-lock');
+                    if (previousActiveElement) {
+                        previousActiveElement.focus();
+                    }
+                }
+
+                function toggleMenu() {
+                    const hidden = wrap.getAttribute('aria-hidden') !== 'false';
+                    if (hidden) {
+                        openMenu();
+                    } else {
+                        closeMenu();
+                    }
+                }
+
+                btn.addEventListener('click', (e) => { e.preventDefault(); toggleMenu(); });
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => closeMenu());
+                }
+
+                wrap.addEventListener('click', (e) => {
+                    const t = e.target;
+                    if (t && t.getAttribute && t.getAttribute('data-close') === 'backdrop') {
+                        closeMenu();
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (wrap.getAttribute('aria-hidden') === 'false' && (e.key === 'Escape' || e.keyCode === 27)) {
+                        closeMenu();
+                    }
+                });
+
+                // 아코디언
+                const acc = wrap.querySelectorAll('.m-acc');
+                acc.forEach(item => {
+                    const b = item.querySelector('.m-acc-btn');
+                    const p = item.querySelector('.m-acc-panel');
+                    if (!b || !p) return;
+                    b.addEventListener('click', () => {
+                        const open = item.classList.contains('open');
+                        if (open) {
+                            item.classList.remove('open');
+                            b.setAttribute('aria-expanded', 'false');
+                        } else {
+                            item.classList.add('open');
+                            b.setAttribute('aria-expanded', 'true');
+                        }
+                    });
+                });
+            }
+
+            /* ===== 기존 스크롤 기능 ===== */
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    scrollToTopBtn.style.display = 'flex';
+                } else {
+                    scrollToTopBtn.style.display = 'none';
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

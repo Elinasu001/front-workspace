@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <title>Document</title>
+</head>
+<style>
+    /* body{width:100%; height: 100%; margin: 0; padding: 0;} */
+    .slider-container{
+        width: 600px; /* 원하는 슬라이드 너비 */
+        height: 400px; /* 슬라이드 하나가 보여질 높이 */
+        overflow: hidden; /* 슬라이드 영역 밖 이미지를 숨깁니다. */
+        margin: auto;
+    }
+
+    .slider-wrapper {
+        display: flex;
+        flex-direction: column; /* 이미지를 세로로 정렬 */
+        transition: transform 1s ease-in-out; /* 1초 동안 부드럽게 이동 */
+    }
+
+    .slide {
+        width: 600px;
+        height: 400px; /* 부모(slider-container)와 동일한 높이 */
+        flex-shrink: 0;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 이미지를 비율에 맞게 채웁니다. */
+        border:1px solid black
+    }
+</style>
+<body>
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="slide"><img src="../02_CSS/resources/image/ham.png" alt="Image 1"></div>
+            <div class="slide"><img src="../02_CSS/resources/image/chu01.png" alt="Image 2"></div>
+            <div class="slide"><img src="../02_CSS/resources/image/chu02.png" alt="Image 3"></div>
+        </div>
+    </div>
+</body>
+<script>
+    // 사진이 재각각일 경우
+// document.addEventListener('DOMContentLoaded', () => { //
+//     const wrapper = document.querySelector('.slider-wrapper');
+//     const slides = document.querySelectorAll('.slide');
+//     let currentIndex = 0;
+
+//     // 다음 슬라이드로 이동하는 함수
+//     const nextSlide = () => {
+//         currentIndex++;
+//         if (currentIndex >= slides.length) {
+//             // 마지막 이미지에 도달하면 처음으로 돌아갑니다.
+//             currentIndex = 0;
+//         }
+
+//         // 이전 슬라이드들의 높이를 모두 더하여 정확한 이동 거리를 계산합니다.
+//         let totalHeight = 0;
+//         for (let i = 0; i < currentIndex; i++) {
+//             totalHeight += slides[i].clientHeight;
+//         }
+        
+//         // Y축으로 이동
+//         wrapper.style.transform = `translateY(-${totalHeight}px)`;
+//     };
+
+//     // 웹사이트 로드 시 자동으로 3초마다 nextSlide 함수를 실행합니다.
+//     setInterval(nextSlide, 3000); // 3초 (3000ms)
+// });
+
+
+
+
+// css 사진이 동일할 경우
+document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.querySelector('.slider-wrapper');
+    const slides = document.querySelectorAll('.slide');
+    const slideHeight = slides[0].clientHeight; // 첫 번째 사진 높이만 가져와도 충분
+    let currentIndex = 0;
+
+    const nextSlide = () => {
+        currentIndex++;
+        if (currentIndex >= slides.length) {
+            currentIndex = 0;
+        }
+        const translateYValue = -currentIndex * slideHeight;
+        // - : 가장 중요! transform : translateY()의 음수 값은 요소를 위로 움직임. 전체 슬라이드 묶음을 위로 올려서 다음 사진을 끌러올려야 하므로 음수 부호를 붙인다.
+        //  slideHeight : 사진 한장의 높이
+        wrapper.style.transform = `translateY(${translateYValue}px)`;
+    };
+
+    setInterval(nextSlide, 3000);
+});
+</script>
+</html>
