@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수</title>
+</head>
+<style>
+    
+</style>
+<body>
+
+    <h1>안녕 나는 변수야</h1>
+    <!--
+        자바 == 명확한 자료형(물론 자바도 타입추론이 가능함)
+        자바스크립트 == 자료형을 선언하지 않음
+        ==> 자바스크립트에 자료형만 좀 붙이면 안됨?? => 타입스크립트
+    -->
+    <h2>자바스크립트는 var, let, const 이용해서 변수 선언</h2>
+    <h3>* var, let, const의 차이점</h3>
+
+    <h4>변수를 선언해보자</h4>
+    <button id="var-btn">나는 변수 선언버튼</button>
+    <button onclick="scope();">var를 쓰지 맙시다.</button>
+
+    <script>
+        document.querySelector('#var-btn').onclick = function(){
+            
+            var userId = "user01";
+            console.log(userId);
+
+            userId = "user02";
+            console.log(userId);
+
+            userId = 123123123;
+            userId = false;
+            console.log(userId);
+
+            var userId = 'user03'; // 중복 선언
+            console.log(userId);
+
+            // 1) var 키워드는 중복선언이 가능하다. / 재할당도 가능 _ 쓰지마 _ 변수 선언할 때는 기본적으로 const 특정 사항에서만 let
+
+
+            console.log("------------------------------------------------------");
+            let userPwd = 'pass01';
+            console.log(userPwd);
+            userPwd = 'pass02';
+            console.log(userPwd);
+            // let userPwd =  var의 차이점은? let은 동일한 변수이름으로 이 스코프 내에서 정의하려고 할때 안됨.
+            
+            // 2) let 키워드는 중복선언이 불가능 / 재할당은 가능
+
+            console.log("------------------------------------------------------");
+            const userName = "고길동";
+            console.log(userName);
+            // userName = "홍길동"; // 빨간줄은 안가지만 실제로 돌려보면 할당 안된다 console 에 뜸
+            // const userName = 도 마찬가지로 안됨.
+            // const email; 초기화 꼭! 해야됨.
+
+            // 3) const 키워드는 중복선언 X / 재할당 X / 초기화 반드시 해야함
+
+            // var 키워드는 자유롭게 변수를 선언하고 사용하 수 있다는 장점이 있음
+            // 중복된 변수명을 사용할 수 있음 / 의도치 않게 갑의 변경 어마어마한 단점
+            // ==> 이 문제를 보안하기 위해 나온게 let, const이다.
+            
+            // 권장사항 : 반드시 const를 이용해서 변수를 선언
+            //           혹여나 값의 변화가 필요한 경우에만 let 사용
+
+            console.log("------------------------------------------------------");
+        }
+
+        function scope(){
+            // var == 포이스팅 == 끌어 올려지는 것
+            //console.log(name); // error 가 발생해야 정상인데 undefined 된다.
+            //var name = '홍길동';
+
+
+            //var variable;
+            //console.log(variable); // undefined
+
+            //console.log(name);  // error : 초기화 되기전에 접근했다고 뜸.
+            //let name = "홍길동";
+
+            // 1) var는 functionScope == 변수가 선언된 함수 영역에서 사용할 수 있음
+
+            for(var i = 0; i < 5; i++){
+                console.log(i);
+            }
+
+            if(1){
+                console.log(i);
+                var userName = "홍길동";
+            }
+            console.log(userName); // 홍길동 포이스팅 당하여 변수 할당되어버림.
+
+            // 2) let, const는 blockScope == 자기 선언된 블록에서만 사용가능
+            if(2){
+                let age = 20;
+                const hobby = '취미당 ㅎ';
+            }
+            console.log(age); // error : age is not defined
+            console.log(hobby);
+        }
+    </script>
+
+
+    <h3>* 변수 선언 위치에 따른 전역 / 지역 변수</h3>
+    <script>
+        //변수 선언
+        var str = 'var 전역변수';
+        str2 = '전역변수';
+
+        // window.onload = 현재 이 HTML문서가 전부 다 로딩되고나서
+        // 곧바로 실행할 이벤트 핸들러(익명함수)를 대입
+        window.onload = function(){
+            //alert('하잉2');  // 2
+
+            var str = '지역변수'; // 전역변수랑 중복된 이름으로 선언
+            var str3 = '새로운 지역변수';
+            str4 = '나는 누구게?';
+            // window.
+            window.str4 = '나는 뭐게?';
+            console.log('------------------------------str--------------------------');
+            console.log(str); // 변수명이 동일하다면 ''지역변수'' 우선권이 높음 // 지역변수
+            console.log(window); // window 객체에서 str 'var 전역변수' 즉, 프로퍼티 : 값으로 저장되어있다.
+            console.log(window.str); // var 전역변수
+            console.log(this); // window 객체
+            console.log(this.str); // window 객체에서의 var 전역변수
+            // 주의 : this키워드가 항상 window 객체를 가리키는 것은 아님
+
+
+            console.log('-------------------str2--------------------');
+            console.log(str2); // window, this 키워드 붙일 수 있음 // 전역변수
+                               // 붙여주는 편이 조금 더 명확하긴함
+
+            console.log('-------------------str3------------------');
+            console.log(str3); // 새로운 지역변수
+            console.log(window.str3);// undefined(정의되지 않음)
+
+
+            console.log('str4'); // str4
+            console.log(str4);   // 나는 뭐게?
+        }
+        //alert('하잉1'); // 1
+    </script>
+
+    <h3>* 자료형</h3>
+    <p>
+        변수 선언 시 자료형을 별도로 지정하지 않음(자료형의 개념이 없는건 아님)<br>
+        => 변수에 대입되는 값에 따라서 알아서 자료형을 결정함 : 타입추론
+    </p>
+
+    <h4>자바스크립트의 자료형</h4>
+    <ul>
+        <li>string(문자열)</li>
+        <li>number(숫자)</li>
+        <li>boolean(논리)</li>
+        <li>object(객체)</li>
+        <li>function(함수)</li>
+        <li>undefined(초기화 안된 상태)</li>
+    </ul>
+    <button id="type-btn">자료형</button>
+    <div id="area" style="border:1px solid beige; height:auto; min-height:150px;"></div>
+    <script>
+        document.querySelector('#type-btn').onclick = function(){
+            // array, string, number
+            const name = '홍길동';
+            const age = 15;
+            const isGoodThief = false;
+            // 배열
+            const hobby = ['운동', '공부']; // 운동,공부
+            // 객체
+            const family = { // [object Object]
+                '아빠' : '홍준표',
+                '형' : '홍석천',
+            };
+            const testFn = function(){ // function(){ alert('가족 못부름'); }
+                alert('가족 못부름');
+            };
+            // 초기화
+            let noVal;
+
+            const area = document.getElementById('area');
+            //자바식 해결법
+            /*
+            area.innerHTML = `${name}<br>`;
+            area.innerHTML += age + '<br/>';
+            area.innerHTML += isGoodThief + '<br/>';
+            area.innerHTML += hobby + '<br/>';
+            area.innerHTML += family + '<br/>';
+            area.innerHTML += testFn + '<br/>';
+            area.innerHTML += noVal + '<br/><hr>';
+            */
+
+            //자바스크립트식
+            area.innerHTML =  `${name} <br>
+                                ${age} <br>
+                                ${isGoodThief} <br>
+                                ${hobby} <br>
+                                ${family} <br>
+                                ${testFn} <br>
+                                ${noVal} <br><hr>`;
+                                
+            // 자료형 출력해보기
+            // 자료형을 확인할 때 필요한 함수 typeOf(인자값);
+            area.innerHTML += `${typeof(name)} <br>
+                                ${typeof(age)} <br>
+                                ${typeof(isGoodThief)} <br>
+                                ${typeof(hobby)} <br>
+                                ${typeof(family)} <br>
+                                ${typeof(testFn)} <br>
+                                ${typeof(noVal)} <br><hr>`
+
+        }
+    </script>
+</body>
+</html>

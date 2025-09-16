@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .area{width:300px; border:1px solid gainsboro;}
+    .big{height:500px;}
+    .small{height:300px;}
+</style>
+<body>
+    <h1>자바스크립 쓸 때 알찬 메소드들</h1>
+
+    <h3>* 문자열과 관련된 메소드</h3>
+    <button onclick="stringMethod();">문자열 메소드 호출</button>
+    <div id="area1" class="area big"></div>
+    <script>
+        function stringMethod(){
+            const str = "Hello World!";
+            const area = document.getElementById('area1');
+            area.innerHTML = `str : ${str} </br>
+                                문자열의 길이 : ${str.length} </br>
+                                toUpperCase : ${str.toUpperCase()} </br>
+                                toLowerCase : ${str.toLowerCase()} </br>
+                                l의 위치 : ${str.indexOf("1")} </br>
+                                뒤에서부터 1의 위치 : ${str.lastIndexOf("1")} </br>
+                                없는거 찾으면 : ${str.indexOf("a")} </br>
+                                subString(시작인덱스) : ${str.substring(3)} </br>
+                                subString(begin, end) : ${str.substring(0, 4)} </br>`;
+            const str2 = '중국집,돈까스,제육,김치찌개'; //중국집,돈까스,제육,김치찌개
+            const lunchMenu = str2.split(","); // object
+
+            area.innerHTML += `점심메뉴 ${str2} <br>
+                                스플릿또 : ${lunchMenu} <br>
+                                런치메뉴 타입 : ${typeof lunchMenu} <br>
+                                랜덤값 : ${Math.random()}`;
+
+            // Math == 자바에서 쓰던것과 동일하게 사용
+        }
+    </script>
+
+    <hr>
+
+    <h3>산술연산 해보기</h3>
+
+    <button id="math-btn">연산하기</button>
+    <div id="area2" class="area big"></div>
+
+    <input type="text" id="price" placeholder="가격을 입력하세요." />
+
+    <script>
+        document.querySelector('#math-btn').onclick = function(){
+            const area = document.querySelector('#area2');
+            area.innerHTML = `7 + 7  = ${7 + 7} <br>
+                                7 + '7' = ${7 + '7'} <br>
+                                7 + 7 + '7' = ${7 + 7 + '7'} (14 + 7) <br>`;
+            // number형이 string형으로 변환이 이루어짐
+
+            const input = document.querySelector('#price');
+            // const price = input.value + 1000;
+            const price = input.value;
+            console.log(price); // input에 5000입력후 출력 시 50001000 출력됨
+            console.dir(input);
+            // value : "5000"
+            // input 요소의 value property 는 자료형이 string이기 때문에
+            // 숫자값이라고 하더라도 산술연산이 의도와는 다르게 이루어질 수 있음.
+
+            // 강제형 변환 (string ==> number);
+            // Number(string)
+            // parseInt(string)
+            // parseFloat(string)
+        
+            const intValue = 2;
+            const stringValue = "3";
+            // 23
+            area.innerHTML += ` 2 + 3 : ${intValue + stringValue} <br>
+                                Number : ${intValue + Number(stringValue)} <br>
+                                parseInt : ${intValue + parseInt(stringValue)} <br>
+                                parseFloat : ${intValue + parseFloat(stringValue)} <br>`;
+                                /*
+                                2 + 3 : 23
+                                Number : 5
+                                parseInt : 5
+                                parseFloat : 5
+                                */
+        
+            // parseInt vs parseFloat ★★★★
+            const floatValue = "1.23";
+            area.innerHTML += `${intValue + Number(floatValue)} <br>
+                                ${intValue + parseInt(floatValue)} <br>
+                                ${intValue + parseFloat(floatValue)} <br>`;
+                                /*
+                                3.23
+                                3 (소수점 날라감)
+                                3.23
+                                */
+            // Number vs parseInt
+            console.log(Number(price)); // 0  // 1000    // 1000원 ==> NaN (Not a Number) ★★★★
+            console.log(parseInt(price)); // NaN  // 1000   // 1000원 ===> 1000(숫자인 부분만) ★★★★
+
+
+            // 나머지 산술연산
+            area.innerHTML += `7 - '7' : ${7  - '7'} <br>
+                                7 X 7 : ${7 * '7'} <br>
+                                7 / '7' : ${7 / '7'} <br>
+                                'a' - 7 : ${'a' - 7} <br> `;
+            // string  타입값이 number 타입으로 변환된 후 산술연산 진행
+            // 단, 이때 문자열이 반드시 숫자로 존재해야함!
+            // 숫자가 아니 문자가 포함될 경우 NaN
+        }
+    </script>
+
+    <hr>
+    <h3>실 습 시 간</h3>
+
+    <h4>덧셈 / 뺄셈 계산기</h4>
+    첫 번째 정수 : <input type="text" id="firstValue"> <br>
+    두 번째 정수 : <input type="text" id="scecondValue"> <br>
+    결과 출력 : <label for="" id="num"></label> <br>
+    <button id="plus-btn">더하기 버튼</button><br>
+    <button id="minus-btn">빼기 버튼</button>
+    
+    <hr>
+    <fieldset>
+        <legend>두 번째 문제 </legend>
+        <p>
+            input 요소에 값을 입력한 뒤 버튼을 클릭했을 때
+            숫자인지 아닌지 출력하기
+        </p>
+        <p>
+            값이 숫자라면 => 숫자입닌다 / 아니라면 => 숫자가 아닙니다 를 alert을 출력해주세요
+        </p>
+        <input type="text" id="input-value">
+        <button id="int-btn">정답은?</button>
+    </fieldset>
+
+    <script>
+        // function으로도 해보기
+        document.querySelector('#plus-btn').onclick = function(){
+            const firstValue = document.getElementById('firstValue').value;
+            const secondValue = document.getElementById('scecondValue').value;
+            //console.log(firstValue);
+           // console.log(secondValue);
+            const plus = Number(firstValue) + Number(secondValue);
+            //console.log(Number(plus));
+            const numEl = document.getElementById('num');
+            numEl.innerHTML += `${plus}`;
+        }
+
+        document.querySelector('#minus-btn').onclick = function(){
+            const firstValue = document.getElementById('firstValue').value;
+            const secondValue = document.getElementById('scecondValue').value;
+
+            const minus = Number(firstValue) - Number(secondValue);
+            const numEl = document.getElementById('num');
+            numEl.innerHTML += `${minus}`;
+        }
+
+        document.querySelector('#int-btn').onclick = function(){
+            const inputEl = document.getElementById('input-value').value;
+            
+            // 방법1
+            /*
+            if(Number(inputEl)){
+                alert('숫자입니다.');
+            }else{
+                alert('숫자가 아닙니다.');
+            }
+            */
+
+            // 방법2
+            // NaN은 falsy값이라서 조건식에 들어가면 false로 취급됨
+            // isNaN(숫자)  : NaN이라면 (숫자가 아니면) true
+                            //NaN이 아니라면(숫자라면) false
+            /*
+            if(!isNaN(inputEl)){
+                alert('숫자입니다.');
+            } else{
+                alert('숫자가 아닙니다.');
+            }
+            */
+
+            // 방법3
+             // inputEl == '7'
+            /*
+            if(inputEl / inputEl){
+                alert('숫자입니다.');
+            }else{
+                alert('숫자가 아닙니다.');
+            }
+             */
+            // 방법4
+            // '7' / '7' == 1
+            if(inputEl * 0){
+                alert('숫자입니다.');
+            }else{
+                alert('숫자가 아닙니다.');
+            }
+        }
+    </script>
+    
+
+
+
+</body>
+</html>

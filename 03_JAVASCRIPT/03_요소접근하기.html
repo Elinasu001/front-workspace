@@ -109,7 +109,139 @@
             // 선택된 여러 개의 요소객체들이 배열 형태로 담겨서 반환
             // 자바스크립트에서의 배열은 [] 표현
             array[0].style.backgroundColor = "red";
+            array[1].style.backgroundColor = "blue";
+            array[2].style.backgroundColor = "yellow";
+            array[3].style.backgroundColor = "green";
+            array[4].style.backgroundColor = "purple";
+
+            // let redColor = 100;
+            // for(let i = 0; i < array.length; i++){
+            //     array[i].style.backgroundColor = "rgb("+ redColor +", 180, 180)";
+            //     redColor += 30;
+            // }
+
+
+            let redColor = 100;
+            for(let i = 0; i < array.length; i++){
+                array[i].style.backgroundColor = `rgb(${redColor}, 180, 180)`; // 백틱 사용 시 + 필요 없음 (js에서 편하고 java는 불편)
+                redColor += 30;
+            }
         }
+    </script>
+
+    <hr>
+
+    <h3>3) name 속성값으로 요소객체 접근해보기</h3>
+    
+    <form action="요청받아줄서버" method="GET" id="fefe">
+        <fieldset>
+            <legend>메뉴</legend>
+            <input type="checkbox" name="menu" id="americano" value="아메리카노">
+            <label for="americano">아메리카노</label>
+            <input type="checkbox" name="menu" id="coldbrew" value="콜드브루">
+            <label for="coldbrew">콜드브루</label>
+            <input type="checkbox" name="menu" id="latte" value="라떼">
+            <label for="latte">라떼</label>
+            <input type="checkbox" name="menu" id="strlatte" value="딸기라떼">
+            <label for="strlatte">딸기라떼</label>
+            <input type="checkbox" name="menu" id="malatte" value="말차라떼">
+            <label for="malatte">말차라떼</label>
+            <button type="submit">꺄가아아아아아아</button>
+        </fieldset>
+    </form>
+
+    <button id="menu-btn">버튼버튼</button>
+
+    <script>
+        const btnEl = document.querySelector('#menu-btn');
+        
+        btnEl.addEventListener('click', function() {
+            // name속성값을 이용해서 요소객체 접근하기
+            // document.getElementsByname('name속성값');
+            const menus = document.getElementsByName('menu');
+            
+            //console.log(menus);
+            //console.log(menus[0]);
+            //console.log(menus[0].value); // 아메리카노
+            //console.log(menus[0].checked); // false
+
+            // if(menus[0].checked){
+            //     alert('아메리카노 췍');
+            // } else{
+            //     console.log('체크된게 없습니다.');
+            // }
+
+
+
+            // 버튼 클릭 시
+            // 체크가 된 체크박스의 value 속성값을
+            // 순차적으로 나열하여
+            // alert창에 출력하시오
+            // 선택하신 메뉴는 아메리카노 라떼 입니다.
+            // 선택하신 메뉴는 아메리카노 말차 라떼입니다.
+
+            //보통 자바에서 사용하는 타입
+            let checkedMenu = " ";
+            for(let i = 0; i < menus.length; i++){
+                if(menus[i].checked){
+                    checkedMenu += " " + menus[i].value;
+                }
+            }
+            //alert(`선택하신 메뉴는${checkedMenu} 입니다.`);
+
+            // 자바스크립트에서 사용하는 타입
+            const array = [...menus];
+            //console.log(array);
+            const selected = array.filter(e => e.checked).map(m => m.value);
+            //console.log(selected);
+            console.log(`선택하신 메뉴는 ${selected}입니다.`);
+
+            if("0.0"){
+                alert(`선택하신 메뉴는 ${selected}입니다.`);
+            }
+            // 자바스크립트의 논리값
+
+            // 자바의 논리값 == true / false
+
+            // 자바스크립트는 모든 값이 논리값으로 쓰일 수 있다. ( // 1, 2, 3, 4, 5, 'a', 'b')
+            // true / false
+            // Falsy : 거짓같이 보이는거 빼고 전부다 true
+            // 0, 0.0, '', "", null, undefined, NaN 빼고 다 true
+
+            console.log('a');
+            console.log('b' + 'a' + + 'a' + 'a');// bNaNa
+            console.log(+'a');//NaN
+            // 잘못 만들어져서 ... 고려해야 될 것이 많다.
+
+        });
+    </script>
+    <hr>
+
+    <h3>4) 클래스 속성명으로 요소객체들 접근하기</h3>
+
+    <div class="test"></div>
+    <p class="test"></p>
+    <ul class="test">
+        <li>
+            <pre class="test"></pre>
+        </li>
+        <li>
+            <pre class="test"></pre>
+        </li>
+        <li>
+            <pre class="test"></pre>
+        </li>
+    </ul>
+    <button onclick="accessClass();">Class속성으로 선택하기</button>
+    <script>
+        function accessClass(){
+            // document.getElementsByClassName('클래스 속성값') ;
+            console.log(document.getElementsByClassName("test")); // HTMLCollection(6)~
+            const tests = document.querySelectorAll('.test');
+            console.log(tests); // NodeList(6)~
+        }
+
+
     </script>
 </body>
 </html>
