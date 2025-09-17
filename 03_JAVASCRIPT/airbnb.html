@@ -9,31 +9,61 @@
     *{box-sizing: border-box; padding:0; margin: 0;}
     a {list-style: none; color:#333; text-decoration: none;}
     #wrap { width:100%;}
-    #inner {display:flex; gap:10px; width:1300px; }
-    .card {position: relative; display:flex; gap:10px;  width:calc(100%/5); }
+    .container {max-width:1200px; margin: 0 auto;}
+    .inner { display: flex; flex-wrap:nowrap; gap:10px; max-width:1200px;  }
+    h3{font-size:28px; padding:20px 0;}
+    .card {position: relative; width:100%; border-radius: 5px; overflow: hidden;}
     .card:hover{ box-shadow: 0px 3px 14px lightgray;}
     .card a {display:block; width:100%;}
     .card .thumnail{  width:100%;height:150px; object-fit: cover;}
     .card .text{ padding:10px}
-    .card .info { position:relative;}
+    .card .info { display:flex; position:relative;}
     .card .info .price::before { position: absolute; content:'₩'; left:5px; top:47%; transform: translateY(-50%); }
     .card .info .price {padding-left:20px;}
     .card .info .ratingAverage::before {content:"★"}
 
-    .card .top { z-index:1; content: ''; position: absolute; top:16px; display:flex; justify-content: space-between; width:100%; padding:0 10px; font-weight: 600;}
+    .card .top { z-index:1; content: ''; position: absolute; top:16px; display:flex; justify-content: space-between;align-items:center;width:100%; padding:0 10px; font-weight: 600;}
     .card .top .favorite { padding:10px; font-size:14px; background-color: white; color:#333; border-radius: 20px;}
-    .card .top .like-btn { width:24px; height: 24px; display: block; fill:rgba(0, 0, 0, 0.5); height:24px; width:24px; stroke: white; stroke-width: 2; overflow: visible; filter:drop-shadow(0, 2px 6px rgba(0, 0, 0, 0.25)); }
+    .card .top .like-btn {width:30px; height:30px;}
+    .card .top .like-btn img{  height:24px; width:24px;  filter:contrast(0.5);}
+    .card .top .like-btn.on img {filter: invert(41%) sepia(87%) saturate(6000%) hue-rotate(336deg) brightness(98%);}
 
+
+    @media screen and (max-width: 1300px) {
+        .inner {flex-wrap: wrap; gap:15px;}
+        .card {
+            width: calc((100% / 3) - (15px * 2 / 3));
+        }
+        
+    }
+
+    @media screen and (max-width: 780px) {
+        .inner {flex-wrap: wrap;}
+        .card {
+            width: calc((100% / 2) - 8px);
+        }
+        
+    }
+
+    @media screen and (max-width: 500px) {
+        .inner {flex-wrap: wrap;}
+        .card {
+            width: 100%;
+        }
+        
+    }
 </style>
 <body>
     <div id="wrap">
-        <h1>airbnb</h1>
-        <br>
-        <div id="inner">
-        </div>
+        <section class="container">
+            <h3>airbnb</h3>
+            <div id="AccList" class="inner">
+            </div>
+        </section>
     </div>
 
-    <script>
+</body>
+ <script>
         window.onload = function(){
 
             const aribnbs = [
@@ -44,6 +74,7 @@
                     price : "251,059",
                     qualifier : "2박",
                     ratingAverage : "4.95",
+                    isLiked : false,
                 },
                 {
                     image : "https://a0.muscache.com/im/pictures/hosting/Hosting-1254611685750285523/original/5a7cbab5-d254-4068-81f2-7aeec2554cf9.jpeg?im_w=720",
@@ -52,6 +83,7 @@
                     price : "80,453",
                     qualifier : "2박",
                     ratingAverage : "4.86",
+                    isLiked : false,
 
                 },
                 {
@@ -61,6 +93,7 @@
                     price : "72,929",
                     qualifier : "2박",
                     ratingAverage : "4.92",
+                    isLiked : false,
 
                 },
                 {
@@ -70,6 +103,7 @@
                     price : "187,153",
                     qualifier : "2박",
                     ratingAverage : "4.92",
+                    isLiked : false,
                 },
                 {
                     image : "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NjI4Nzk2NDc5Mzk3Nzc2NzIz/original/9328f0ad-6465-40b9-89b9-54383cbcaa7f.jpeg?im_w=720",
@@ -78,18 +112,20 @@
                     price : "239,647",
                     qualifier : "2박",
                     ratingAverage : "4.89",
+                    isLiked : false,
                 },
             ]
 
 
             let element = "";
             for(let aribnb of aribnbs){
+                const likeClass = aribnb.isLiked ? 'on' : '';
                 element += `<div class="card">
                                 <a href="#">
-                                    <div class="top"><span class="favorite">게스트 선호</span> <span class="like-btn"><img src="resources/img/like.svg" ></span></div>
+                                    <div class="top"><span class="favorite">게스트 선호</span> <span onclick="accomodationLike(this);" class="like-btn ${likeClass}"><img src="resources/img/like.svg" ></span></div>
                                     <img src="${aribnb.image}" class="thumnail"/>
                                     <div class="text">
-                                        <h3 class="name">${aribnb.name}</h3>
+                                        <h4 class="name">${aribnb.name}</h4>
                                         <p class="date">${aribnb.date}</p>
                                         <p class="info">
                                             <span class="price">${aribnb.price}</span>
@@ -103,12 +139,14 @@
                             </div>`;
             }
 
-            document.getElementById('inner').innerHTML = element;
+            document.getElementById('AccList').innerHTML = element;
 
         }
-    
+
+    function accomodationLike(element) {
+        element.classList.toggle('on');
+        const isLiked = element.classList.contains('on');
+    }
         
     </script>
-
-</body>
 </html>
