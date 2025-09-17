@@ -16,10 +16,11 @@
     .card:hover{ box-shadow: 0px 3px 14px lightgray;}
     .card a {display:block; width:100%;}
     .card .thumnail{  width:100%;height:150px; object-fit: cover;}
-    .card .text{ padding:10px}
-    .card .info { display:flex; position:relative;}
-    .card .info .price::before { position: absolute; content:'₩'; left:5px; top:47%; transform: translateY(-50%); }
-    .card .info .price {padding-left:20px;}
+    .card .text{ padding:10px;}
+    .card .text .date {font-size: 14px;}
+    .card .info { display:flex; position:relative; font-size: 12px;}
+    .card .info .price {padding-left:10px;}
+    .card .info .price::before { position: absolute; content:'₩'; left:0px; top:47%; transform: translateY(-50%); }
     .card .info .ratingAverage::before {content:"★"}
 
     .card .top { z-index:1; content: ''; position: absolute; top:16px; display:flex; justify-content: space-between;align-items:center;width:100%; padding:0 10px; font-weight: 600;}
