@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체01</title>
+</head>
+<style>
+    body{background-color: black; color:gray; font-weight: 600; font-size: 18px;}
+    .area{background-color: khaki; border:1px dotted gold;}
+    .big{height:500px;}
+    .small{height:300px;}
+    button {font-size: 18px; padding:10px;}
+</style>
+<body>
+    <h1>객체</h1>
+    <p>
+        property(속성) + value(속성값)를 한쌍으로 저장할 수 있는 구조 <br>
+        여러개의 속성을 하나의 변수에 담을 수 있게 쓰는 데이터 타입(자료형의 한 종류)<br><br>
+
+        ==> 자바했을 때 Map을 생각하면 된다. (key : value)<br><br>
+
+        - 객체는 중괄호 {}를 사용해서 선언하고 <br>
+        중괄호 안에 객체가 가져야 할 속성(property)를 정의함. (속성 : 속성값) <br>
+        참고로 속성값으로는 모든 자료형의 값을 다 담을 수 있음
+    </p>
+
+    <pre>
+    [표현법]
+    const 객체명 = {
+        속성명 : 속성값,
+        속성명 : 속성값,
+        ...
+    }
+    </pre>
+
+    <button onclick="createObj();">자바스크립트객체는 진짜 별거없다</button>
+    <div id="area" class="area big"></div>
+    <script>
+        function createObj(){
+
+            // 상품의 정보를 저장해놓아야함
+            // 신상인가 아닌가                  boolean
+            // 상품명 - 스피릿다이어리케이스GS    string
+            // 판매가 - 23500                  number
+            // 할인판매가 - 22400               number
+            // 배송비 - 3000                   number
+            // 기종 - 갤럭시, 아이폰, 샤오미      array
+
+            // 변수 -- 6개 * N
+            // 배열
+            // 배열에 담을 경우 각 인덱스 의미를 알기 어려우니 각 객체의 이름 달아주기 !
+            
+            const array = [
+                true,
+                '스피릿다이어리케이스GS',
+                23500,
+                22400,
+                3000,
+                ['갤럭시', '아이폰', '사오미'],
+            ];
+            
+
+            // 객체
+            // 속성명으로 인해 값을 다루기 용이하다
+            const phoneCase = {
+                "newStatus" : true,
+                "productName" : "스피릿다이어리케이스GS",
+                "realPrice" : 23500,
+                "price" : 22400,
+                "fee" : 3000,
+                "model" : ["갤럭시", "아이폰", "샤오미"],
+            };
+
+            console.log(array);
+            console.log(phoneCase);
+
+            const area = document.getElementById('area');
+            area.innerHTML += `배열 : ${array}<br>`;     // 배열의 요소가 찍힘
+            area.innerHTML += `객체 : ${phoneCase}<br><hr>`; // [object Object]
+
+            // 해당 객체 내부의 각 속성 값 접근하는 방법!
+            // 방법 1.
+            area.innerHTML += "<strong>방법 1. 객체명.속성명<strong><br>";
+            area.innerHTML += `신상품 : ${phoneCase.newStatus}<br>
+                                상품명 : ${phoneCase.productName}<br>
+                                판매가 : ${phoneCase.realPrice}<br>
+                                할인가 : ${phoneCase.price}<br>
+                                배송비 : ${phoneCase.fee}<br>
+                                모델명 : ${phoneCase.model}<br><hr>`;
+            // 방법 2.
+            area.innerHTML += "<strong>방법 2. 객체명['속성명']<strong><br>";
+            area.innerHTML += `신상품 : ${phoneCase["newStatus"]}<br>
+                                상품명 : ${phoneCase["productName"]}<br>`;
+        }
+    </script>
+
+    <hr>
+
+    <h2>방법 2. 이 방법은 언제 필요한가??</h2>
+    <button onclick="fn();">실행</button>
+    <div id="area2" class="area small"></div>
+
+    <script>
+        function fn(){
+            // 특수문자, 띄어쓰기
+            const phoneCase = {
+                "price~" : 1500,
+                "project name" : '뉴제네레이션케이스',
+            };
+            const area = document.getElementById('area2');
+            // 방법 1. 로 안된다.
+            // area.innerHTML += phoneCase.price~;
+            // area.innerHTML += phoneCase.project name;
+            // 방법 2. 를 사용한다.
+            area.innerHTML += phoneCase["price~"];
+            area.innerHTML += phoneCase["project name"];
+        }
+    </script>
+
+    <hr>
+    <h3>* 객체가 가지고 있는 속성에 반복문 사용하기</h3>
+
+    <p>
+        객체는 인덱스 개념이 존재하지 않기 때문에 for loop문, for of문 사용하기 힘듦<br>
+        for in 문을 사용해서 속성에 순차적으로 접근할 수 있음
+    </p>
+
+    <h4>반복문</h4>
+    <button onclick="loop();">버튼</button>
+    <div id="area3" class="area small"></div>
+    
+    <script>
+        function loop(){
+            const area = document.querySelector('#area3');
+            const human = {
+                name : '홍길동',
+                age : 15,
+            };
+
+            for(let key in human){
+                // console.log(key); // 속성명(property)
+                // console.log(human.key); // x  undefiend
+                // => 진짜 말그대로 human 객체의 key라는 속성에 접근
+                // => 사용불가
+
+                area.innerHTML += `${human[key]}<br>`;
+                // => for in문 사용 시 객체를 이용해서 반복했다면,
+                // 반복할 때마다 해당 객체의 속성명이 let 변수명에 담긴다.
+            }
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 객체의 메소드 속성</h3>
+    
+    <p>
+        객체의 속성값 중 자료형이 함수자료형인 속성을 메소드라고 부른다.<br>
+    </p>
+
+    <button onclick="method();">메소드 버튼</button>
+    <div id="area4" class="area small"></div>
+    
+    <script>
+        function method(){
+            const area = document.getElementById('area4');
+
+            let name = '박수현';
+            // dig();
+            const mole = {
+                name : '디그다',
+                kind : '두더지',
+                dig : function(){ // 속성명이 함수명이 되므로 익명함수
+                    area.innerHTML =`${this.kind}인 ${name}(이)가 땅을 팝니다.`;
+                },
+                // => 메소드 속성 안에서 같은 객체 내부에 있는 속성을 사용할 경우
+                //      this. 키워드를 붙여주어야함.
+                // this.kind / this.name : 두더지인 디그다(이)가 땅을 팝니다.
+
+                // => 속성명 또는 변수명이 동일한 경우 this 키워드를 안붙이면
+                //      외부에 존재하는 변수가 호출됨!
+                // this.kind / name : 두더지인 박수현(이)가 땅을 팝니다.
+            };
+            mole.dig();
+        }
+    </script>
+
+
+    <hr>
+    <h3>* in 과 with</h3>
+    <p>
+        in : 객체 내부에 해당 속성이 존재하는지 확인하는 키워드 <br>
+        with : 코드를 줄이는 용도
+    </p>
+    
+    이름 : <input type="text" id="name"><br>
+    국어점수 : <input type="text" id="kor"><br>
+    영어점수 : <input type="text" id="eng"><br>
+
+    <button onclick="info();">확인하기</button>
+    <div id="area6" class="area big"></div>
+
+    <script>
+        /*
+            객체 만들기 실습
+            속성명 : 속성값
+            name : 사용자가 입력한 이름값
+            kor : 사용자가 입력한 국어점수
+            eng : 사용자가 입력한 영어점수
+            getSum : 점수의 합계를 계산해서 반환해주는 메소드
+            getAvg : 점수의 평균을 계산해서 반환해주는 메소드
+
+        */
+
+        function info(){
+            const area = document.getElementById('area6');
+            const nameEl = document.getElementById('name').value;
+            const korEl = document.getElementById('kor').value;
+            const engEl = document.getElementById('eng').value;
+
+            const student = {
+                name : nameEl,
+                kor : Number(korEl),
+                eng : Number(engEl),
+                getSum : function(){
+                    return this.kor + this.eng;
+                },
+                getAvg : function(){
+                    return this.getSum() / 2;
+                },
+                toString: function(){
+                    return `학생명 : ${this.name} <br>
+                            국어점수 :  ${this.kor}<br>
+                            영어점수 :  ${this.eng}<br>
+                            합계 :  ${this.getSum()}<br>
+                            평균 :  ${this.getAvg()}<br>`;
+                }
+            };
+            
+            
+            student.getSum();
+            student.getAvg();
+
+            /*
+            area.innerHTML += `이름 : ${student.name}<br>
+                                국어점수 :  ${student.kor}<br>
+                                영어점수 :  ${student.eng}<br>
+                                합계 :  ${student.getSum()}<br>
+                                평균 :  ${student.getAvg()}<br>`;
+            */
+            area.innerHTML += `${student.toString()}`;
+            
+            // 해당 객체에 속성이 존재하는가 ? '속성명' in 객체명 : boolean
+            area.innerHTML += `student객체에 name 속성이 있나요? ${'name' in student}<br>`;
+
+            // with : 객체명.속성명 ==> 속명 만 사용하여 접근할 수 있다.
+            with(student){
+                console.log(kor);
+                console.log(eng);
+            }
+        }
+    </script>
+
+
+    <hr>
+    <h3>* 객체의 속성 추가하기 및 제거하기</h3>
+    <button onclick="addProperty();">확인</button>
+    <div id="area7" class="area small"></div>
+    <button id="button">버튼</button>
+
+    <script>
+        function addProperty(){
+            const area = document.getElementById('area7');
+            const arr = [];
+            arr.push(1); // 배열 요소 추가 push
+
+            console.log(arr);
+            const btn = document.getElementById('button');
+            btn.onclick = () => {
+                console.log('하이');
+            }
+            console.dir(btn);
+
+            // ★★★★★ 객체에 속성을 추가하는 방법! ★★★★★
+            const student = [];
+            
+            student.name = '홍길동';
+            student.age = 15;
+            // !! 단, 조심해야될 부분 =>
+            // 이미 존재하는 속성명이 있는데 또 넣을 경우 ? map이랑 동일하기 때문에 덮어 씌어진다.
+            student.age = 155;
+            console.log(student);
+
+            // 객체 속성 제거
+            // delete(객체명.속성명)
+            delete student.age;
+            console.log(student);
+
+            // with써볼까? width로 속성 추가하는 것은 불가능
+            /*
+            width(student) {
+                address = "한양";
+            }
+            console.log(student);
+            */
+
+        }
+    </script>
+</body>
+</html>

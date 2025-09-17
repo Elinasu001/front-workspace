@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>airbnb</title>
+</head>
+<style>
+    *{box-sizing: border-box; padding:0; margin: 0;}
+    a {list-style: none; color:#333; text-decoration: none;}
+    #wrap { width:100%;}
+    #inner {display:flex; gap:10px; width:1300px; }
+    .card {position: relative; display:flex; gap:10px;  width:calc(100%/5); }
+    .card:hover{ box-shadow: 0px 3px 14px lightgray;}
+    .card a {display:block; width:100%;}
+    .card .thumnail{  width:100%;height:150px; object-fit: cover;}
+    .card .text{ padding:10px}
+    .card .info { position:relative;}
+    .card .info .price::before { position: absolute; content:'₩'; left:5px; top:47%; transform: translateY(-50%); }
+    .card .info .price {padding-left:20px;}
+    .card .info .ratingAverage::before {content:"★"}
+
+    .card .top { z-index:1; content: ''; position: absolute; top:16px; display:flex; justify-content: space-between; width:100%; padding:0 10px; font-weight: 600;}
+    .card .top .favorite { padding:10px; font-size:14px; background-color: white; color:#333; border-radius: 20px;}
+    .card .top .like-btn { width:24px; height: 24px; display: block; fill:rgba(0, 0, 0, 0.5); height:24px; width:24px; stroke: white; stroke-width: 2; overflow: visible; filter:drop-shadow(0, 2px 6px rgba(0, 0, 0, 0.25)); }
+
+</style>
+<body>
+    <div id="wrap">
+        <h1>airbnb</h1>
+        <br>
+        <div id="inner">
+        </div>
+    </div>
+
+    <script>
+        window.onload = function(){
+
+            const aribnbs = [
+                {
+                    image : "https://a0.muscache.com/im/pictures/hosting/Hosting-1157133225923295926/original/1664a4f5-dde0-404b-abb8-75b15946d44c.jpeg?im_w=720",
+                    name : "부산의 아파트",
+                    date : "4월 17일 ~ 19일",
+                    price : "251,059",
+                    qualifier : "2박",
+                    ratingAverage : "4.95",
+                },
+                {
+                    image : "https://a0.muscache.com/im/pictures/hosting/Hosting-1254611685750285523/original/5a7cbab5-d254-4068-81f2-7aeec2554cf9.jpeg?im_w=720",
+                    name : "동래구의 아파트",
+                    date : "11월 29일 ~ 30일",
+                    price : "80,453",
+                    qualifier : "2박",
+                    ratingAverage : "4.86",
+
+                },
+                {
+                    image : "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTU5MTE2NjUyNjY5NTc0NzQ5/original/05ea7367-616a-41b7-af70-be5d5da73669.jpeg?im_w=720",
+                    name : "부산의 호텔",
+                    date : "10월 31일 ~ 11월 2일",
+                    price : "72,929",
+                    qualifier : "2박",
+                    ratingAverage : "4.92",
+
+                },
+                {
+                    image : "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQzOTA1OTM4MDUwMzg4NDc2Nw==/original/a9ef458f-316d-4b07-aa2f-324f56698fc4.jpeg?im_w=720",
+                    name : "광안리의 집",
+                    date : "12월 12일~14일",
+                    price : "187,153",
+                    qualifier : "2박",
+                    ratingAverage : "4.92",
+                },
+                {
+                    image : "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NjI4Nzk2NDc5Mzk3Nzc2NzIz/original/9328f0ad-6465-40b9-89b9-54383cbcaa7f.jpeg?im_w=720",
+                    name : "오크홀름의 아파트",
+                    date : "11월 18일~30일",
+                    price : "239,647",
+                    qualifier : "2박",
+                    ratingAverage : "4.89",
+                },
+            ]
+
+
+            let element = "";
+            for(let aribnb of aribnbs){
+                element += `<div class="card">
+                                <a href="#">
+                                    <div class="top"><span class="favorite">게스트 선호</span> <span class="like-btn"><img src="resources/img/like.svg" ></span></div>
+                                    <img src="${aribnb.image}" class="thumnail"/>
+                                    <div class="text">
+                                        <h3 class="name">${aribnb.name}</h3>
+                                        <p class="date">${aribnb.date}</p>
+                                        <p class="info">
+                                            <span class="price">${aribnb.price}</span>
+                                            <span>&nbsp · &nbsp</span>
+                                            <span class="qualifier">${aribnb.qualifier}</span>
+                                            <span>&nbsp · &nbsp</span>
+                                            <span class="ratingAverage">${aribnb.ratingAverage}</span>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>`;
+            }
+
+            document.getElementById('inner').innerHTML = element;
+
+        }
+    
+        
+    </script>
+
+</body>
+</html>
