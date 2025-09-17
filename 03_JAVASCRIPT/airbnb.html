@@ -75,7 +75,8 @@
                     price : "251,059",
                     qualifier : "2박",
                     ratingAverage : "4.95",
-                    isLiked : false,
+                    isLiked : true,
+                    isFavorite : true,
                 },
                 {
                     image : "https://a0.muscache.com/im/pictures/hosting/Hosting-1254611685750285523/original/5a7cbab5-d254-4068-81f2-7aeec2554cf9.jpeg?im_w=720",
@@ -85,7 +86,7 @@
                     qualifier : "2박",
                     ratingAverage : "4.86",
                     isLiked : false,
-
+                    isFavorite : false,
                 },
                 {
                     image : "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTU5MTE2NjUyNjY5NTc0NzQ5/original/05ea7367-616a-41b7-af70-be5d5da73669.jpeg?im_w=720",
@@ -95,7 +96,7 @@
                     qualifier : "2박",
                     ratingAverage : "4.92",
                     isLiked : false,
-
+                    isFavorite : false,
                 },
                 {
                     image : "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQzOTA1OTM4MDUwMzg4NDc2Nw==/original/a9ef458f-316d-4b07-aa2f-324f56698fc4.jpeg?im_w=720",
@@ -105,6 +106,7 @@
                     qualifier : "2박",
                     ratingAverage : "4.92",
                     isLiked : false,
+                    isFavorite : true,
                 },
                 {
                     image : "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NjI4Nzk2NDc5Mzk3Nzc2NzIz/original/9328f0ad-6465-40b9-89b9-54383cbcaa7f.jpeg?im_w=720",
@@ -113,7 +115,8 @@
                     price : "239,647",
                     qualifier : "2박",
                     ratingAverage : "4.89",
-                    isLiked : false,
+                    isLiked : true,
+                    isFavorite : true,
                 },
             ]
 
@@ -121,11 +124,10 @@
             let element = "";
             for(let aribnb of aribnbs){
                 const likeClass = aribnb.isLiked ? 'on' : '';
-                    console.log("현재 Airbnb 객체:", aribnb);
-                    console.log("isLiked 값:", aribnb.isLiked);
+                const favoriteHtml = aribnb.isFavorite ? `<span class="favorite">게스트 선호</span>` : '';
                 element += `<div class="card">
                                 <a href="#">
-                                    <div class="top"><span class="favorite">게스트 선호</span> <span onclick="accomodationLike(this);" class="like-btn ${likeClass}"><img src="resources/img/like.svg" ></span></div>
+                                    <div class="top">${favoriteHtml}<span onclick="accomodationLike(this);" class="like-btn ${likeClass}"><img src="resources/img/like.svg" ></span></div>
                                     <img src="${aribnb.image}" class="thumnail"/>
                                     <div class="text">
                                         <h4 class="name">${aribnb.name}</h4>
