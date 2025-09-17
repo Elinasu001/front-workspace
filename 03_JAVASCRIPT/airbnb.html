@@ -121,6 +121,8 @@
             let element = "";
             for(let aribnb of aribnbs){
                 const likeClass = aribnb.isLiked ? 'on' : '';
+                    console.log("현재 Airbnb 객체:", aribnb);
+                    console.log("isLiked 값:", aribnb.isLiked);
                 element += `<div class="card">
                                 <a href="#">
                                     <div class="top"><span class="favorite">게스트 선호</span> <span onclick="accomodationLike(this);" class="like-btn ${likeClass}"><img src="resources/img/like.svg" ></span></div>
