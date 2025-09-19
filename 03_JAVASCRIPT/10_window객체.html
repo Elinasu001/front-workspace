@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈도우 객체</title>
+</head>
+<style>
+    * {color:gray;}
+    a{color:rgb(69, 209, 209)}
+    body{
+        background-color: black;
+        color: gray;
+        font-weight: 800;
+    }
+    .area {width:300px;height:100px; background-color: greenyellow; margin: auto; overflow: scroll;}
+    .small{height:200px;}
+    .big{height: 500px;}
+</style>
+<body>
+    <h1>브라우저 인터페이스</h1>
+    <p>
+        브라우저 상에서 자바스크립트라는 언어로 브라우저라는 프로그램을<br>
+        제어할 수 있도록 BOM 과 DOM이라는 인터페이스를 제공됨B<br><br>
+
+        - BOM(Browser Object Model) : 브라우저 관련 <br>
+        - DOM(Document Object Model) : HTML문서 관련 <br>
+    </p>
+
+    <h3>window 객체가 제공하는 메소드</h3>
+    <!--
+        window.alert();
+        window.console.log();
+        window.confirm();
+        window.prompt();
+    -->
+
+    <h4>window.open()</h4>
+    <a href="http://www.naver.com" target="_blank">오픈</a>
+    <button onclick="openFn();">옛날옛적 홀랑이 담배피던 시절</button>
+
+    <script>
+        function openFn(){
+            // window.open();
+            window.open("http://www.naver.com", "하하", "width-400, height=500");
+        }
+    </script>
+
+    <hr>
+
+
+    <h4>* window.setTimeout(함수, ms)</h4>
+    <button onclick="timeoutBtn();">나는 버튼이다.</button>
+
+    <script>
+        function timeoutBtn(){
+            // alert("안녕?");
+
+            // 버튼을 누르면 5초뒤에 alert이 뜨게 만들고 싶음
+            /*
+            window.setTimeout(() => {
+                alert("나는 사실 5초 뒤에 뜸");
+            }, 5000);
+            */
+
+            const newWindow = open();   // 창이 새로 열리고 : 새창 window 객체
+            newWindow.alert("이 버튼을 누르면 3초 뒤 창이 닫힙니다.")
+
+            setTimeout(() => {
+                newWindow.close();
+            }, 3000);
+            // 내가 지정한 일정 시간 후에 "딱 한번"만 핸들러를 수행
+        }
+    </script>
+
+    <hr>
+    <h4>window.setInterval(함수, ms)</h4>
+    <button onclick="timer();">쨰깍쨰각</button>
+    <div id="area1" class="area"></div>
+
+
+    <script>
+        function timer(){
+            const area = document.getElementById('area1');
+            const value = 'ㅋ';
+            
+
+            window.setInterval(() => {
+                // area.innerHTML += value;
+                // area.innerHTML = count--;
+
+                // 9번 객체_part02.html 파일을 참고하여
+                // 시계 만들기
+
+                // 화면에 11:02:30 오전
+                // area.innerHTML = date;
+                const date = new Date();
+                const hour = date.getHours();
+                let min = date.getMinutes();
+                let sec = date.getSeconds();
+                let ap = "";
+
+                if(hour > 12){
+                    hour -= 12; // 24 기준
+                    ap = "오후";
+                }else {
+                    ap = "오전";
+                }
+
+                if(min < 10){
+                    min = "0" + min;
+                }
+
+                if(sec < 10){
+                    sec = "0" + sec;
+                }
+                area.innerHTML += `${hour} : ${min} : ${sec} : ${ap}<br>`;
+            }, 1000);
+
+            // setInterval : 내가 지정한 간격마다 "매 번" 핸들러를 수행★★★★★
+        }
+    </script>
+
+    <hr>
+    <h3>* BOM(Browser Object Model)</h3>
+
+    <p>
+        location, screen, navigator
+    </p>
+
+    <hr>
+
+    <h4>location 객체</h4>
+
+    <button onclick="console.log(location)">로케이션 확인!!!!!!!</button> <!--href 속성 중요-->
+
+    <a href="http://www.naver.com">하잇</a>
+    <!--a태그는 애초에 클릭 시 요청할 URL을 작성할 수 있는 속성제공-->
+    <p>
+        브라우저의 주소 입력창 => URL(href속성값)
+    </p>
+    <button onclick="loc();">매커니즘~</button>
+
+    <script>
+        function loc(){
+            location.href = "http://www.naver.com"
+        }
+    </script>
+
+
+    <p>
+        web통신 client <-> Server == java web socket<br>
+        1. Server 항상 돌아가기<br>
+        2. Client 열기<br>
+        3. IP + Port (broser가 알아서 붙임) => 외우기 어려움 => URL(스키마네임/호스트네임/도메인네임/로케이션) 로 변경<br>
+        .. 로컬:포트 ==> 라이브서버패키지 설치 하는 순간 개발용 로컬 서버는 계속 돌리고 있음<br>
+        .. HTTPS == 포트번호<br>
+        .. naver.com == 도메인네임<br>
+        .. www == 호스트네임<br>
+    </p>
+
+    <!--새로고침-->
+    <button onclick="location.reload();">새로고쳐</button>
+    <button onclick="location.href=location.href">새로고침이란 이거지</button>
+
+    <!--
+        assign(), replace()
+
+        뒤로가기 막는 경우가 있는데 이 경우는?
+        사용자가 뒤로 가기를 막는 경우는 주로 보안이나 사용자 경험을 관리하기 위함입니다
+        replace() 메서드를 사용하면 사용자가 "뒤로 가기" 버튼을 눌러도 이전 페이지로 돌아갈 수 없게 됩니다.
+
+        replace() :
+        1. 로그인 또는 로그아웃 페이지 : 로그인에 성공한 후 대시보드 페이지로 이동시킬 때 replace()를 사용
+            사용자가 뒤로 가기 버튼을 눌러도 다시 로그인 페이지로 돌아갈 수 없게 됩니다.
+
+            로그아웃 후 초기 페이지나 로그인 페이지로 돌아갈 때도 사용
+
+        2. 폼 제출 후: 사용자가 결제, 회원가입, 예약 등 중요한 폼을 제출한 후 '완료' 또는 '결과' 페이지로 이동시킬 때 replace()를 사용
+                        이중 제출(double submission)을 막는 데 매우 효과적
+
+        3. 일회성 페이지: 특정 작업을 한 번만 수행해야 하는 페이지(예: 비밀번호 재설정 링크 클릭 후의 페이지)에서 replace()를 사용하여 사용자가 다시 그 페이지로 돌아오는 것을 방지
+        
+        replace() == 뒤로가기를 사용할 수 없음
+
+        assign()을 사용하는 경우 (뒤로 가기 허용) :
+        1. 웹 탐색
+        
+    -->
+
+
+    <h5>screen 객체</h5>
+    <button onclick="console.log(screen)">스크린</button>
+    <!--사용자가 보고있는 화면에 대한 정보-->
+
+    <h5>navigator</h5>
+    <button onclick="console.log(navigator)">나비</button>
+    <!--브라우저에 대한 정보-->
+
+    <hr>
+    <h2>* DOM(Document Object Model)</h2>
+
+    <p>
+        원리 공부하기
+        - 요소 노드(Element Node) : 태그 자체를 의미 <br>
+        - 텍스트 노드(Text Node) : 태그 내에 기록되는 애용을 의미<br>
+
+        텍스트노드가 존재하지 않는 요소(빈태그) : input, img, br, hr<br>
+        텍스트노드가 있는 요소 : div, button, span, label
+    </p>
+
+    <button onclick="addElement();">빠른</button>
+    <div id="area3" class="area small"></div>
+
+
+    <script>
+    function addElement(){
+        // 동적으로 요소를 만들자
+        // 처음 문서 로딩할 때는 존재하지 않다가
+        // 나중에 만들어지는 요소 == 동적인 요소
+
+        // 컨트롤러에서 응답받은 문자열 => user01
+        /*
+            <h3>user01</h1>
+        */
+
+        const userId = "user01";
+
+        // 1. 문자열로 만드는 방법
+        //document.getElementById('area3').innerHTML = `<h3>${userId}</h1>`;
+
+        // 2. document객체가 제공하는 메소드를 통해 "요소객체"를 만들기 (리액트이해하기~)
+        // 2_1) elementNode 만들기 : document.createElement('태그명');
+        const elementNode = document.createElement('h3');
+        console.log(elementNode);
+        // 우리가 나중에 배우게 될 React는 가상 DOM이라는 개념을 사용함
+        // 문자열이 아닌 요소객체
+
+        // 2_2) textNode 만들기 : document.createTextNode('텍스트');
+        const textNode = document.createTextNode(userId);
+        console.log(textNode);
+
+        // 3. 두 개의 노드를 연결
+        // a의 자식으로 b를 추가
+        // a.appendChild(b);
+        elementNode.appendChild(textNode);
+        console.log(elementNode);
+        //document.querySelector('#area3').innerHTML = elementNode; // [object HTMLHeadingElement]
+        document.querySelector('#area3').appendChild(elementNode); // 요소 객체라서 appendChild 사용
+
+
+        
+        // 텍스트 노드가 없는 요소를 만들어야될 경우는?
+        const img = document.createElement("img");
+        
+        // 객체 속성 추가 하는 방법
+        img.src = "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQzOTA1OTM4MDUwMzg4NDc2Nw==/original/a9ef458f-316d-4b07-aa2f-324f56698fc4.jpeg?im_w=720";
+
+        document.getElementById('area3').appendChild(img);
+
+    }
+    </script>
+
+
+</body>
+</html>

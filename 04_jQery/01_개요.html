@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>제이쿼리</h1>
+    <a href="https://jquery.com" target="_blank">제이쿼리</a><br>
+    <p>
+        기본 자바스크립트만으로는 브라우저마다 각기 다른 코드를 작성해서<br>
+        브라우저를 조작해야하는 어려움이 존재했음<br>
+        "존레식"은 이런 문제를 해결하기 위해 javascript 기반의 라이브러리를 만들었는데, 그것이 jquery<br>
+        즉, javascript를 이용한 유용한 함수 모음집 <br>
+
+
+        - jquery 쓰면 뭐가 좋은가?<br>
+        1) DOM 요소의 관련된 스크립트들을 쉽게 구현할 수 있음 <br>
+        2) AJAX(비동기식 통식), 이벤트 처리 등을 쉽게 지원한다. <br>
+        3) jQuery 와 관련된 확장 플러그인, OPEN API등이 많이 지원된다. <br>
+
+        => 조금 쓰고, 많은 기능을 구현할 수 있음 !
+
+        Google CDN 사용
+    </p>
+
+    <hr>
+
+    <h3>* jQuery 라이브러리 연결 방법</h3>
+
+    <p>
+        head영역에 script 태그를 이용해서 jQuery 관련 .js 파일 가져오기
+    </p>
+    <h3>* jQuery 사용해보기</h3>
+        
+    <p>
+        <strong>
+            우리는 jQuery구문을 이용해서 DOM요소객체를 다룰 예정 <br>
+            jQuery구문이 문서상 모든 요소들이 전부 다 로드 된 후에 <br>
+            실행할 수 있도록 만들어주어야함 => window.onload
+        </strong>
+    </p>
+
+    <pre>
+        순수 자바스크립트에서 해당 내용
+        [표현법]
+        window.onload = function(){
+            실행내용;
+        }
+        onload : 페이지가 전부 다 로딩되고 나면 자동으로 딱 한 번 수행
+        해당 HTML문서의 요소들도 다 로딩되고 연동되어있는 외부문서들도
+        전부 다 로딩된 후에 대입한 이벤트 핸들러가 수행되는 특징을 가짐
+        window.onload는 해당 HTML 문서에서 딱 한번만 수행 가능!
+    </pre>
+
+    <script>
+        window.onload = function(){
+            console.log("안녕하세요");
+        };
+        window.onload = function(){
+            console.log("반갑습니다"); //문서에서는 마지막을 한 번 수행
+        };
+    </script>
+
+    <pre>
+        - jQuery에서는 해당 내용을 세 가지 구문을 통해 제공
+
+        [표현법]
+
+        1) jQuery(document).ready(function(){
+            실행내용;
+        });
+
+        2)
+        $(document).ready(function(){
+            실행내용;
+        });
+
+        $: jQuery키워드를 나타냄
+        
+        3)
+        $(function(){
+            실행내용;
+        });
+
+        jQuery에서 해당 function은 HTML문서안에 있는 DOM요소들만
+        로드되면 바로 실행됨 실행됨!!
+        여러번 기술 가능, 횟수 제한 없음~!
+    </pre>
+
+    <script>
+        /* window.onload = function({실행내용}*/
+        $(function(){
+            console.log('문서 로딩완료~');
+        });
+        $(function(){
+            console.log('문서로딩완료 끝');
+        });
+
+        $(function(){
+            // 현재 HTML문서에 존재하는 모든 pre요소를 선택해서
+            // 배경색을 노란색으로 변경
+            /*
+            // 자바스크립트 방식
+            const pre = document.getElementsByTagName('pre');
+
+            console.log(pre);
+            //pre[0].style.backgroundColor = 'yellow';
+            //pre[1].style.backgroundColor = 'yellow';
+
+            // 자바스크립트 방법 1
+            for(let i = 0; i < pre.length; i++){
+                pre[i].style.backgroundColor = 'yellow';
+            };
+            // 자바스크립트 방법 2
+            for (let el of pre){
+                el.style.backgorundColor = 'yellow';
+            };
+            */
+
+            // 제이쿼리 방식
+            $('pre').css('background', 'yellow');
+
+            // $("css선택자") : 해당 요소를 선택하겠다.
+            // .css() : 선택된 요소들의 스타일과 관련된 기능을 수행
+
+            // h3 태그들의 글자색을 red로 바꾸겠다.
+            /*
+            // 자바스크립트 방식 1
+            const h3 = document.querySelectorAll('h3');
+            for(let i = 0; i <h3.length; i++){
+                h3[i].style.color = 'red';
+            }*/
+
+            // jQuery 방식
+            $('h3').css('color', 'red');
+            
+        });
+    </script>
+
+    <pre>
+        하하
+    </pre>
+
+</body>
+</html>

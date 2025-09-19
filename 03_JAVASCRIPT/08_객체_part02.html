@@ -14,6 +14,9 @@
 
     .card > h5{font-size:18px; font-weight: 800;}
     .card > p{font-size:14px; font-weight: 500;}
+    
+
+    .area{background-color: lemonchiffon; border:1px solid blanchedalmond; height: 300px;}
 </style>
 <body>
     <h1>배열과 객체의 활용</h1>
@@ -94,5 +97,96 @@
             document.getElementById('wrap').innerHTML = element;
         }
     </script>
+
+    <hr>
+    <h3>생성자 함수</h3>
+    <p>new 키워드를 사용해서 객체를 생성할 수 있는 함수를 의미<br></p>
+    <button onclick="con();">실행</button>
+    <script>
+        function con(){
+            // 웹툰 객체를 만들고 싶음
+            // 썸네일, 제목, 작가명
+            const webtoon1 = {
+                image : "",
+                title : "",
+                author : "",
+            };
+            const webtoon2 = new Webtoon("이미지경로", "재밌는웹툰", "이승철");
+            const webtoon3 = new Webtoon("하하", "호호", "히히")
+            //"생성자 함수" 정의(선언할 때 첫 글자를 "대문자"로 만들면됨)
+            function Webtoon(image, title, author){
+                // 항상 생성자 최상단에서 일어남
+                // this = {
+                //     image : "이미지경로",
+                //     title : "재밌는웹툰",
+                //     author : "이승철",
+                // }
+
+                this.image = image;
+                this.title = title;
+                this.author = author;
+                
+                // return this;
+            }
+            console.log(webtoon2);
+            console.log(webtoon3);
+        }
+    </script>
+
+    <h3>* Date 객체</h3>
+    <button onclick="dateFn();">★★★★날짜 사용★★★★</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        function dateFn(){
+            
+            const area = document.getElementById('area1');
+
+            // Date 객체
+            const date1 = new Date();
+            area.innerHTML = `현재 날짜 및 시간 :  ${date1} <br>`;
+
+            // 2026년 2월 12일로 세팅
+            const date2 = new Date(2026, 2 - 1, 12);// 가운데만 월은 고정된 길이니깐?  2 - 1
+            area.innerHTML = `종강일 : ${date2} <br>` ;
+            // 월의 경우 인덱스를 의미하기 때문에 해당 월에 -1을 해줘야함
+
+            // 2026년 2월 12일
+            const date3 = new Date(2026, 2 - 1, 12, 17, 50, 0);
+            area.innerHTML = `종강일(시간) : ${date3} <br>`;
+
+            // ms까지 세팅??
+            // 1s == 1000ms
+            const date4 = new Date(2026, 2 - 1, 12, 17, 50, 0, 5000);
+            area.innerHTML += `찐종강일(시간) : ${date4} <br>`;
+
+            // 종강일까지 디데이 구하기
+            const endDay = new Date(2026, 2 - 1, 12);
+            const today = new Date();
+            area.innerHTML += `종강일까지 디데이 : ${endDay - today} <br>`;
+
+            // 일자 단위로 바꿔주자
+            // MS ==> Day
+            // 1s == 1000ms
+            // 1m == 60s == 60 * 1000ms
+            // 1h == 60m == 60 * 60s == 60 * 60 * 1000ms
+            // 1d == 24h == 24 * 60m == 24 * 60 * 60s == 24 * 60 * 60 * 1000ms
+            const dDay = (endDay - today) / (24 * 60 * 60 * 1000);
+            alert(`종강까지 ${Math.ceil(dDay)}남았습니다.`);
+
+            // 날짜에서 특정 데이터만 뽑고 싶다. 년월일시분초
+            area.innerHTML += `${date1.getFullYear()}년<br>
+                                ${date1.getMonth() +1}월 <br>
+                                ${date1.getDate()}일 <br>
+                                ${date1.getHours()}시 <br>
+                                ${date1.getMinutes()}분 <br>
+                                ${date1.getSeconds()}초 <br>`;
+            // 요일만 알아내고 싶다 : getDay();
+            // 0 == 일요일, 1 == 월요일, 2 == 화요일, ... 6 == 토요일
+            area.innerHTML += `요일 : ${date1.getDay()}`;
+
+        }
+    </script>
+
 </body>
 </html>

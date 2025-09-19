@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+</head>
+<style>
+    .area{
+        background-color: beige;
+        border:1px solid palegoldenrod;
+        height:100px;
+    }
+
+    .on {
+        background-color: yellowgreen;
+    }
+</style>
+<body>
+    <h1>이벤트</h1>
+    <!--
+        *이벤트 관련 용어정리
+        event : 브라우저에서 발생하는 사건(동작, 행위)
+        event target : 이벤트가 일어날(난) 객체
+        event type : 이벤트 종류(click, mouseover, scroll, keydown)
+        event listener : event 감지하다가 감지되면 event handler를 수행
+        event handler : 이벤트가 발생했을 때 동작할 코드들의 집합
+
+        * 이벤트 모델 종류
+        1. 고전 이벤트 모델 => 요소객체.onclick = 이벤트핸들러
+        2. 인라인 이벤트 모델 => <요소 onclick="함수();"></요소>
+        3. 표준 이벤트 모델 => 요소.addEventListener();
+    -->
+
+    <h3>* 고전 이벤트 모델(기본 이벤트 모델)</h3>
+
+
+    <p>
+        해당 요소객체의 이벤트 속성에 접근한 후 <br>
+        이벤트 핸들러를 대입하는 방식 <br><br>
+
+        [표현법]
+        객체명.(이벤트)속성명 = () => {} <br>
+        => null을 대입하면 이벤트가 제거됨
+    </p>
+    
+    <button id="btn1">뻐어튼</button>
+    <button id="btn2">뻐어튼</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        const area1 = document.querySelector('#area1');
+        /*
+            querySelector vs getElementById
+
+            * 일반적으로 querySelector를 권장함
+            * 성능이 필요한 시점엔 getElementById 더 빠를 수 있음
+        */
+
+        // target(이벤트가 발생할 객체)에 접근하기
+        const btn1 = document.getElementById('btn1');
+        // eventtype을 지정
+        btn1.onclick = function(){
+            // eventHandler 대입
+                area1.innerHTML += "btn1클릭<br>";
+        }
+
+        // btn2인 버튼을 클릭했을 때 btn1에게 달린 이벤트를 제거
+        document.getElementById('btn2').onclick = () => {
+            btn1.onclick = null;
+            area1.innerHTML = "이벤트 없앴지~~";
+        }
+
+    </script>
+
+    <hr>
+    <h3>* 인라인 이벤트 모델</h3>
+
+    <p>
+        요소 내부에 직접적으로 이벤트 속성을 적어서 정의하는 방식<br>
+        주로 js모듈에 정의한 함수를 호출하는 방법을 선호
+    </p>
+
+
+    <button onclick="document.getElementById('area1').innerHTML ='클릭'; alert('띄어띄어')">극단적으로</button>
+    <!--
+        요소 내부에 직접 이벤트핸들러를 달아도 실행하는 것에는 문제가 없지만
+        내용이 길어지고 복잡하므로 ↑ 이렇게는 잘안함
+    -->
+
+
+    <hr>
+
+    <h3>* 표준 이벤트 모델(addEventListener)</h3>
+
+    <pre>
+        [표현법]
+
+        요소객체.addEventListener('이벤트명', '이벤트핸들러');
+
+    </pre>
+
+    <button id="btn3">이벤트</button>
+    <script>
+        const btn = document.getElementById('btn3');
+        btn.addEventListener('click', () => {
+            alert('표준 이벤트 모델 테스트');
+        });
+        
+        //mouseenter : 포틴터가 보더안으로 들어가는 순간
+
+        btn.addEventListener('mouseenter', () => {
+           //btn.style.backgroundColor = 'yellowgreen';
+            btn.classList.add('on');
+        });
+        // mouseout : 보더밖으로 포인터가 빠져나가는 순간
+        btn.addEventListener('mouseout', () => {
+            //btn.style.backgroundColor = null;
+            btn.classList.remove('on');
+        });
+
+       
+
+    </script>
+
+
+    <hr>
+
+    <h3>2. 현재 이벤트가 발생한 요소객체(이벤트타겟)에 접근하는 방법</h3>
+    <button id="btn4">고전 이벤트 방식</button>
+    <button id="btn5">표준 이벤트 방식</button>
+    <button onclick="exFn(this);">인라인 이벤트 방식1</button>
+    <button onclick="enFn();">인라인 이벤트 방식2</button>
+
+    <script>
+        // 인라인 이벤트 모델
+        function exFn(e){
+            // 버튼을 클릭했을 때 클릭한 요소의 컨텐트 값을 클릭됨!!으로 변경
+            console.dir(e);
+            e.innerHTML = `클릭됨!`;
+        }
+
+        // 고전 이벤트 방식
+        document.getElementById('btn4').onclick = (e) => {
+            // 먼저 이벤트 타입부터 알아보자
+            console.log(window.event);
+            console.log(this.event);
+
+            // event target을 알아내는 방법
+            console.log(window.event.target);
+            console.log(this.event.target);
+            console.log(e.target);
+            window.event.target.style.background = 'red';
+            this.event.target.style.color = 'white';
+            e.target.innerText = '클릭했다능~~';
+        }
+
+         // 표준 이벤트 방식
+        document.getElementById('btn5').addEventListener("click", function(e){
+            console.log(this);
+            // window.event.target == e.target
+            // == this(function 키워드가 붙은 함수)
+            // == this.target(=> array Function)
+
+            window.event.target.style.background = 'black';
+            e.target.innerHTML = '이벤트발생~~~';
+            this.style.color = 'white';
+        });
+    </script>
+
+    <h2>3. 태그별 기본적으로 달려있는 이벤트 제거하기</h2>
+    <p>
+        기본적으로 이벤트를 가지고 있는 요소<br>
+        - a 태그 : 클릭 시 href 속성값으로 URL 요청보내는 이벤트 달림 <br>
+        - form 태그 안에있는 submit 버튼 : <br>
+        클릭 시 사용자가 입력한 값들을 action 속성 값으로 요청 보내는 이벤트 달림<br><br><br>
+    </p>
+
+    <a href="http://www.naver.com" onclick="alert('하이')">네이버로</a>
+
+    <br>
+    <a href="http://www.naver.com" onclick="return false;">네이버로</a>
+    <!--방법 1. return false onclick 속성에 넣어줌-->
+
+    <script>
+        function returnFn(){
+            // 무조건 return false
+            if(1){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+    <a href="http://www.naver.com" onclick="return returnFn();">너나가~</a>
+    <!--방법 2. return 함수() 호출-->
+
+    <br><br><br>
+
+    <!-- USER_ID VARCHAR2(15) UNIQUE NOT NULL ==> 자바스크립트로 유효성 ㄱㅓㅁ사 -->
+
+    <form action="회원가입URL" method="">
+        <fieldset>
+            <legend>회원가입</legend>
+            아이디 : <input type="text" name="userId" id="userId"><br>
+            <label for="" syle="font-size:14px; color:lightgray">
+                영문자 또는 숫자로만 5 ~ 12자 사이로 입력해주세요
+            </label>
+            <input type="submit" value="가입하기" onclick="return validate();">
+        </fieldset>
+    </form>
+
+    <script>
+        function validate(){
+            const userId = document.getElementById('userId').value;
+            // 사용자가 입력한 아이디값이 유효한 값인지
+            // 검사하는 함수
+            // 유효하지 않은 값이라면 요청을 못가게 할 거임
+            console.log(userId);
+
+            // 영문자 or 숫자로만 + 5~ 12 자 사이
+            // 비교대상 == 사용자가 입력한 값 (userId)
+            // 사용자가 입력한 값이 영문자 또는 숫자인가
+            // 사용자가 입력한 값이 5 ~ 12자 사이
+
+            /*
+            if(5 <= userId.length && userId.length <= 12){
+                for(let i = 0; i < userId.length; i++){
+                    if('a' <= userId.charAt(i) && userId.charAt(i) <= 'z' ||
+                        ('A' <= userId.charAt(i) && userId.charAt(i) <='Z') ||
+                        ('0' <= userId.charAt(i) && userId.charAt(i) <= '9')){
+                            return true;
+                    }
+                }
+            }
+            */
+            // 아이디 값에 대한 유효성 검사이지만 복잡하고 읽기 힘드니 간단히 하는 방법은?
+            // 값에 대한 유효성 검사를 위해 정규 표현식을 사용해보자.
+            // 영문자 또는 숫자로만 5 ~ 12 자 사이
+            const regExp = /^[A-Za-z0-9]{5,12}$/;
+
+            // 패턴을 만족하는지 검사 => tes();
+            if(regExp.test(userId)){
+                return true;
+            }
+            console.log(regExp);
+
+
+            alert('조건 만족해야지')
+            return false;
+        }
+    </script>
+
+</body>
+</html>

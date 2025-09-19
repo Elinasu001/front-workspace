@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>추가적인 선택자</title>
+</head>
+<style>
+    .yellow{background-color: yellow;}
+</style>
+<body>
+    <h3>* 속성 선택자</h3>
+    <p>
+        선택자[속성=속성값]  : 속성값이 특정값과 "일치"하는 요소 선택<br>
+        선택자[속성~=속성값]  : 속성값에 특정값을 "포함"하는 요소 선택(공백기준)<br>
+        선택[속성^=속성값] : 속성값이 특정값으로 "시작"하는 요소 선택<br>
+        선택자[속성$=속성값] : 속성값이 특정값으로 "끝"나는 요소 선택<br>
+        선택자[속성*=속성값] : 속성값에 특정값이 "포함"되는 요소 선택<br>
+        선택자[속성] : 특정 속성을 가지고있는 모든 요소 선택
+    </p>
+
+    <input type="text"><br>
+    <input type="number" class="test1 test test3 test4"><br>
+    <input type="radio"><br>
+    <input type="checkbox"><br>
+    <input type="button" value="버튼" class="test2"><br>
+
+
+    <script>
+        $(function(){
+            /*
+            $('input[class]').css('background', 'lightblue');
+            $('input[type=text]').val('안녕');
+            // .var() : value 속성과 관련된 기능을 수행
+
+            $('input[class~=test3]').val(1234);
+
+            // attr(): 그 외의 속성들과 관련된 기능을 수행 || prop(); 상태관련
+            $('input[type^=r]').attr('checked', true);
+            $('input[type$=ox]').attr('checked', true);
+            $('input[class*=st2]').css('width', '50px').css('height', '50px').val('왕버튼');
+            */
+
+        });
+    </script>
+
+    <h3>* 입력양식 선택자(input 요소의 type 속성값으로 선택)</h3>
+    <pre>
+        [표현법]
+
+        $(':type속성값')
+        :text, :radio, :button
+    </pre>
+
+    텍스트 상자 : <input type="text"><br>
+    일반 버튼 : <input type="button"><br>
+    체크 박스 : <input type="checkbox"><br>
+    비밀번호 : <input type="password"><br>
+    라디오 버튼 : <input type="radio"><br>
+    첨부파일 : <input type="file" id="file"><br>
+    제출 : <input type="submit" id="submit" sylte="border: 1px dotted lightpink; background: pink; font-size:22px; width:200px; height:600px;"><br>
+    초기화 : <input type="reset"><br><br><br>
+
+    <script>
+        $(function(){
+            $(':text').css('background', 'red');
+            //$(':button').css('width', '200px').css('height', '200px;').val('왕버튼');
+            // 전달하려고 하는 ㅇ니자값을 객체 형태로 전달하는 것이 가능
+            $(':button').css({
+                width: '200px',
+                height: '200px',
+                border: null,
+            }).val('왕버튼');
+        });
+
+        $(':file').css('background', 'yellowgreen');
+        $('#file').css('display', 'none');
+        $('#submit').click(function(){
+            $('#file').click();
+        });
+        $(':reset').click(function(){
+            //alert('경고경고');
+
+            // 비밀번호 입력란에 작성한 값을 alert 경고창에 출력
+
+            // 객체.속성 = '값'
+            // 객체.속성
+            console.log($(":password").val());
+            alert($(':password').val());
+
+            // .val() : 인자값 없이 호출하면 value 속성 값을 반환해줌
+            // setter() // getter() 역할을 동시에 수행
+        });
+
+        //jQuery에서 제공하는 hover메소드
+        $(':button').hover(function(){
+            //$(':button').css('background', 'yellow');
+            //console.log(this);
+            // this.css('background', 'yellow');
+            // this.style.background = 'yellow';
+            // 직접적으로 스타일을 부여하는 것이 아니라
+            // 클래스 속성값을 추가
+            $(this).addClass('yellow');
+            // .addClass('클래스 속성값') : 선택된 요소에 클래스 속성값을 추가
+        }, function(){
+            $(this).removeClass('yellow');
+        });
+    </script>
+
+    <hr>
+
+    <h3>* 상태 선택자</h3>
+    <h4>- checked 상태 선택자(radio, checkbox)</h4>
+    <p>
+        체크되어있는 입력양식 태그를 선택 <br><br>
+
+        $(':checked')
+    </p>
+
+    국적 :
+    <input type="checkbox" name="nara" value="한국"> 한국
+    <input type="checkbox" name="nara" value="미국"> 미국
+    <input type="checkbox" name="nara" value="호주"> 호주
+    
+
+    <button id="btn1">너 어느나라 사람이야아아아아아ㅏㅏㅏㅏㅏ</button>
+
+    <script>
+        $(function(){
+            // 버튼 클릭 시 현재 checked 상태인 요소만 선택해서 스타일 부여
+            $('#btn1').click(function(){
+                $(':checked').css({width:'50px', height:'50px'});
+            });
+
+        });
+    </script>
+
+    <h4>- selected 상태 선택자(select > option)</h4>
+
+    <p>
+        option요소들 중 선택된(selected) 태그를 선택<br><br>
+        $(':selected')
+    </p>
+    지역 : <br>
+    <select name="" id="">
+        <option>서울</option>
+        <option>경기</option>
+        <option>인천</option>
+    </select>
+
+    <button id="btn2">선택</button>
+
+    <br>
+    선택한 지역 : <label id="location">없음</label>을(를) 선택하셨습니다.
+
+
+    <script>
+        $(function (){
+            $('#btn2').click(function(){
+                //console.log($('option:selected').html());// html(인자값 넣으면 값 setter, 안넣으면 getter)
+                $('#location').html($('option:selected').html());
+            });
+        });
+    </script>
+
+    <hr>
+    <h4>- enabled, diabled</h4>
+    <p>
+        활성화/ 비활성화 상태 <br>
+        :enabled <br>
+        :disabled<br>
+    </p>
+
+    <div id="wrap">
+        활성화:  <input type="text" value="하하허허"  readonly><br>
+        비활성화 : <input type="text" disabled value="하하호호" ><br>
+    </div>
+
+    <script>
+        $(function(){
+            $('#wrap > :enabled').css('background', 'yellow');
+            $('#wrap > :disabled').css('background', 'greenyellow');
+        });
+    </script>
+
+</body>
+</html>
