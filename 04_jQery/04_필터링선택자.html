@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>필터링선택자</title>
+</head>
+<body>
+    <div id="area1">
+        <div id="p1"></div>
+        <div id="p2"></div>
+        <div id="p3"></div>
+        <div id="p4"></div>
+        <div id="p5"></div>
+    </div>
+    <script>
+        window.onload = function(){
+            const area1 = document.getElementById("area1");
+            console.log(area1.children); // 모든 자식 요소 선택
+
+            console.log(area1.firstElementChild); // 첫 번째 자식요소
+            console.log(area1.lastElementChild); // 마지막 자식 요소
+
+            const p3 = document.getElementById("p3");
+            console.log(p3.parentElement); // 부모 요소
+            console.log(p3.previousElementSibling); // 동위 이전 요소 선택
+            console.log(p3.nextElementSibling); // 동위 이후 요소 선택
+        };
+    </script>
+
+    <h3>필터링 관련 메소드</h3>
+    <table border="1">
+        <tr>
+            <td>이름</td>
+            <td>취미</td>
+        </tr>
+        <tr>
+            <td>홍길동</td>
+            <td>Java</td>
+        </tr>
+        <tr>
+            <td>고길동</td>
+            <td>SQL</td>
+        </tr>
+        <tr>
+            <td>이승철</td>
+            <td>퇴근</td>
+        </tr>
+    </table>
+
+    <script>
+        $(function(){
+            // table의 자식요소인 tr요소 선택
+            // :first, :last, :even, :odd
+            $("tr:first").css("color", "orangered");
+            $("tr:last").css("color", "forestgreen");
+            $("tr:even").css("background", "gray");
+            $("tr:odd").css("background", "violet");
+            // 0 부터 시작
+        });
+    </script>
+
+
+    <hr>
+
+    <p>
+        기준이 되는 요소 중 특정 요소만을 선택해서 걸러주는 메소드<br>
+        first(), last(), filter(), not(), eq()
+    </p>
+    <h4 class="test">test-1</h4>
+    <h4 class="test">test-2</h4>
+    <h4 class="test">test-3</h4>
+    <h4 class="test">test-4</h4>
+    <h4>test-5</h4>
+    <h4 class="test">test-6</h4>
+        
+    <script>
+        $(function(){
+            // .first(): 기준중에서 가장 첫 번째 요소를 선택
+            $("h4").first().css("font-size", "20px");
+            // .last(): 기준중에서 가장 마지막 요소를 선택
+            $("h4").last().css("font-size", "36px");
+            // .filter('선택자') : 기준 중에서 해당 조건에 만족하는 요소를 선택
+            $("h4").filter(".test").html("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+            //$("h4.test").html("ㅋㅋㅋㅋㅋㅋㅋㅋ"); 별차이 없지만,
+            // $("h4.test, h5.test, h6.test, h7.test") 각각 다는 것보다 더 나음
+
+            //.not('선택자') : 기준 중에서 해당 조건에 만족하지 않는 요소를 선택
+            $("h4").not(".test").css("color", "skyblue");
+
+            //.eq(위치) : 0부터 시작, 몇 번째 요소를 선택
+            $("h4").eq(3).html('<b>eq(3)번 선택됨</b>');
+
+
+        });
+    </script>
+
+</body>
+</html>
+
+

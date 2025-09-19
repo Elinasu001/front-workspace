@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>탐색(순회)메소드-조상</title>
+</head>
+<style>
+    #wrap, #wrap *{display:block;border:2px dotted orangered; margin:15px; padding:5px; color:orange;}
+</style>
+<body>
+    <h1>탐색순회메소드</h1>
+    <h3>* 조상요소 탐색 메소드 : 기준점으로부터 상위요소들을 선택</h3>
+
+    <div id="wrap">div
+        <div>div
+            <ul>ul
+                <li>li
+                    <span>span(기준점)</span>
+                </li>
+            </ul>
+        </div>
+        <div>div
+            <p>p
+                <span>span(기준점)</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            /*
+                $("선택자").parent();
+                선택된 요소를 기준으로 바로 위 부모요소 하나만 선택
+            */
+
+            $("span").parent().css("border", "2px solid green");
+            
+            /*
+                $("선택자").parents();
+                선택된 요소를 기준으로 모든 상위요소 선택
+            */
+            $("span").parents().css("color", "blue");
+            $("span").parents("div").css("color", "forestgreen");
+
+            /*
+                $("선택자").parentsUntil("선택자");
+                선택된 요소를 기준으로 선택된 요소부터 인자까지의 요소를 선택
+            */
+            $("span").parentsUntil("div").css("border", "1px solid red");
+
+            $("span").parent().parent().css("color", "pink");
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요소만들기</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- https://getbootstrap.com/docs/5.3/getting-started/introduction/ -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<style>
+    .item{background-color: gold; width:100px; height:100px; margin:4px; border:2px solid goldenrod; line-height:51px; text-align: center;}
+
+
+</style>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <h1>요소만들기니깐</h1>
+    <h3>Content 영역과 관련된 메소드</h3>
+
+    <pre>
+    선택된 요소의 content 영역(여는태그와 닫는 태그사이)을 반환해주거나 또는 변경해주는 메소드들<br>
+
+    - $("선택자").html()
+    - $("선택자").test()
+    - 선택된 요소의 content영역 값을 반환해줌<br>
+    - $("선택자").html("인자값")
+    - $("선택자").text("인자값")
+    - 선택된 요소의 content영역의 값을 전달한 인자값으로 바꿔줌 <br>
+
+    => 이때, html()는 HTML태그를 인식
+    </pre>
+
+    <h3 id="test1">
+        <a href="http://www.naver.com">네이버로 이동~!</a>
+    </h3>
+    <h3 i d="test2"></h3>
+    <button id="btn1">버튼</button>
+
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                const url = prompt("이동할 URL를 입력해주세요.");
+                const test1Content = $("#test1").html();
+                console.log(test1Content);
+                $("#test2").html(test1Content);
+                $("#test2").children("a").attr("href", url);
+            });
+        });
+    </script>
+
+    <hr>
+    <h2>요소 생성 및 제거</h2>
+    <h3>* 동적으로 요소 생성</h3>
+    <div id="area1"></div>
+    <button id="btn2">요소 생성하기</button>
+
+    <script>
+        $(function(){
+            $("#btn2").on("click", function(){ // click, mousever, mouseenter여러개 한번에 사용할 수 있음
+                // <p> ~~~</p>
+                // 1. 문자열로 만드는 방법
+                const el1 = '<p>CreateElement By Text</p>'
+                ///document.getElementById("#area1").innerHTML = el1;
+
+                // 2. jquery 방식
+                const el2 = $("<P></P>").text("CreateElement By jQyert");
+                /*
+                $("#area1").append(el1);
+                $("#area1").append(el2);
+                */
+                $("#area1").append(el1, el2);
+
+                $("#area1").append(createMyElement("h1", "하이하이"));
+            });
+
+            function createMyElement(element, content){
+                return `<${element}>${content}</${element}>`;
+            }
+        });
+    </script>
+
+    <hr>
+
+    <h3>* 추가 관련 메소드</h3>
+    <pre>
+        선택된 요소를 기준으로 새롭게 생성된 요소를 추가해주는 메소드
+        
+        $(A).append(B) : A요소 내부에 가장 뒷부분에 B를 추가(자식)<br>
+        $(A).prepend(B) : A요소 내부에 가장 앞부분에 B를 추가(자식)<br>
+        $(A).before(B) : A요소 앞 부분에 B를 추가(동위)<br>
+        $(A).after(B) : A요소 뒷 부분에 B를 추가(동위) <br>
+
+        <hr>
+
+        $(B).appendTo(A) : B를  A소 내부에 뒷부분에 추가(자식)<br>
+        $(B).prependTo(A) : B를 요소 내부에 앞부분에 추가(자식)<br>
+        $(B).insertAfter(A) : B를 A요소 뒷부분에 추가(동위)
+
+    </pre>
+
+    <!-- A == h2 -->
+    <!-- B == span -->
+
+    <h2 id="test4">
+        A
+        <div>div</div>
+        <!-- B -->
+    </h2>
+    <h2 id="test5">
+        A
+        <!-- B -->
+        <div>div</div>
+    </h2>
+    <!-- B -->
+    <h2 id="test6">
+        A
+        <div>div</div>
+    </h2>
+    <h2 id="test7">
+        A
+        <div>div</div>
+    </h2>
+    <!-- B -->
+    <script>
+        $(() => {
+            const span = `<span style="color:red">나는span이다</span>`;
+            $("#test4").append(span);
+            $("#test5").prepend(span);
+            $("#test6").before(span);
+            $("#test7").after(span);
+        });
+    </script>
+
+    <hr>
+
+
+    <h3>* 요소 객체 복제하는 메소드</h3>
+    <p>
+        $("선택자").clone(true/ false);
+        복제한 요소 이벤트도 복제할건지 지정(생략 시 false)
+    </p>
+
+    <button id="clone">복제</button>
+
+    <div id="clone-area">
+        <!-- 복제할 요소 -->
+        <div class="item">
+            <p>골드바</p>
+        </div>
+    </div>
+
+    <div id="clone-result"></div>
+
+    <script>
+        $(function(){
+            $('#clone-area').children().click(function(){
+                $(this).css("color", "goldenrod");
+            });
+
+            // 복제 버튼 클릭 시 해당 요소를 복사해서
+            // clone-result 의 자식요소로 추가
+
+            $("#clone").click(function() {
+                const $copyEl = $("#clone-area > .item").clone(true);
+                $("#clone-result").append($copyEl);
+            });
+        });
+
+    </script>
+    <h3>* 요소객체 제거 / 잘라내기 메소드</h3>
+    <p>
+        $("선택자").empty(): 선택된 요소의 모든 후손요소 제거 <br><br>
+        $("선택자").remove() / detach() : 해당 요소 잘라내기 <br><br>
+
+        - remove : 요소의 이벤트가 날아가버립 <br>
+        - detach : 이벤트가 같이 잘라내짐
+    </p>
+
+    <button id="empty">empty</button>
+    <button id="remove">remove</button>
+    <button id="detach">detach</button>
+
+    <div id="remove-area">
+        <div id="item1" class="item">
+            <span>날제거하</span>
+        </div>
+    </div>
+    
+    <hr>
+
+    <div id="remove-result"></div>
+
+    <script>
+        $(function(){
+            $("#empty").click(function(){
+                $("#remove-area").empty();
+            });
+
+            $("#remove").click(function(){
+                const $el = $("#item1").remove(); // 제거 == 제거된 요소를 반환
+                $("#remove-result").append($el);
+            });
+
+            $("#item1").mouseenter(function(){
+                $(this).css("color", "red");
+            });
+
+            $("#detach").click(function(){
+                const $el = $("#item1").detach();
+                $("#remove-result").append($el);
+            });
+        });
+    </script>
+
+    <hr>
+    <p>부트스트랩</p>
+    
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <button type="button" class="btn btn-outline-secondary">Secondary</button>
+    <button type="button" class="btn btn-outline-success">Success</button>
+    <button type="button" class="btn btn-outline-danger">Danger</button>
+    <button type="button" class="btn btn-outline-warning">Warning</button>
+    <button type="button" class="btn btn-outline-info">Info</button>
+    <button type="button" class="btn btn-outline-light">Light</button>
+    <button type="button" class="btn btn-outline-dark">Dark</button>
+
+    <div class="card" style="width: 18rem;">
+        <img src="../02_CSS/resources/image/chu01.png" class="card-img-top" alt="추성훈">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myMenu">
+        메뉴보기
+    </button>
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h3>시각적인 효과 메소드</h3>
+    <p>
+        페이지 내부에서 애니메이션 효과를 만들기 위해 사용하는 메소드 <br><br>
+    </p>
+
+    
+</body>
+</html>

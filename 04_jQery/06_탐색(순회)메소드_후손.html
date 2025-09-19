@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>탐색(순회)메소드-후손</title>
+</head>
+<style>
+    #wrap, #wrap *{display:block;border:2px dotted orangered; margin:15px; padding:5px; color:orange;}
+</style>
+<body>
+    <h1>탐색순회메소드</h1>
+    <h3>* 후손요소 탐색 메소드 : 기준점으로부터 하위요소들을 선택</h3>
+
+    <div id="wrap">div(기준점)
+        <div>div
+            <ul>ul
+                <li>li
+                    <span>span</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <p>p
+                <span>span</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            // 스타일 객체
+            const style1={
+                color: "gold",
+                border: "2px solid gold"
+            };
+
+            const style2 = {
+                color: "silver",
+                border: "2px solid silver"
+            };
+
+            const style3 = {
+                color: "aqua",
+                border: "2px solid aqua"
+            };
+
+            const style4 = {
+                color: "aquamarine",
+                border: "2px solid aquamarine"
+            };
+
+            const style5 = {
+                color: "forestgreen",
+                border: "2px solid forestgreen"
+            };
+
+            /*
+                $("선택자").children()
+                선택된 요소를 기준으로 모든 자식(바로 하위)요소들을 선택
+            */
+
+            $("#wrap").children().css(style1);
+            $("#wrap").children().children().css(style2);
+
+            /*
+                $("선택자").children("선택자")
+                선택된 요소를 기준으로 모든 자식 선택자만 선택
+            */
+            $("#wrap").children().children("ul").css(style3);
+
+
+            /*
+                $("선택자").find("선택자")
+                선택된 요소를 기준으로 모든 후손요소들 중 선택자와 일치하는
+                요소를 선택
+            */
+            $("#wrap").find("span").css(style4);
+            $("#wrap").find("li").css(style5);
+
+        });
+    </script>
+
+</body>
+</html>

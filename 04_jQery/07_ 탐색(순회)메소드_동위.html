@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>탐색(순회)메소드_동위</title>
+</head>
+<style>
+    #wrap, #wrap *{border:1px solid salmon; display:block; margin:14px; padding:5px; color:brown;}
+</style>
+<body>
+    <h3>동위 메소드 : 같은 위치에 있는 요소들을 선택하는 메소드</h3>
+
+    <div id="wrap">
+        <p>p</p>
+        <div>div</div>
+        <span>span</span>
+        <h2>h2</h2>
+        <!-- 기준점 -->
+        <h3>h3</h3>
+        <p>p</p>
+    </div>
+
+    <script>
+        $(function(){
+
+            // siblings();
+            // 선택된 요소를 기준으로 동위에 있는 모든 요소를 선택
+            $("h2").siblings().css("color", "silver");
+            $("h2").siblings("p").css("color", "gold");
+
+            // next 게열
+            $("h2").next().css("color", "aqua");
+            $("h2").nextAll().css("font-size", "3em");
+            $("h2").nextUntil("p").css("color", "violet"); // p 전까지
+
+            // prev 게열
+            $("h2").prev().css("background", "orangered"); // 바로 이전
+            $("h2").prevAll().css("color", "green");
+            $("h2").prevUntil("p").css("border", "5px inset magenta");
+
+            
+        });
+    </script>
+</body>
+</html>
