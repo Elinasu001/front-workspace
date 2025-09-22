@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>jQuery이벤트</title>
+</head>
+
+<body>
+    
+    <h1>이벤트 달자 ~~ !</h1>
+
+    <h3>* 방법 1. 이벤트 메소드 호출해서 연결</h3>
+
+    <pre>
+    $("선택자").이벤트메소드(function(){
+        이벤트 발생 시 실행할 코드;
+    });
+    </pre>
+
+    <p id="test1">클릭!!</p>
+
+    <script>
+        $(function(){
+            $("#test1").dblclick(function(){
+                alert("더브클릭");
+            });
+        });
+    </script>
+
+
+    <h3>* 방법 2. on 메소드를 호출하는 방법</h3>
+    <pre>
+    [표현식]
+    $("선택자").on("이벤트 타입", function(){
+        이벤트 발생시 실행할 코드;
+    });
+    </pre>
+
+    <p id="test2">마우스로 클릭도 해보고, 올려도보고 할 것</p>
+
+    <script>
+        $(function(){
+            // 권장
+            $("#test1").on({
+                mouseenter: function(){
+                    $(this).css("color", "blue").text("올라감")
+                },
+                mouseout : function(){
+                    $(this).css("color", "red").text("나감");
+                },
+                click : function(){
+                    // 클릭 이벤트가 발생한 경우 달려있는 이벤트 핸들러 제거
+                    $(this).off("mouseenter").off("mouseout").text("제거");
+                }
+            });
+        });
+    </script>
+
+    
+    <hr>
+
+    <h3>* 방법 3.★★★★★ on 메소드를 사용하는 방법 ★★★★★</h3>
+
+    <pre>
+    [표현법]
+    $("상위요소선택자").on("이벤트타입", "하위요소선택자", function(){
+        이벤트 발생 시 실행할 내용;
+    });
+    </pre>
+
+    <div id="wrap">
+        <h4>h4요소를 클릭해보세요.</h4>
+    </div>
+
+    <script>
+        $(function(){
+            $("#wrap").on("click", "h4", function(){
+                alert("클릭했니");
+            });
+        });
+    </script>
+
+    <h3>* 동적으로 만든 요소에 이벤트 적용</h3>
+
+    <pre>
+    동적 요소 : 처음 HTML 문서상에서는 존재하지 않다가 나중에 새롭게 만들어지는 요소
+    </pre>
+
+    <div id="wrap2" style="border:1px solid skyblue;">
+        <h6>기존에 존재하는 요소</h6>
+    </div>
+
+    <script>
+        $(function(){
+
+            // 문서 로딩이 끝났을 때 h6 정확히 달림
+            // 방법 1. 이벤트 메소드 호출
+            // 동적으로 만든 요소한테는 append 안됨.
+            /*
+            $("#wrap2 > h6").click(function(){
+                $("#wrap2").append("<h6>새로 만든 요소</h6>");
+            });
+            */
+
+            // 방법 2. on메소드
+            // 마찬가지로 동적 요소 append 안됨.
+            /*
+            $("#wrap2 > h6").on("click", function(){
+                $("#wrap2").append("<h6>새로 만든 요소</h6>");
+            });
+            */
+            
+            // 방법 3. on 메소드
+            // 동적 요소 append 성공 !
+            // 동적으로 만들어진 요소에 기존에 존재하는 이벤트를 달아주고 싶다면 3번 방법 사용 !
+            $("#wrap2").on("click", "h6", function(){
+                $("#wrap2").append("<h6>새로 만든 요소</h6>");
+            });
+        });
+    </script>
+    
+    <h3>* 일회성 이벤트</h3>
+
+
+    <p>
+        이벤트를 딱 한 번만 수행하고 싶을 때 사용
+    </p>
+
+    <h6 id="test3">
+        한 번 만 클 릭 하 세 요
+    </h6>
+
+    <script>
+        $(function(){
+            $("#test3").one("click", function(){
+                alert("딱 한 번@");
+            });
+        });
+    </script>
+
+    <hr>
+
+    <h3>* 키보드 관련 이벤트</h3>
+
+    <pre>
+    키가 눌렸을 때 발생하는 이벤트 <br>
+    - keydown : 키보드의 모든 키가 눌리면 발생 (한글자씩 밀리는 문제가 있어 보통 keyup 사용)
+    - keypress :  키보드의 function키, 기능키, 한글을 제외한 나머지가 눌릴 때 발생<br><br>
+
+    키가 떼어질 때 발생하는 이벤트
+    - keyup :
+    </pre>
+
+    <input type="text" id="test4">
+
+
+
+    <script>
+        $(function(){
+            $("#test4").keydown((e) => {
+                // console.log("키보드 눌렸당 ㅎ");
+                // console.log(e.target.value); // 안쳤을 때 공간 까지 들어가서 하나씩 밀림
+                console.log(e.target.value.length);
+            });
+        });
+    </script>
+
+
+    <hr>
+
+    <h3>* 글자수 세기 예제</h3>
+
+    <div style="border: 1px solid rgba(0, 0, 0, 0.2);">
+        <br>
+        30자 이내로 입력하세요 <br>
+        <textarea id="content" cols="40" rows="10" style="resize:none" maxlength="30"></textarea>
+        <br>
+        <hr>
+        <span id="count">0</span>/30
+    </div>
+
+    <pre>
+    
+    
+    </pre>
+
+    <script>
+        $(function(){
+            $("#content").keyup((e) => {
+                console.log(e.target.value.length);
+
+                $("#count").text(e.target.value.length);
+            });
+        });
+    </script>
+
+    <br><br><br><br><br>
+
+</body>
+</html>
