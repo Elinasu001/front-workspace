@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여섯가지방법</title>
+</head>
+<style>
+    .area{width:350px; height:150px; border:1px solid lavenderblush;}
+</style>
+<body>
+    <h1>HTML요소 접근해봅시당</h1>
+    <h3>1) 아이디 속성값을 이용해서 접근하기</h3>
+    <div id="area1" class="area"></div>
+    <button onclick="selectById();">아이디로 접근하기</button>
+    <script>
+        function selectById(){
+            const area1 = document.getElementById("area1");
+            area1.innerHTML = "아이디로 접근하기 성공!!"
+            area1.style.color = "pink";
+        }
+    </script>
+
+    <br><br><br>
+
+    <hr>
+    <div id="area2" class="area" style="background: yellowgreen;"></div>
+    <button onclick="styleById();">선택할때마다 색상변경</button>
+    <script>
+        const colors =  ['red', 'blue', 'yellow', 'green', 'orange', 'indigo', 'violet'];
+        let idx = 0;
+        function styleById(){
+            const area2 = document.getElementById("area2");
+
+            area2.style.backgroundColor = colors[idx];
+            idx++;
+
+            if(idx === colors.length){ // 배열 끝까지 갔을 경우 다시 처음
+                idx = 0;
+            }
+        }
+    </script>
+
+    <hr>
+
+    <hr>
+    <h3>2) 태그명으로 접근하는 방법</h3>
+    <ul>
+        <li>목록1</li>
+        <li>목록2</li>
+        <li>목록3</li>
+        <li>목록4</li>
+        <li>목록5</li>
+    </ul>
+
+    <button onclick="tag();">태그명으로 접근하기</button>
+
+    <script>
+        function tag(){
+            const array = document.getElementsByTagName('li');
+            let chColor = 100;
+            for(let i = 0; i < array.length; i++){
+                array[i].style.backgroundColor = `rgb(${chColor}, 180, 100)`;
+                chColor += 30;
+            }
+        }
+    </script>
+
+
+    <ul id="colorList">
+        <li>목록1</li>
+        <li>목록2</li>
+        <li>목록3</li>
+        <li>목록4</li>
+        <li>목록5</li>
+    </ul>
+
+    <button onclick="tag02();">태그명으로 접근하기</button>
+
+    <script>
+        function tag02(){
+            const listArea = document.getElementById('colorList');
+            const array = listArea.getElementsByTagName("li");
+            const colors = ['red', 'blue', 'yellow', 'purple', 'green'];
+
+            for(let i = 0; i < array.length; i++){
+                array[i].style.backgroundColor = colors[i];
+            }
+        }
+    </script>
+
+    <hr>
+
+    <h3>3) name 속성값으로 요소객체 접근해보기</h3>
+    
+    <form action="요청받아줄서버" method="GET" id="fefe">
+        <fieldset>
+            <legend>메뉴</legend>
+            <input type="checkbox" name="menu" id="americano" value="아메리카노">
+            <label for="americano">아메리카노</label>
+            <input type="checkbox" name="menu" id="coldbrew" value="콜드브루">
+            <label for="coldbrew">콜드브루</label>
+            <input type="checkbox" name="menu" id="latte" value="라떼">
+            <label for="latte">라떼</label>
+            <input type="checkbox" name="menu" id="strlatte" value="딸기라떼">
+            <label for="strlatte">딸기라떼</label>
+            <input type="checkbox" name="menu" id="malatte" value="말차라떼">
+            <label for="malatte">말차라떼</label>
+            <button type="submit">꺄가아아아아아아</button>
+        </fieldset>
+    </form>
+
+    <button id="menuBtn">버튼버튼</button>
+
+    <script>
+        // 버튼 클릭 시
+        // 체크가 된 체크박스의 value 속성값을
+        // 순차적으로 나열하여
+        // alert창에 출력하시오
+        // const menuBtn = document.getElementById("menuBtn");
+        // menuBtn.addEventListener("click", () => {
+        //     const menus = document.getElementsByName("menu");
+
+        //     let menu = "";
+        //     for(let i = 0; i < menus.length; i++){
+        //         menu += " " + menus[i].value;
+        //     }
+        //     //alert(menu);
+
+        //     const array = [...menus];
+        //                             //배열에서 조건(e.checked)이 true인 요소만 // map은 배열의 각 요소를 변환하는 함수, value만 꺼내서 새로운 배열을
+        //     const checkedMenu = array.filter(e => e.checked).map(m => m.value);
+        //     alert(checkedMenu);
+
+        // });
+
+        const menuBtn = document.getElementById("menuBtn");
+        menuBtn.addEventListener("click", () => {
+            const menus = document.getElementsByName("menu");
+
+            let menu = "";
+            for(let i = 0; i < menus.length; i++){
+                menu += " " + menus[i].value;
+            }
+
+            const array = [...menus];
+            const checkedMenu = array.filter(e => e.checked).map(m => m.value);
+            alert(checkedMenu);
+
+        });
+    </script>
+    <hr>
+
+    <h3>4) 클래스 속성명으로 요소객체들 접근하기</h3>
+
+    <div class="test"></div>
+    <p class="test"></p>
+    <ul class="test">
+        <li>
+            <pre class="test"></pre>
+        </li>
+        <li>
+            <pre class="test"></pre>
+        </li>
+        <li>
+            <pre class="test"></pre>
+        </li>
+    </ul>
+    <button onclick="accessClass();">Class속성으로 선택하기</button>
+    <script>
+        function accessClass(){
+            const tests = document.querySelectorAll(".test");
+            console.log(tests);
+        }
+    </script>
+</body>
+</html>

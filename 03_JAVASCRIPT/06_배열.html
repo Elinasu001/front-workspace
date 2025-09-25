@@ -155,6 +155,14 @@
             array1[1] = '바나나';
             array1[2] = '당근';
             document.querySelector('#area2').innerHTML = array1; // 배열 요소에 추가 // 사과,바나나,당근
+
+
+            const array3 = ['사과', '바나나', '당근'];
+            const area2 = document.querySelector("#area2");
+            for(let v of array3){
+                area2.innerHTML += `${v}`;
+            }
+
         }
     </script>
 
@@ -211,9 +219,7 @@
             // 방법3.
             const index = days.indexOf(day);
             const result = index != -1 ? '맞습니다' : '아닙니다';
-            document.getElementById(
-                'area3'
-            ).innerHTML = `${day}는 빨간날이 ${result}`;
+            document.getElementById('area3').innerHTML = `${day}는 빨간날이 ${result}`;
 
 
             // 방법 1
@@ -238,28 +244,34 @@
             // 자바스크립트에서 동등비교
             console.log(1 == 1) // true
             console.log('1' == 1); //true
-            console.log([] == 0); // 이게 대체 왜?
+            console.log([] == 0); // 이게 대체 왜? (값만 비교)
 
-            console.log('1' === 1); // false : 값, 자료형 둘다 일치해야만 true
+            console.log('1' === 1); // false : 값, 자료형 둘다 일치해야만 true ( 값과 타입 둘다 비교 )
 
             // 구조분해할당
             const array = ['Apple', 'Banana', 'Carrot'];
+
+            //console.log(array); // (3) ['Apple', 'Banana', 'Carrot']
 
             /*
             const el1 = array[0];
             const el2 = array[1];
             const el3 = array[2];
             console.log(el1, el2, el3);
+
+            //Apple Banana Carrot
             */
 
-            /*
+            
             const str = [...array];
             console.log(str);
-            */
+            //(3) ['Apple', 'Banana', 'Carrot']
+
 
             // 한번에 변수에 담기
             const [el1, el2, el3] = array;
             console.log(el1, el2, el3);
+            //Apple Banana Carrot
         }
     </script>
 
@@ -282,14 +294,18 @@
             area.innerHTML = `${array1} <br>
                                 ${array1.concat(array2)} <br>
                                 ${array1} <br>`; // 원본 배열 수정이 아닌 두개의 배열 요소를 반환
+                                // 가나다,라마바 / 가나다,라마바,사아자,차카파 / 가나다 라마바
+
+
             // 예시2)
             const array3 = array1.concat(array2);
-            area.innerHTML = `${array3}`;
+            area.innerHTML = `${array3}`; // 가나다,라마바,사아자,차카파
 
             // 예시3)
             const array4 = [...array1, ...array2];
-            area.innerHTML = `${array4}`; // 배열의 요소를 풀어서 반환
+            area.innerHTML = `${array4}`; // 배열의 요소를 풀어서 반환 //가나다,라마바,사아자,차카파
 
+            
         }
     </script>
 
@@ -305,11 +321,11 @@
             const array = ['Apple', 'Banana', 'Melon', 'kiwi'];
             // const newArray = array ; // 얕은복사
             // const newArray = [...array]; // 깊은 복사 : 완전히 새 배열을 복사하여 관리 [보편적으로 많이 사용]
-            const area = document.getElementById('area5');
+            const area5 = document.getElementById('area5');
 
-            area5.innerHTML = `${array} <br>`;
+            area5.innerHTML = `${array} <br>`; //Apple,Banana,Melon,kiwi
             array.reverse();
-            area5.innerHTML = `${array} <br>`;
+            area5.innerHTML = `${array} <br>`; //kiwi,Melon,Banana,Apple
         }
     </script>
 
@@ -326,7 +342,9 @@
             const area6 = document.getElementById('area6');
             area6.innerHTML = `${array} <br>`;
             array.sort();  // 오름차순 정렬 : 정렬 시 속도가 좀 더 빠름 (단, 여기보다 데이터 자체 SELECT ~ ORDER BY에서 처리하는게 성능이 더 좋다.)
+            //Apple,Banana,Kiwi,Lemon,Mango,WaterMelon,イチジク,딸기
             array.sort().reverse();  // 내림차순 정렬
+            //딸기,イチジク,WaterMelon,Mango,Lemon,Kiwi,Banana,Apple
             area6.innerHTML = `${array} <br>`;
         }
     </script>
@@ -361,15 +379,25 @@
             // pop한 요소 반환 : 제일 마지막 요소가 반환됨
             area.innerHTML += `pop(마지막요소반환) : ${lunchMenu.pop()} <br>`;
 
-            // 6_1) unshift(추가할요소) : 0번인덱스에 요소 추가
-            // 6_2) shift() : 0번인덱스 요소 뽑아내기
+            // 6_1) shift() : 0번인덱스 요소 뽑아내기
+            // 6_2) unshift(추가할요소) : 0번인덱스에 요소 추가
             const salad = lunchMenu.shift();
-            area.innerHTML += `shift(0번인덱스요소추가) :  ${salad} <br>`;
+            area.innerHTML += `shift(0번인덱스요소뽑기) :  ${salad} <br>`;
             lunchMenu.unshift(newMenu);
-            area.innerHTML += `unshift(0번인덱스요소뽑기) : ${lunchMenu}<br>`;
+            area.innerHTML += `unshift(0번인덱스에요소추가) : ${lunchMenu}<br>`;
             
             // 새로운 배열
             const newLunchMenu = [...lunchMenu, '제육볶음'];
+            area.innerHTML += `[...lunchMenu, '제육볶음'] : ${newLunchMenu}<br>`;
+
+            /*
+            3 입력,
+            push(요소가 추가된 점심메뉴) : 샐러드,짜장면,김치찌개,돈까스,3
+            pop(마지막요소반환) : 3
+            shift(0번인덱스요소뽑기) : 샐러드
+            unshift(0번인덱스에요소추가) : 3,짜장면,김치찌개,돈까스
+            [...lunchMenu, '제육볶음'] : 3,짜장면,김치찌개,돈까스,제육볶음
+            */
 
         });
         
@@ -398,6 +426,15 @@
             area.innerHTML += `splice(특정위치요소삭제) 배열 결과 : ${array} <br>`;
             area.innerHTML += `splice(특정위치요소추가) :${array.splice(1, 0, '내년에')} <br>`;
             area.innerHTML += array;
+
+            /*
+            올해 목표 : 나는,올 해,다이어트,하겠다
+            slice(특정위치요소추출 2, 4) ) : 다이어트,하겠다
+            splice(특정위치요소삭제 1, 1) : 올 해
+            splice(특정위치요소삭제) 배열 결과 array : 나는,다이어트,하겠다
+            splice(특정위치요소추가 1, 0, '내년에') :
+            나는,내년에,다이어트,하겠다
+            */
         }
     </script>
 
@@ -422,8 +459,8 @@
             //console.log(arr);
             // 배열
             area.innerHTML = `${arr} <br>`; // A,P,P,L,E
-            area.innerHTML +=`${arr.join()} <br>`;
-            area.innerHTML +=`${arr.join('')} <br>`;
+            area.innerHTML +=`${arr.join()} <br>`; // A,P,P,L,E
+            area.innerHTML +=`${arr.join('')} <br>`;// APPLE
             // join메소드는 , 를 가지고 문자열로 합쳐주기 떄문에
             // 구분자를 지정해줄 수 있음.
 
@@ -438,7 +475,7 @@
             // 배열을 HTML 요소에 출력할 경우
             // div.innerHTML = arr
             // 자바 : println(참조자료형변수.toString()); : 참조자료형변수 ==> toString() 메소드 결과가 나옴
-            area.innerHTML += arr.toString(); // 자바 동일하게 toString이 찍힘.
+            area.innerHTML += arr.toString(); // 자바 동일하게 toString이 찍힘.  A,P,P,L,E
         }
     </script>
 </body>

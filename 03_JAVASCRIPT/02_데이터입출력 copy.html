@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터입출력</title>
+</head>
+<style>
+    .area{width:500px; height:200px; border:1px solid;}
+</style>
+<body>
+    <h3>다크모드 / 라이트모드</h3>
+    <button onclick="darkMode();">다크모드</button> <button onclick="lightMode();">라이트모드</button>
+    <script>
+        const bodyEl = document.querySelector("body");
+        function darkMode(){
+            bodyEl.style.backgroundColor = "black";
+            bodyEl.style.color = "white";
+        }
+        function lightMode(){
+            bodyEl.style.backgroundColor = "white";
+            bodyEl.style.color = "black";
+        }
+    </script>
+
+
+
+    <h3>증가 / 감소</h3>
+    <div class="quantity">
+        <button class="minus">-</button> <span class="num">0</span> <button class="plus">+</button>
+    </div>
+    <script>
+            document.querySelectorAll(".quantity").forEach(container => {
+                const minusBtn = container.querySelector(".minus");
+                const plusBtn = container.querySelector(".plus");
+                const num = container.querySelector(".num");
+
+                minusBtn.addEventListener("click", () =>{
+                    num.innerText = Number(num.innerText) - 1;
+                });
+
+                plusBtn.addEventListener("click", () =>{
+                    num.innerText = Number(num.innerText) + 1;
+                });
+            });
+    </script>
+
+    <h3>innerHTML / innerText</h3>
+    <button onclick="documentWrite();">출력해줘</button>
+    <div id="area12">
+
+    </div>
+    <script>
+        function documentWrite(){
+            const areaEl = document.getElementById("area12");
+            areaEl.innerHTML = `
+            <table border="1">
+                <tr>
+                    <td>하하</td>
+                    <td>나오지롱</td>
+                </tr>
+            </table>
+            `;
+
+            // areaEl.innerHTML = table;
+        }
+
+    </script>
+
+
+
+    <h3>반복문_출력</h3>
+    <button onclick="promptType();">단순 버튼</button>
+    <ul id="numbers">
+
+    </ul>
+    <script>
+        function promptType(){
+            const num = prompt("숫자를 입력해주세요");
+            const ulEl = document.getElementById("numbers");
+
+            let listHtml = "";
+            for (let i = 0; i < num; i++) {
+                listHtml += `<li>자식${i + 1}</li>`;
+            }
+            ulEl.innerHTML = listHtml;
+        }
+    </script>
+
+
+    <h3>input 요소 객체.value</h3>
+    <input type="text" id="inputTxt"><br>
+    <button id="inputBtn">확인</button>
+    <script>
+        const iptBtn = document.getElementById("inputBtn");
+        iptBtn.addEventListener("click", () =>{
+            const iptTxt = document.getElementById("inputTxt").value;
+            alert(iptTxt);
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

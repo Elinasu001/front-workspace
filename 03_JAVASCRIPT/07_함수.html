@@ -192,7 +192,7 @@
 
             // 내부 함수 반환
             return function naming(name){
-                return `${name}님의 랜덤한 숫자 : ${num}`;
+                return `${name}님의 랜덤한 숫자 : ${num}`; //홍길동님의 랜덤한 숫자 : 10
             }
         }
         // 클로저(Closure) : 외부 함수 실행이 끝나더라도
@@ -207,7 +207,7 @@
             // 반환된 내부 함수 통한 외부 함수 호출 후 변수 사용
             const naming = generateNum();
             console.log(naming);
-            document.getElementById('area6').innerHTML = naming("홍길동");
+            document.getElementById('area6').innerHTML = naming("홍길동"); 
         }
     </script>
 
