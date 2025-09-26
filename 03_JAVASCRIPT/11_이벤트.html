@@ -241,6 +241,7 @@
 
             // 패턴을 만족하는지 검사 => tes();
             if(regExp.test(userId)){
+                alert('조건 만족')
                 return true;
             }
             console.log(regExp);
@@ -248,6 +249,17 @@
 
             alert('조건 만족해야지')
             return false;
+
+
+
+            // const regExp = /^[A-Za-z0-9]{5,12}$/;
+
+            // if(regExp.test(userId)){
+            //     alert("만족");
+            //     return true;
+            // }
+            // alert("만족 안함");
+            // return false;
         }
     </script>
 
