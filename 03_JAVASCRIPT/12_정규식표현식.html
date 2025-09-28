@@ -78,7 +78,7 @@
 
             // 비교할 문자열
             const str = 'javascript jquery ajax';
-
+                                // /a/ : true // /a/ : j*vascript jquery ajax
             area.innerHTML += `/a/ : ${regExp.test(str)} <br>
                                 /a/ : ${str.replace(regExp, '*')} <br>`;
             /*true , j*vascript jquery ajax */
