@@ -54,9 +54,10 @@
             // 비교할 문자열
             const str1 = "samsung lg google kh apple amazon"
             const area = document.getElementById('area1');
-                                                    // true / false
+                                                    // true
             area.innerHTML += `regExp.test(str1) : ${regExp.test(str1)} <br>
-                                ${regExp.test("sfdsfdsdf")}`;
+                                ${regExp.test("sfdsfdsdf")}`;//false
+
 
         };
     </script>
@@ -80,7 +81,7 @@
 
             area.innerHTML += `/a/ : ${regExp.test(str)} <br>
                                 /a/ : ${str.replace(regExp, '*')} <br>`;
-
+            /*true , j*vascript jquery ajax */
 
             // 메타문자
             // 1. ^ : 시작을 의미 => ^= 해당값으로 "시작"하는 경우
@@ -88,27 +89,30 @@
             area.innerHTML += `/^j/ : ${regExp.test(str)} <br>
                                 /^j/ : ${regExp.test("gdfgdfgdf")} <br>`;
                                 // if(str.charAt(0) === 'j')
-            
+                                // true //false
 
             // 2. [] : [] 안에 있는 문자 중 하나라도 존재할 경우
             regExp = /[abc]/; // 문자열 중 a 또는 b 또는 c가 하나라도 존재할 경우
             area.innerHTML += `/[abc]/ : ${regExp.test(str)} <br>
                                 /[abc]/ : ${regExp.test("pppvvvfff")} <br>`;
+                                // true //false
 
             // 문자열의 시작 문자가 j 또는 s 또는 a 인가
             // if(str.charAt(0) === 'j' || str.charAt('0' === 's' || str.charAt(0) === 'A'))
             regExp = /^[jsa]/;
             area.innerHTML += `/^[jsa]/ : ${regExp.test(str)} <br>`;
+                                // true
 
             // 3. $ : 끝을 의미
             regExp = /x$/;
             area.innerHTML += `/x$/ : ${regExp.test(str)} <br>`;
+                                //true
 
             // 시작은 j로 시작하고 끝글자는 x인지
             regExp = /^jx$/;
             area.innerHTML += `/^jx$/ : ${regExp.test(str)} <br>
                                 /^jx$/ : ${regExp.test("jx")} <br>`;
-
+                                // false // true (/^jx$/는 "문자열 전체가 j로 시작해서 x로 끝나는 두 글자 : 자열 전체 길이가 딱 "jx")
             // 4. . : 개행문자를 제외한 모든 문자를 의미(영어, 숫자, 한글, 특문...)
             // 5. + : 한 글자 이상을 의미(0 글자 x)
 
@@ -119,7 +123,7 @@
             regExp = /^[0-9]+$/;
             area.innerHTML += `/^[0-9]+$/ : ${regExp.test(str)}<br>
                                 /^[0-9]$/ : ${regExp.test('1.000')}<br>`;
-
+                                //false //false
 
             // a부터 z까지 A부터 Z까지
             regExp = /^[a-zA-Z]+$/;
@@ -130,11 +134,11 @@
             regExp = /^[a-zA-Z0-9]+$/;
             area.innerHTML += `/^[a-zA-Z0-9]+$/ : ${regExp.test('dwqdqw123')}<br>
                                 /^[a-zA-z0-9]+$/ : ${regExp.test('fewf한fewf')}<br>`;
-
+                                    // true // false
             // 시작부터 끝까지 오로지 한글(자음, 모음, 결합)로만 이루어진 경우
             regExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
             area.innerHTML += `/^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/ : ${regExp.test('가ㅏ나렂ㄷ')} <br>
-                                /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/ : ${regExp.text('fjiewjf')}<br>`;
+                                /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/ : ${regExp.test('fjiewjf')}<br>`;//true //false
         }
     </script>
 
@@ -157,10 +161,10 @@
 
             // 정규표현식 객체
             let regExp = /a/;
-            console.log(str.replace(regExp, 'ㅋㅋㅋ')); // 앞에 a만 바뀜
+            console.log(str.replace(regExp, 'ㅋㅋㅋ')); // 앞에 a만 바뀜 // JㅋㅋㅋvaScript jQuery AJAX
 
             regExp = /a/g;
-            console.log(str.replace(regExp, "ㅋㅋㅋ")); // a가 달린 친구 전역 바뀜
+            console.log(str.replace(regExp, "ㅋㅋㅋ")); // a가 달린 친구 전역 바뀜 // JㅋㅋㅋvㅋㅋㅋScript jQuery AJAX
 
             regExp = /a/ig; // ig순서 상관 없음
             
