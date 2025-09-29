@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="resources/css/lib/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/css/ui/com/header.css"/>
     <title>상업용 풀스크린 스크롤 페이지</title>
 </head>
@@ -91,25 +89,66 @@
         
         <div class="section" id="secondPage">
             <div class="content">
-                <h1>참여형 이벤트</h1>
+                <h1>기록과 성장</h1>
                 <p>함께 도전하고, 인증하며 보상을 받아보세요.</p>
             </div>
         </div>
         
         <div class="section" id="thirdPage">
             <div class="content">
-                <h1>기록과 성장</h1>
-                <p>매일 인증하고 쌓이는 기록이 곧 당신의 성장입니다.</p>
-                <!-- Swiper -->
-                <div id="swiperWrap">
-                    <div class="swiper mySwiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">Slide 1</div>
-                            <div class="swiper-slide">Slide 2</div>
-                            <div class="swiper-slide">Slide 3</div>
-                            <div class="swiper-slide">Slide 9</div>
-                        </div>
-                        <div class="swiper-pagination"></div>
+                <h1>참여형 이벤트</h1>
+                <!-- <p>매일 인증하고 쌓이는 기록이 곧 당신의 성장입니다.</p> -->
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <a  href="#" class="event-card">
+                            <div class="event-banner">
+                                <img src="./assets/images/event/e001.png" alt="썸머 세일 페스타 배너">
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">
+                                <span class="badge">N</span>
+                                <div class="txt">
+                                    <span>썸머 세일 페스타 이벤트</span>
+                                    <span class="d-day">D-294</span>
+                                </div>
+                                </div>
+                                <div class="event-date">2026.03.12 ~ 06.24</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="gallery-item">
+                        <a  href="#" class="event-card">
+                            <div class="event-banner">
+                                <img src="./assets/images/event/e002.png" alt="썸머 세일 페스타 배너">
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">
+                                    <span class="badge">N</span>
+                                    <div class="txt">
+                                        <span>썸머 세일 페스타 이벤트</span>
+                                        <span class="d-day">D-294</span>
+                                    </div>
+                                </div>
+                                <div class="event-date">2026.03.12 ~ 06.24</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="gallery-item">
+                        <a  href="#" class="event-card">
+                            <div class="event-banner">
+                                <img src="./assets/images/event/e003.png" alt="썸머 세일 페스타 배너">
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">
+                                <span class="badge">N</span>
+                                <div class="txt">
+                                        <span>썸머 세일 페스타 이벤트</span>
+                                        <span class="d-day">D-294</span>
+                                    </div>
+                                </div>
+                                <div class="event-date">2026.03.12 ~ 06.24</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -381,16 +420,25 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            pagination: {
-                el: ".swiper-pagination",
-            },
-            loop:true,
-            autoplay: {
-                delay: 2500,
-            },
+
+
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 화면에 들어오면
+                entry.target.classList.add('show');
+            } else {
+                // 화면에서 벗어나면
+                entry.target.classList.remove('show');
+            }
+            });
+        }, {
+            threshold: 0.2
         });
+
+        galleryItems.forEach(item => observer.observe(item));
         
     });
 </script>
