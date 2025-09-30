@@ -39,6 +39,7 @@ body {
     /** 기본 색상 **/
     --primary: #143f71;
     --secondary: #BAD1EC;
+    --etc : #EEEEEE;
 
     --color-1: #111111;
     --color-2: #222222;
@@ -74,6 +75,8 @@ body {
     --btn-txt-disabled: var(--color-2);
     --btn-primary: var(--primary);
     --btn-secondary: var(--secondary);
+    --btn-line : var(--etc);
+
     /* 버튼_하단 */
     --btm-btn-primary: #1C1F4A;
     --btm-btn-secondary:#DADFEA;
@@ -87,7 +90,7 @@ body {
     --ipt-border: var(--color-c);
     --ipt-border-active: var(--active);
     --ipt-border-inactive:var(--color-c);
-    --ipt-bg-inactive: var(--color-f8);
+    --ipt-bg-inactive: var(--color-e);
 
     /* 폼_라디오/체크박스 */
     --rc-txt: var(--color-2);
