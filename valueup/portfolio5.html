@@ -6,9 +6,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/ui/com/header.css"/>
     <script type="text/javascript"  src="../valueup/assets/js/ui/com/header.js"></script>
+    <script type="text/javascript"  src="../valueup/assets/js/ui/com/animation.js"></script>
+    <script type="text/javascript"  src="../valueup/assets/js/ui/com/fullpage.js"></script>
+    <script type="text/javascript"  src="../valueup/assets/js/ui/com/scrollTopBtn.js"></script>
+    <title>valueup</title>
+    <title>valueup</title>
     <title>valueup</title>
 </head>
 <body>
+    <div id="wrap">
+        
     <header>
         <div class="top-bar">
             <div class="inner">
@@ -76,165 +83,169 @@
             </div>
         </nav>
     </header>
-    <div id="full-container">
-        <div class="section" id="firstPage">
-            <div class="content">
-                <h1>오늘의 챌린지</h1>
-                <p>작은 습관이 모여 큰 변화를 만듭니다.</p>
-                <button class="app-link">
-                    <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='25' fill='none' viewBox='0 0 24 25'%3e %3cpath fill='currentColor' d='M19.98 3.058a1 1 0 0 0-.11.01H15a1 1 0 1 0 0 2h2.586L8.293 14.36a1 1 0 1 0 1.414 1.414L19 6.482v2.586a1 1 0 1 0 2 0V4.195a1 1 0 0 0-1.02-1.137ZM5 3.068c-1.093 0-2 .907-2 2v14c0 1.093.907 2 2 2h14c1.093 0 2-.907 2-2v-6a1 1 0 1 0-2 0v6H5v-14h6a1 1 0 1 0 0-2H5Z'/%3e%3c/svg%3e" width="16" height="16" style="filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(110deg) brightness(98%) contrast(108%); opacity: 1;">
-                    앱으로 이동
-                </button>
-            </div>
-        </div>
         
-        <div class="section" id="secondPage">
-            <div class="content">
-                <h1>기록과 성장</h1>
-                <p>함께 도전하고, 인증하며 보상을 받아보세요.</p>
+        <div id="full-container">
+            <div class="section" id="firstPage">
+                <div class="content">
+                    <h1>오늘의 챌린지</h1>
+                    <p>작은 습관이 모여 큰 변화를 만듭니다.</p>
+                    <button class="app-link">
+                        <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='25' fill='none' viewBox='0 0 24 25'%3e %3cpath fill='currentColor' d='M19.98 3.058a1 1 0 0 0-.11.01H15a1 1 0 1 0 0 2h2.586L8.293 14.36a1 1 0 1 0 1.414 1.414L19 6.482v2.586a1 1 0 1 0 2 0V4.195a1 1 0 0 0-1.02-1.137ZM5 3.068c-1.093 0-2 .907-2 2v14c0 1.093.907 2 2 2h14c1.093 0 2-.907 2-2v-6a1 1 0 1 0-2 0v6H5v-14h6a1 1 0 1 0 0-2H5Z'/%3e%3c/svg%3e" width="16" height="16" style="filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(110deg) brightness(98%) contrast(108%); opacity: 1;">
+                        앱으로 이동
+                    </button>
+                </div>
             </div>
-        </div>
-        
-        <div class="section" id="thirdPage">
-            <div class="content">
-                <h1>참여형 이벤트</h1>
-                <!-- <p>매일 인증하고 쌓이는 기록이 곧 당신의 성장입니다.</p> -->
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <a  href="#" class="event-card">
-                            <div class="event-banner">
-                                <img src="./assets/images/event/e001.png" alt="썸머 세일 페스타 배너">
-                            </div>
-                            <div class="event-info">
-                                <div class="event-title">
-                                <span class="badge">N</span>
-                                <div class="txt">
-                                    <span>썸머 세일 페스타 이벤트</span>
-                                    <span class="d-day">D-294</span>
+            
+            <div class="section" id="secondPage">
+                <div class="content">
+                    <h1>기록과 성장</h1>
+                    <p>함께 도전하고, 인증하며 보상을 받아보세요.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="thirdPage">
+                <div class="content">
+                    <h1>참여형 이벤트</h1>
+                    <!-- <p>매일 인증하고 쌓이는 기록이 곧 당신의 성장입니다.</p> -->
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <a  href="#" class="event-card">
+                                <div class="event-banner">
+                                    <img src="./assets/images/event/e001.png" alt="썸머 세일 페스타 배너">
                                 </div>
-                                </div>
-                                <div class="event-date">2026.03.12 ~ 06.24</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="gallery-item">
-                        <a  href="#" class="event-card">
-                            <div class="event-banner">
-                                <img src="./assets/images/event/e002.png" alt="썸머 세일 페스타 배너">
-                            </div>
-                            <div class="event-info">
-                                <div class="event-title">
+                                <div class="event-info">
+                                    <div class="event-title">
                                     <span class="badge">N</span>
                                     <div class="txt">
                                         <span>썸머 세일 페스타 이벤트</span>
                                         <span class="d-day">D-294</span>
                                     </div>
-                                </div>
-                                <div class="event-date">2026.03.12 ~ 06.24</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="gallery-item">
-                        <a  href="#" class="event-card">
-                            <div class="event-banner">
-                                <img src="./assets/images/event/e003.png" alt="썸머 세일 페스타 배너">
-                            </div>
-                            <div class="event-info">
-                                <div class="event-title">
-                                <span class="badge">N</span>
-                                <div class="txt">
-                                        <span>썸머 세일 페스타 이벤트</span>
-                                        <span class="d-day">D-294</span>
                                     </div>
+                                    <div class="event-date">2026.03.12 ~ 06.24</div>
                                 </div>
-                                <div class="event-date">2026.03.12 ~ 06.24</div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+                        <div class="gallery-item">
+                            <a  href="#" class="event-card">
+                                <div class="event-banner">
+                                    <img src="./assets/images/event/e002.png" alt="썸머 세일 페스타 배너">
+                                </div>
+                                <div class="event-info">
+                                    <div class="event-title">
+                                        <span class="badge">N</span>
+                                        <div class="txt">
+                                            <span>썸머 세일 페스타 이벤트</span>
+                                            <span class="d-day">D-294</span>
+                                        </div>
+                                    </div>
+                                    <div class="event-date">2026.03.12 ~ 06.24</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="gallery-item">
+                            <a  href="#" class="event-card">
+                                <div class="event-banner">
+                                    <img src="./assets/images/event/e003.png" alt="썸머 세일 페스타 배너">
+                                </div>
+                                <div class="event-info">
+                                    <div class="event-title">
+                                    <span class="badge">N</span>
+                                    <div class="txt">
+                                            <span>썸머 세일 페스타 이벤트</span>
+                                            <span class="d-day">D-294</span>
+                                        </div>
+                                    </div>
+                                    <div class="event-date">2026.03.12 ~ 06.24</div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="section" id="fourthPage">
+                <div class="content">
+                    <h1>포인트 리워드</h1>
+                    <p>성공적인 도전을 마치면 포인트와 성취감을 동시에!</p>
+                </div>
+                <footer class="site-footer">
+                    <p>&copy; 2025 ValueUp Challenge. All rights reserved.</p>
+                </footer>
             </div>
         </div>
         
-        <div class="section" id="fourthPage">
-            <div class="content">
-                <h1>포인트 리워드</h1>
-                <p>성공적인 도전을 마치면 포인트와 성취감을 동시에!</p>
-            </div>
-            <footer class="site-footer">
-                <p>&copy; 2025 ValueUp Challenge. All rights reserved.</p>
-            </footer>
-        </div>
-    </div>
-    
-    <aside id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mobileMenuTitle">
-        <div class="backdrop" data-close="backdrop"></div>
-        <div class="sheet">
-            <header>
-                <h2 id="mobileMenuTitle" style="margin:0;font-size:18px;">전체 메뉴</h2>
-                <button type="button" class="close" id="mobileClose">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-x close-icon">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
+        <aside id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mobileMenuTitle">
+            <div class="backdrop" data-close="backdrop"></div>
+            <div class="sheet">
+                <header>
+                    <h2 id="mobileMenuTitle" style="margin:0;font-size:18px;">전체 메뉴</h2>
+                    <button type="button" class="close" id="mobileClose">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-x close-icon">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
 
-                </button>
-            </header>
-            <nav aria-label="전체 메뉴">
-                <div class="top-bar">
-                    <div class="inner">
-                        <div class="auth-links">
-                        <a href="#login" class="btn-login line">로그인</a>
-                        <a href="#signup" class="btn-signup">회원가입</a>
+                    </button>
+                </header>
+                <nav aria-label="전체 메뉴">
+                    <div class="top-bar">
+                        <div class="inner">
+                            <div class="auth-links">
+                            <a href="#login" class="btn-login line">로그인</a>
+                            <a href="#signup" class="btn-signup">회원가입</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <ul style="list-style:none; margin:0; padding:0">
-                    <li class="m-acc">
-                        <button class="m-acc-btn" aria-expanded="false">공지사항</button>
-                        <div class="m-acc-panel m-sub">
-                            <a href="#">공지사항 등록</a>
-                            <a href="#">공지사항 목록조회</a>
-                            <a href="#">공지사항 수정/삭제</a>
-                        </div>
-                    </li>
-                    <li class="m-acc">
-                        <button class="m-acc-btn" aria-expanded="false">일반게시판</button>
-                        <div class="m-acc-panel m-sub">
-                            <a href="#">게시글 작성</a>
-                            <a href="#">게시글 목록조회</a>
-                            <a href="#">게시글 수정/삭제</a>
-                        </div>
-                    </li>
-                    <li class="m-acc">
-                        <button class="m-acc-btn" aria-expanded="false">사진게시판</button>
-                        <div class="m-acc-panel m-sub">
-                            <a href="#">사진게시글 작성</a>
-                            <a href="#">사진게시글 목록조회</a>
-                        </div>
-                    </li>
-                    <li class="m-acc">
-                        <button class="m-acc-btn" aria-expanded="false">회원서비스</button>
-                        <div class="m-acc-panel m-sub">
-                            <a href="#">내정보 변경</a>
-                            <a href="#">회원탈퇴</a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </aside>
+                    <ul style="list-style:none; margin:0; padding:0">
+                        <li class="m-acc">
+                            <button class="m-acc-btn" aria-expanded="false">공지사항</button>
+                            <div class="m-acc-panel m-sub">
+                                <a href="#">공지사항 등록</a>
+                                <a href="#">공지사항 목록조회</a>
+                                <a href="#">공지사항 수정/삭제</a>
+                            </div>
+                        </li>
+                        <li class="m-acc">
+                            <button class="m-acc-btn" aria-expanded="false">일반게시판</button>
+                            <div class="m-acc-panel m-sub">
+                                <a href="#">게시글 작성</a>
+                                <a href="#">게시글 목록조회</a>
+                                <a href="#">게시글 수정/삭제</a>
+                            </div>
+                        </li>
+                        <li class="m-acc">
+                            <button class="m-acc-btn" aria-expanded="false">사진게시판</button>
+                            <div class="m-acc-panel m-sub">
+                                <a href="#">사진게시글 작성</a>
+                                <a href="#">사진게시글 목록조회</a>
+                            </div>
+                        </li>
+                        <li class="m-acc">
+                            <button class="m-acc-btn" aria-expanded="false">회원서비스</button>
+                            <div class="m-acc-panel m-sub">
+                                <a href="#">내정보 변경</a>
+                                <a href="#">회원탈퇴</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
 
-    <button id="scrollToTopBtn" title="맨 위로">↑</button>
+        <button id="scrollToTopBtn" title="맨 위로">↑</button>
 
-    <ul id="pagination"></ul>
-
+        <ul id="pagination"></ul>
+    </div>
 </body>
+
+
+
 </html>
