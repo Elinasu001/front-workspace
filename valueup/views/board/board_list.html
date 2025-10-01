@@ -30,6 +30,7 @@
     <script type="module" src="../../assets/js/ui/com/fake_select.js"></script>
     <script type="module" src="../../assets/js/ui/com/popup.js"></script>
     <script type="text/javascript" src="../../assets/js/ui/com/header.js"></script>
+    <script type="text/javascript" src="../../assets/js/ui/com/scrollTopBtn.js"></script>
 
 
     <title>자유 게시판</title>
@@ -113,7 +114,7 @@
                 <div class="inner">
                     <h2 class="sec-tit"><img src="../../assets/images/Icon.png" class="upicon">자유 게시판</h2>
                     
-                    <div class="form-group mt60">
+                    <div class="form-group mt60 searchBd">
                         <div class="flex-row gap5">
                             <div class="col col-4">
                                 <div id="phn-first" class="se-select" data-stove="select" data-uicase="slide">
@@ -135,52 +136,111 @@
                         </div>
                     </div>
                     
-                    <div class="btn-sec mt60">
+                    <div class="btn-sec mt30">
                         <button class="btn-sm">글쓰기</button>
                     </div>
-                    <div class="table-type1">
-                        <table>
-                            <caption>자유 게시판- 번호, 카테고리, 작성자, 제목, 작성일, 조회수</caption>
-                            <colgroup>
-                                <col width="10%">
-                                <col width="20%">
-                                <col width="20%">
-                                <col width="30%">
-                                <col width="20%">
-                                <col width="10%">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th scope="row">번호</th>
-                                    <th scope="row">카테고리</th>
-                                    <th scope="row">작성자</th>
-                                    <th scope="row">제목</th>
-                                    <th scope="row">작성일</th>
-                                    <th scope="row">조회수</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>43</td>
-                                    <td>css</td>
-                                    <td>망아지3</td>
-                                    <td>가가가가가가가</td>
-                                    <td>2025-10-01</td>
-                                    <td>10</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="table-wrap">
+                        <div class="table-type1 ft-sticky">
+                            <table>
+                                <caption>자유 게시판- 번호, 카테고리, 작성자, 제목, 작성일, 조회수</caption>
+                                <colgroup>
+                                    <col width="10%">
+                                    <col width="20%">
+                                    <col width="20%">
+                                    <col width="30%">
+                                    <col width="20%">
+                                    <col width="10%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th scope="row">번호</th>
+                                        <th scope="row">카테고리</th>
+                                        <th scope="row">작성자</th>
+                                        <th scope="row">제목</th>
+                                        <th scope="row">작성일</th>
+                                        <th scope="row">조회수</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>css</td>
+                                        <td>망아지3</td>
+                                        <td>가가가가가가가</td>
+                                        <td>2025-10-01</td>
+                                        <td>10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div id="paging_div" class="pagination-wrap">
-                    <div class="pagination">
-                        <a class="btn-circle prevDb nb ir" href="javascript:pageFunc.selectNoticeList(1)">이전</a>
-                        <a class="btn-circle prev nb ir" href="javascript:pageFunc.selectNoticeList(1)">이전</a>
-                        <ul>
-                            <li><a href="#" onclick="pageFunc.selectNoticeList(1)" class="btn-circle nb">1</a></li>
-                            <li><a href="#" onclick="pageFunc.selectNoticeList(2)" class="btn-circle nb active" title="현재페이지">2</a></li>
-                        </ul>
-                        <a class="btn-circle next nb ir" href="javascript:pageFunc.selectNoticeList(3)">다음</a>
-                        <a class="btn-circle nextDb nb ir" href="javascript:pageFunc.selectNoticeList(3)">다음</a>
+                        <div class="pagination">
+                            <a class="btn-circle prevDb nb ir" href="javascript:pageFunc.selectNoticeList(1)">이전</a>
+                            <a class="btn-circle prev nb ir" href="javascript:pageFunc.selectNoticeList(1)">이전</a>
+                            <ul>
+                                <li><a href="#" onclick="pageFunc.selectNoticeList(1)" class="btn-circle nb">1</a></li>
+                                <li><a href="#" onclick="pageFunc.selectNoticeList(2)" class="btn-circle nb active" title="현재페이지">2</a></li>
+                            </ul>
+                            <a class="btn-circle next nb ir" href="javascript:pageFunc.selectNoticeList(3)">다음</a>
+                            <a class="btn-circle nextDb nb ir" href="javascript:pageFunc.selectNoticeList(3)">다음</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -248,6 +308,9 @@
         </aside>
 
         <button id="scrollToTopBtn" title="맨 위로">↑</button>
+        <footer class="site-footer">
+            <p>&copy; 2025 ValueUp Challenge. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 </html>

@@ -27,12 +27,6 @@
     
 </head>
 
-<style>
-    .contArea.login { background-color: #f8f8f8; }
-    .loginArea { display: flex; justify-content: center; align-items: center; height:100%;   }
-    .loginArea form { background-color: #ffffff; display: flex;  border-radius: 5px; flex-direction:column; justify-content:space-between;  width:400px; padding:20px;  box-shadow: 2px 3px 10px rgb(0, 0, 0, 0.2);}
-    .upicon {width:24px; height:24px; margin-right:10px;}
-</style>
 <body>
     <div class="wrap">
         <header>
@@ -48,7 +42,7 @@
                 
                 <div class="inner">
                     <a href="#" class="logo" aria-label="홈으로">
-                        <img src="./assets/images/logo.png" alt="">
+                        <img src="../../assets/images/logo.png" alt="">
                         <span>valueup</span>
                     </a>
 
@@ -103,7 +97,7 @@
             </nav>
         </header>
 
-        <div class="contentWrap">
+        <div class="contentWrap form">
             <div class="contArea login">
                 <div class="loginArea">
                     <form action="signUp">
@@ -112,27 +106,27 @@
                             <div class="form-group"><!-- user-invalid -->
                                 <label for="userId" class="essential">아이디</label>
                                 <input id="userId" type="text" name="userId" maxlength="14" required class="form-control" placeholder="아이디">
-                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                                <p class="feedback">아이디를 입력해주세요</p>
                             </div>
                             <div class="form-group"><!-- user-invalid -->
                                 <label for="userPwd" class="essential">비밀번호</label>
                                 <input id="userPwd" type="password" name="userPwd" size="17" maxlength="30" required class="form-control" placeholder="아이디">
-                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                                <p class="feedback">비밀번호를 입력해주세요</p>
                             </div>
                             <div class="form-group"><!-- user-invalid -->
                                 <label for="userPwdChk" class="essential">비밀번호 재확인</label>
                                 <input id="userPwdChk" type="password" size="17" maxlength="30" required  class="form-control" placeholder="아이디">
-                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                                <p class="feedback">비밀번호 재확인해주세요</p>
                             </div>
                             <div class="form-group"><!-- user-invalid -->
                                 <label for="userName" class="essential">이름</label>
                                 <input id="userName" type="text" name="userName" required class="form-control" placeholder="이름">
-                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                                <p class="feedback">이름를 입력해주세요</p>
                             </div>
                             <div class="form-group"><!-- user-invalid -->
                                 <label for="userEmail" class="essential">이메일</label>
                                 <input id="userEmail" type="email" name="email" required class="form-control" placeholder="이메일">
-                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                                <p class="feedback">이메일를 입력해주세요</p>
                             </div>
                             
                         </div>
@@ -206,6 +200,10 @@
         </aside>
 
         <button id="scrollToTopBtn" title="맨 위로">↑</button>
+
+        <footer class="site-footer">
+            <p>&copy; 2025 ValueUp Challenge. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 </html>
