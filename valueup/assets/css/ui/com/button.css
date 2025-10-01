@@ -31,12 +31,15 @@ button.btn:focus-visible{ outline: 1px solid var(--outline); outline-offset:2px;
 /** 컨텐츠 버튼 **/
 .btn-area { gap:10px; }
 .btn-area .btn { height:45px; }
+.btn-sec { display:flex; justify-content: flex-end; margin-bottom:16px;}
+
 /* 버튼 */
 .btm-btn-area .btn:disabled,
 .btn:disabled { background-color: var(--btn-disabled); cursor: not-allowed; color: var(--btn-txt-disabled); }
 .btn-primary { background-color: var(--btn-primary); color: var(--white); }
 .btn-secondary { background-color: var(--btn-secondary); }
 .btn-line { background-color: var(--btn-line); text-decoration: underline; }
+.btn-sm { padding: 10px 20px; background-color: var(--btn-primary);; color:var(--white); border-radius: 4px;}
 
 /** 하단 버튼 **/
 .btmWrap .btm-btn-area { padding: 16px calc(constant(safe-area-inset-bottom) + 16px); padding: 16px calc(env(safe-area-inset-bottom) + 16px);  }

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="../../assets/css/lib/ui-lib.css" >
+    <link rel="stylesheet" href="../../assets/css/ui/com/input.css">
+    <link rel="stylesheet" href="../../assets/css/ui/com/button.css">
+    <link rel="stylesheet" href="../../assets/css/ui/com/common.css">
+    <link rel="stylesheet" href="../../assets/css/ui/com/layout.css">
+    <link rel="stylesheet" href="../../assets/css/ui/com/default.css">
+    <link rel="stylesheet" href="../../assets/css/ui/com/style.css">
+    <link rel="stylesheet" href="../../assets/css/ui/com/header.css"/>
+    
+    
+    <script type="text/javascript" src="../../assets/js/lib/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../../assets/js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/lib/ui_plugin.js"></script>
+    <script type="text/javascript" src="../../assets/js/lib/swiper-bundle.min.js"></script>
+    <script type="module" src="../../assets/js/ui/com/ui-util.js"></script>
+    <script type="text/javascript" src="../../assets/js/ui/com/header.js"></script>
+
+    <title>상업용 풀스크린 스크롤 페이지</title>
+    
+</head>
+
+<style>
+    .contArea.login { background-color: #f8f8f8; }
+    .loginArea { display: flex; justify-content: center; align-items: center; height:100%;   }
+    .loginArea form { background-color: #ffffff; display: flex;  border-radius: 5px; flex-direction:column; justify-content:space-between;  width:400px; padding:20px;  box-shadow: 2px 3px 10px rgb(0, 0, 0, 0.2);}
+    .upicon {width:24px; height:24px; margin-right:10px;}
+</style>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="top-bar">
+                <div class="inner">
+                    <div class="auth-links">
+                        <a href="#login" class="btn-login line">로그인</a>
+                        <a href="#signup" class="btn-signup">회원가입</a>
+                    </div>
+                </div>
+            </div>
+            <nav id="gnbFull" aria-label="주요 메뉴">
+                
+                <div class="inner">
+                    <a href="#" class="logo" aria-label="홈으로">
+                        <img src="./assets/images/logo.png" alt="">
+                        <span>valueup</span>
+                    </a>
+
+                    <ul class="menu-list" role="menubar">
+                        
+                        <li class="menu-item" role="none">
+                            <a href="#secondPage" role="menuitem" aria-haspopup="true" aria-expanded="false">공지사항</a>
+                            <div class="menu-sub" role="menu" aria-label="공지사항 하위메뉴">
+                                <ul>
+                                    <li><a href="#">공지사항 등록</a></li>
+                                    <li><a href="#">공지사항 목록조회</a></li>
+                                    <li><a href="#">공지사항 수정/삭제</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item" role="none">
+                            <a href="#thirdPage" role="menuitem" aria-haspopup="true" aria-expanded="false">일반게시판</a>
+                            <div class="menu-sub" role="menu" aria-label="일반게시판 하위메뉴">
+                                <ul>
+                                    <li><a href="#">게시글 작성</a></li>
+                                    <li><a href="#">게시글 목록조회</a></li>
+                                    <li><a href="#">게시글 수정/삭제</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item" role="none">
+                                <a href="#thirdPage" role="menuitem" aria-haspopup="true" aria-expanded="false">사진게시판</a>
+                                <div class="menu-sub" role="menu" aria-label="사진게시글 하위메뉴">
+                                    <ul>
+                                        <li><a href="#">사진게시글 작성</a></li>
+                                        <li><a href="#">사진게시글 목록조회</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        <li class="menu-item" role="none">
+                            <a href="#firstPage" role="menuitem" aria-haspopup="true" aria-expanded="false">회원서비스</a>
+                            <div class="menu-sub" role="menu" aria-label="회원서비스 하위메뉴">
+                                <ul>
+                                    <li><a href="#">내정보변경</a></li>
+                                    <li><a href="#">회원탈퇴</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="hamburger-container">
+                        <button id="btnMobileMenu" class="hamburger" aria-label="전체 메뉴 열기" aria-controls="mobileMenu" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu hamburger-icon"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="contentWrap">
+            <div class="contArea login">
+                <div class="loginArea">
+                    <form action="signUp">
+                        <div class="form-wrap">
+                            <h3><img src="../../assets/images/Icon.png" class="upicon">회원가입</h3>
+                            <div class="form-group"><!-- user-invalid -->
+                                <label for="userId" class="essential">아이디</label>
+                                <input id="userId" type="text" name="userId" maxlength="14" required class="form-control" placeholder="아이디">
+                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                            </div>
+                            <div class="form-group"><!-- user-invalid -->
+                                <label for="userPwd" class="essential">비밀번호</label>
+                                <input id="userPwd" type="password" name="userPwd" size="17" maxlength="30" required class="form-control" placeholder="아이디">
+                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                            </div>
+                            <div class="form-group"><!-- user-invalid -->
+                                <label for="userPwdChk" class="essential">비밀번호 재확인</label>
+                                <input id="userPwdChk" type="password" size="17" maxlength="30" required  class="form-control" placeholder="아이디">
+                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                            </div>
+                            <div class="form-group"><!-- user-invalid -->
+                                <label for="userName" class="essential">이름</label>
+                                <input id="userName" type="text" name="userName" required class="form-control" placeholder="이름">
+                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                            </div>
+                            <div class="form-group"><!-- user-invalid -->
+                                <label for="userEmail" class="essential">이메일</label>
+                                <input id="userEmail" type="email" name="email" required class="form-control" placeholder="이메일">
+                                <p class="feedback">유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다. 유효하지 않을 경우 사용합니다.</p>
+                            </div>
+                            
+                        </div>
+                        <div class="btn-area mt30">
+                            <button type="button" class="btn btn-primary">회원가입</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <aside id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mobileMenuTitle">
+            <div class="backdrop" data-close="backdrop"></div>
+            <div class="sheet">
+                <header>
+                    <h2 id="mobileMenuTitle" style="margin:0;font-size:18px;">전체 메뉴</h2>
+                    <button type="button" class="close" id="mobileClose">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-x close-icon">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+
+                    </button>
+                </header>
+                <nav aria-label="전체 메뉴">
+                    <div class="top-bar">
+                        <div class="inner">
+                            <div class="auth-links">
+                            <a href="#login" class="btn-login line">로그인</a>
+                            <a href="#signup" class="btn-signup">회원가입</a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul style="list-style:none; margin:0; padding:0">
+                        <li class="m-acc">
+                            <button class="m-acc-btn" aria-expanded="false">마이페이지</button>
+                            <div class="m-acc-panel m-sub">
+                                <a href="#">인사말</a>
+                                <a href="#">연혁</a>
+                                <a href="#">오시는 길</a>
+                            </div>
+                        </li>
+                        <li class="m-acc">
+                            <button class="m-acc-btn" aria-expanded="false">제품</button>
+                            <div class="m-acc-panel m-sub">
+                                <a href="#">AI 서비스</a>
+                                <a href="#">클라우드</a>
+                                <a href="#">보안 솔루션</a>
+                            </div>
+                        </li>
+                        <li class="m-acc">
+                            <button class="m-acc-btn" aria-expanded="false">고객지원</button>
+                            <div class="m-acc-panel m-sub">
+                                <a href="#">공지사항</a>
+                                <a href="#">자료실</a>
+                                <a href="#">문의하기</a>
+                            </div>
+                        </li>
+                        <li><a class="m-link" href="#">블로그</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <button id="scrollToTopBtn" title="맨 위로">↑</button>
+    </div>
+</body>
+</html>
+
+
+

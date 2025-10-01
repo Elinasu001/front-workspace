@@ -41,3 +41,24 @@ tbody tr td:first-child { border-left: none; border-top: none;}
 
 .tbl-l { border-left:1px solid var(--tbl-border) !important; }
 .tbl-r { border-right:1px solid vaR(--tbl-border) !important; }
+
+.table-type1 {width: 100%; overflow-x: auto; border-top:1px solid #333;}
+.table-type1 table {min-width: 800px;; border-collapse: collapse; }
+.table-type1 tbody tr:hover td{ background-color: #e9ecef; cursor: pointer; }
+
+/* pagination */
+.pagination-wrap { display:block; height:45px; margin:40px auto; text-align:center; }
+.pagination { display:inline-block; }
+.pagination > a { float:left; }
+.pagination ul { float:left; margin:0px 10px; }
+.pagination ul li { float:left; }
+.pagination ul li + li { margin-left:4px; }
+.pagination a { display: inline-block; width:44px; height:44px; line-height:44px; }
+.pagination a:hover, .pagination a:focus { background-color:transparent; }
+.pagination a.active { height:44px; line-height:42px; font-weight:600; color:#005EFF; border-radius: 50%; }
+.pagination a.active:hover,.pagination a.active:focus { height:44px; line-height:42px; background:#EEEBFF; }
+.pagination a.prev { background:url(../../../images/com/pag_prev.svg) no-repeat center; }
+.pagination a.prevDb { background:url(../../../images/com/pag_prev_db.svg) no-repeat center;  }
+.pagination a.next { background:url(../../../images/com/pag_next.svg) no-repeat center; }
+.pagination a.nextDb { background:url(../../../images/com/pag_next_db.svg) no-repeat center; }
+    

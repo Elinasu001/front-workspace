@@ -1,0 +1,62 @@
+/*---------------------------------------------
+    #팝업 레이아웃 :: layerPopup > z-index:110; ;
+---------------------------------------------*/
+.layerPopup { z-index:110;  display:none; flex-direction: column; position: fixed; top:0; left:0; background-color: var(--white); overflow: hidden; width:100%; visibility: hidden; opacity: 0; transition: opacity 0.3s ease;}
+.layerPopup .pop-area:focus-visible { outline: 2px solid var(--outline); outline-offset: -2px; }
+.layerPopup.btmSheet.toggleUp .pop-header:focus-visible { outline: 2px solid var(--outline); outline-offset: -4px; }
+/* 팝업_헤더 */
+.layerPopup .pop-header {/* position: fixed; top: 0; left:0;*/ display:flex; justify-content:center; align-items:center; z-index: 110; width:100%; height:60px; line-height: 60px; padding:0 1rem; background-color: var(--white); }
+/* .layerPopup.full.on .pop-header { position:fixed; } */
+.layerPopup .pop-header .left,
+.layerPopup .right { position: absolute; z-index:111;}
+.layerPopup .pop-header .left { left:1rem; }
+.layerPopup .right { top:0; right:1rem; }
+.layerPopup .pop-header .pop-tit { font-size:var( --font18); font-weight: var(--font-w-b); }
+
+.layerPopup .btn.btn-back,
+.layerPopup .btn.btn-close {width:40px; height:60px; }
+.layerPopup .btn.btn-back { background: var(--ico-back) no-repeat 100%/40px auto; }
+.layerPopup .btn.btn-close { background: var(--ico-close) no-repeat 100%/40px auto; }
+.layerPopup .btn.btn-back.login { background: var(--ico-back) no-repeat left -11px center/40px auto; padding-left:40px; }
+
+/* 팝업_콘텐츠 */
+.layerPopup .pop-con-wrap { width:auto; height:100%; padding:0 1rem; overflow-y: auto; background-color: var(--white); }
+.layerPopup.on { display:block; visibility: visible;  opacity: 1; }/*스크립트 :: display:block; 방지*/
+.layerPopup .pop-header.on,
+.pop-btm-wrap.on { box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); }/*스크립트 :: 스크롤*/
+/* 팝업_풀팝업 */
+.layerPopup.full > .pop-area { display: flex; flex-direction: column; height:100dvh; }
+.layerPopup.full .pop-con-wrap { /*padding-top:60px;*/ flex:1 1 auto; }
+.layerPopup.full { display:initial;  min-height:auto;}
+/* 팝업_바텀팝업 */
+.layerPopup.btmSheet { display:initial; top:initial; bottom:-100%; min-height:auto; transition:bottom 0.2s ease-in-out; }
+.layerPopup.btmSheet .pop-area { border-radius: 30px 30px 0 0; overflow: hidden; background-color: var(--white); }
+.layerPopup.btmSheet .pop-header .left { left:1rem; }
+.layerPopup.btmSheet.on { bottom:0; }
+.layerPopup.full.on::before,
+.layerPopup.btmSheet.on::before,
+.layerPopup.modal.on::before { content: ''; position:fixed; top:0; left:0; width:100%; height:100%; background-color: var(--dim); z-index:-1; }
+.layerPopup.btmSheet .pop-header { position: initial; }
+.layerPopup.btmSheet .pop-con-wrap { padding:20px;  min-height:auto; }
+/* 팝업_바텀팝업_toggleUp */
+.layerPopup.full.on .layerPopup.btmSheet.toggleUp { bottom:0; }
+.layerPopup.btmSheet.toggleUp { /*bottom:0;*/ border-radius: 30px 30px 0 0; box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.08); }
+.layerPopup.btmSheet.toggleUp.active::before { content: ''; position:fixed; top:0; left:0; width:100%; height:100%;  background-color:var(--white-dim); z-index:-1; }
+.layerPopup.btmSheet.toggleUp .pop-header {  position: relative; height:60px; border-radius: 30px 30px 0 0; }
+.layerPopup.btmSheet.toggleUp .pop-header .btn.btn-close { z-index:110; position: initial; width:100%; background-color: var(--color-d); mask-image: var(--ico-close-toggle); mask-size: 34px auto; mask-repeat:no-repeat; mask-position: center; --webkit-mask-image:var(--ico-close-toggle);  --webkit-mask-size: 34px auto; --webkit-mask-repeat:no-repeat; --webkit-mask-positon:center; }
+.layerPopup.btmSheet.toggleUp.active .pop-header .btn.btn-close { transform: rotate(180deg); }
+.layerPopup.btmSheet.toggleUp .pop-header .btn.btn-close:focus-visible { background-color: var(--outline); }
+.layerPopup.btmSheet.toggleUp .pop-con-wrap { max-height: 16px; overflow-y: hidden; transition: max-height 0.2s ease-in-out; }
+.layerPopup.btmSheet.toggleUp.active .pop-con-wrap { height:100%; max-height:370px; overflow-y: auto; }
+.layerPopup.btmSheet.toggleUp { visibility: visible; opacity: 1; display:initial; top:initial; bottom:-100%; min-height:auto; transition:bottom 0.2s ease-in-out; }
+.layerPopup.btmSheet.toggleUp.on { bottom:0; }
+
+/* 팝업_모달팝업*/
+.layerPopup.modal .pop-area { position:fixed !important; width:85%; height:auto; top:50%; left:50%; transform: translate(-50%, -50%); border-radius: 10px; overflow:hidden; background-color: var(--white);}
+.layerPopup.modal .pop-tit { font-size:var( --font18); font-weight: var(--font-w-b);}
+.layerPopup.modal .pop-con-wrap { padding:20px; }
+/* 전체메뉴 */
+.layerPopup.full.allMenu { display:initial; left:100%; bottom:0; transition:left 0.3s ease-in-out; }
+.layerPopup.full.allMenu .pop-header { left:100%; transition:left 0.3s ease-in-out; }
+.layerPopup.full.allMenu.on,
+.layerPopup.full.allMenu.on .pop-header { left:0; }
