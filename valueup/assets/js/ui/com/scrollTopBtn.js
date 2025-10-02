@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const container = document.getElementById('full-container');
+
+    const container = document.getElementById('#wrap');
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    
     if (!container || !scrollToTopBtn) return;
 
     function toggleScrollTopButton() {

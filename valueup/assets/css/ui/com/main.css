@@ -1,11 +1,12 @@
+html {overflow:hidden;}
 /* 풀스크린 섹션 컨테이너 */
 #full-container {
     display: flex;
     flex-direction: column;
-    /* width: 100dvw; */
-    height: calc(100dvh - 100px);
+    width: 100%;
+    height: calc(100dvh - 115px);
     overflow-y: scroll;
-    scroll-snap-type: y mandatory; /* 스크롤 스냅 */
+    scroll-snap-type: y mandatory;
 }
 
 /* 개별 섹션 스타일 */
@@ -243,7 +244,7 @@
     }
 
     #full-container{
-        height:calc(100dvh - 60px);
+        /* height:calc(100dvh - 60px); */
     }
     #pagination {
         display: none;
