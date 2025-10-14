@@ -150,7 +150,7 @@ div.toggle-box input[type="checkbox"]:checked::before { left:auto; right:3px; }
 /* .contArea.login { background-color: #f8f8f8; } */
 .loginArea { display: flex; justify-content: center; align-items: center; height:100%; background-image: url(../../../images/com/bg_login.png); background-repeat: no-repeat; background-size: 400px; background-position: center top calc(50% + 2px);   }
 .loginArea form { background-color: #ffffff; display: flex;  border-radius: 5px; flex-direction:column; justify-content:space-between;  width:400px; padding:20px;  box-shadow: 2px 3px 10px rgb(0, 0, 0, 0.2);}
-.loginArea h3 { color:#244190; }
+.loginArea h3 { color:#244190; padding-bottom:1rem;}
 .loginArea h3 .flag { margin-left:10px; padding:3px 8px; border-radius: 5px; font-size:var(--font14); color:var(--color-6); background-color: var(--color-d); }
 
 
