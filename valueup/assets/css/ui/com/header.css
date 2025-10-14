@@ -281,6 +281,15 @@ background-color: #eef4ff;
     border-bottom: 1px solid #eee;
 }
 
+#mobileMenu .top-bar .inner {
+	padding:0;
+}
+
+#mobileMenu .auth-links {
+     justify-self: flex-end;
+}
+   
+
 #mobileMenu .close {
     border: 0;
     background: white;
@@ -292,9 +301,11 @@ background-color: #eef4ff;
 }
 
 #mobileMenu nav {
-    padding: 8px 16px 20px;
+    padding: 1rem;
     overflow: auto;
 }
+
+
 
 /* 모바일 아코디언 */
 .m-acc {
@@ -364,19 +375,17 @@ background-color: #eef4ff;
 
 /* 모바일(<=960px)*/
 @media (max-width: 960px) {
-
+	
     header .top-bar {
         display: none;
     }
-    header #gnbFull .menu-list {
+    
+    #gnbFull .menu-list {
         display: none;
     }
-
-    header #mobileMenu  .top-bar {
+    
+    #mobileMenu .top-bar {
         display: block;
-    }
-    header #mobileMenu .auth-links {
-        justify-self: flex-end;
     }
     
     header .hamburger {
@@ -384,6 +393,6 @@ background-color: #eef4ff;
         align-items: center;
         justify-content: center;
     }
-    
+        
 }
 

@@ -244,7 +244,7 @@ html {overflow:hidden;}
     }
 
     #full-container{
-        /* height:calc(100dvh - 60px); */
+        height:calc(100dvh - 60px);
     }
     #pagination {
         display: none;

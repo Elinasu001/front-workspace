@@ -63,8 +63,9 @@ input.form-control.ipt-pd-r { padding:0 32px 0 15px; }
 .ir { overflow:hidden; text-indent:100%; white-space:nowrap; }
 
 /* 아이콘 */
-.upicon {width:24px; height:24px; margin-right:10px;}
+.upicon {width:24px; height:24px; margin-right:10px; vertical-align:middle;}
 
 /* scrollBtn */
-#scrollToTopBtn {position: fixed;bottom: 20px;right: 20px;z-index: 99;width: 40px;height: 40px;border: none;outline: none;background-color: rgba(0, 0, 0, 0.5); color: white;cursor: pointer;border-radius: 50%;font-size: 1.5rem;display: none;justify-content: center;align-items: center;opacity: 0.8;transition: opacity 0.3s, transform 0.3s;}
+#scrollToTopBtn {position: fixed;bottom: 20px;right: 40px;z-index: 99;width: 40px;height: 40px;border: none;outline: none;background-color: rgba(0, 0, 0, 0.5); color: white;cursor: pointer;border-radius: 50%;font-size: 1.5rem;display: none;justify-content: center;align-items: center;opacity: 0.8;transition: opacity 0.3s, transform 0.3s;}
 #scrollToTopBtn:hover { opacity: 1;transform: scale(1.1);}
+
