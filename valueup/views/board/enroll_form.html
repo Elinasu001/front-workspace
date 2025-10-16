@@ -112,144 +112,58 @@
         </header>
 
 
-        <div class="contentWrap">
+        <div class="contentWrap mb40">
             <div class="contArea">
                 <div class="breadcrumb">
                     <div class="inner">
-                        <a href="#" class="home ir">홈</a>><a href="#">고객지원</a>><span>자유게시판</span>
+                        <a href="#" class="home ir">홈</a>><a href="#">고객지원</a>><a href="#">자유게시판</a>><span>게시글 등록</span>
                     </div>
                 </div>
                 <div class="inner">
-                    <h2 class="sec-tit"><img src="../../assets/images/Icon.png" class="upicon">자유 게시판</h2>
-                    
-                    <div class="form-group mt60 searchBd">
-                        <div class="flex-row gap5">
-                            <div class="col col-4">
-                                <div id="phn-first" class="se-select" data-stove="select" data-uicase="slide">
-                                    <div class="e-hidden-title">TITLE</div>
-                                    <select required="" title="">
-                                        <option value="" hidden="">안녕</option>
-                                        <option value="0">000</option>
-                                        <option value="1">111</option>
-                                        <option value="2">222</option>
-                                        <option value="3">333</option>
-                                        <option value="4">444</option>
+                    <h2 class="sec-tit"><img src="../../assets/images/Icon.png" class="upicon">게시글 등록</h2>
+                    <form action="signIn">
+                        <div class="form-wrap mt60 searchBd">
+
+                            <div class="form-group">
+                                <label for="selectDisabled">카테고리</label>
+                                <div id="selectDisabled" class="se-select" name="category" data-stove="select" data-uicase="slide">
+                                    <div class="e-hidden-title">카테고리</div>
+                                    <select required="" title="" >
+                                        <option value="" hidden="">카테고리</option>
+                                        <option value="0">option 00</option>
                                     </select>
                                 </div>
+                            </div>    
+
+                            <div class="form-group">
+                                <label for="title">제목</label>
+                                <input id="title" type="text" name="title" class="form-control" readonly>
                             </div>
-                            <div class="col">
-                                <input id="search-input" type="text" class="form-control ipt-pd-r" placeholder="입력해주세요">
-                                <span class="ipt-right ico flex-row gap10"><button type="reset" class="btn btn-ipt-clear"><span class="sr-only">삭제버튼</span></button><button type="button" class="btn btn-ipt-search"><span class="sr-only">검색버튼</span></button></span>
+
+                            <div class="form-group">
+                                <label for="content">내용</label>
+                                <textarea type="content" id="ipt02" class="inp" name="content" placeholder="내용을 입력해주세요" maxlength="" readonly></textarea>
                             </div>
+
+                            <div class="form-group">
+                                <label for="files">첨부파일</label>
+                                <div class="col">
+                                    <input class="form-control upload-text uploadInput" type="text" placeholder="파일을 첨부하세요" tabindex="0" readonly>
+                                    <label class="upload-label" for="files">
+                                        <input id="files" class="upload" name="upfile" type="file" />
+                                        <span class="sr-only fileLabel">파일 선택</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="btn-area mt30">
+                                <button type="button" class="btn btn-secondary" onclick="history.back();">뒤로가기</button>
+                                <button type="button" class="btn btn-primary">등록하기</button>
+                            </div>
+
                         </div>
-                    </div>
+                    </form>
                     
-                    <div class="btn-sec mt30">
-                        <button class="btn-sm">글쓰기</button>
-                    </div>
-                    <div class="table-wrap">
-                        <div class="table-type1 ft-sticky">
-                            <table>
-                                <caption>자유 게시판- 번호, 카테고리, 작성자, 제목, 작성일, 조회수</caption>
-                                <colgroup>
-                                    <col width="10%">
-                                    <col width="20%">
-                                    <col width="20%">
-                                    <col width="30%">
-                                    <col width="20%">
-                                    <col width="10%">
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th scope="row">번호</th>
-                                        <th scope="row">카테고리</th>
-                                        <th scope="row">작성자</th>
-                                        <th scope="row">제목</th>
-                                        <th scope="row">작성일</th>
-                                        <th scope="row">조회수</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>43</td>
-                                        <td>css</td>
-                                        <td>망아지3</td>
-                                        <td>가가가가가가가</td>
-                                        <td>2025-10-01</td>
-                                        <td>10</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div id="paging_div" class="pagination-wrap">
-                        <div class="pagination">
-                            <a class="btn-circle prevDb nb ir" href="javascript:pageFunc.selectNoticeList(1)">이전</a>
-                            <a class="btn-circle prev nb ir" href="javascript:pageFunc.selectNoticeList(1)">이전</a>
-                            <ul>
-                                <li><a href="#" onclick="pageFunc.selectNoticeList(1)" class="btn-circle nb">1</a></li>
-                                <li><a href="#" onclick="pageFunc.selectNoticeList(2)" class="btn-circle nb active" title="현재페이지">2</a></li>
-                            </ul>
-                            <a class="btn-circle next nb ir" href="javascript:pageFunc.selectNoticeList(3)">다음</a>
-                            <a class="btn-circle nextDb nb ir" href="javascript:pageFunc.selectNoticeList(3)">다음</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
