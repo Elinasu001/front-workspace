@@ -13,6 +13,7 @@
     --ico-se-arrow: url(../../../images/com/svg/ico_se_arrow.svg);
     --ico-file: url(../../../images/com/svg/ico_file.svg);
     --ico-date: url(../../../images/com/svg/ico_date.svg);
+    --ico-home:url(../../../images/com/ico_home.png);
 
     --ico-w-plus: url(../../../images/com/ico_w_plus.png);
     --ico-top: url(../../../images/com/ico_scrollTop.png)
@@ -69,3 +70,9 @@ input.form-control.ipt-pd-r { padding:0 32px 0 15px; }
 /* scrollBtn */
 #scrollToTopBtn {position: fixed;bottom: 20px;right: 40px;z-index: 99;width: 40px;height: 40px;border: none;outline: none;background-color: rgba(0, 0, 0, 0.5); color: white;cursor: pointer;border-radius: 50%;font-size: 1.5rem;display: none;justify-content: center;align-items: center;opacity: 0.8;transition: opacity 0.3s, transform 0.3s;}
 #scrollToTopBtn:hover { opacity: 1;transform: scale(1.1);}
+
+
+.breadcrumb .inner{display:flex; justify-content: flex-end; gap:12px; padding:0 1rem; font-size:12px; color:#BBB;}
+.breadcrumb a.home {width:15px;height:15px; background: var(--ico-home) no-repeat 100%/15px auto; margin-bottom: -5px;}
+.breadcrumb a,
+.breadcrumb span{color:#888;}

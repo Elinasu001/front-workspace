@@ -1,324 +1,309 @@
-$(document).ready(function () {
-
+document.addEventListener('DOMContentLoaded', function () {
 
     /*---------------------------------------------
-        ready, load
-    ---------------------------------------------*/
-    $(window).on('load', function () {
+     * ready, load
+     *---------------------------------------------*/
+    window.addEventListener('load', function () {
         fnPreload();
     });
 
-
     /*---------------------------------------------
-        preload, init
-    ---------------------------------------------*/
+     * preload, init
+     *---------------------------------------------*/
     /* preload */
     function fnPreload() {
         seSelect.init();
     }
 
     /*---------------------------------------------
-        Custom Select Function #셀렉트
-    ---------------------------------------------*/
-    /*
-        function
-    */
-    var customSelect = function (element) {
+     * Custom Select Function #셀렉트
+     *---------------------------------------------*/
+    var customSelect = function (selectElement) {
         /* Funtion Define */
-        var fnName = '[data-stove="select"]',
-            $this = $(element).closest(fnName),
-            $select = $this.find('select'),
-            $stage = $('.contentWrap');
+        const fnName = '[data-stove="select"]';
+        const thisEl = selectElement.closest(fnName);
+        const stage = document.querySelector('.contentWrap');
+
+        if (!thisEl) return;
 
         /* Class Define */
-        var onClass = 'on',
-            dimClass = 'stove-dim',
-            optionLayerClass = 'stove-option-layer',
-            optionLayerScrollClass = 'stove-option-scroll',
-            optionLayerCloseClass = 'stove-btn-close',
-            optionTitleClass = 'stove-options-title',
-            optionListClass = 'stove-options',
-            optionClass = 'stove-option';
+        const onClass = 'on';
+        const dimClass = 'stove-dim';
+        const optionLayerClass = 'stove-option-layer';
+        const optionLayerScrollClass = 'stove-option-scroll';
+        const optionListClass = 'stove-options';
+        const optionClass = 'stove-option';
+        const optionTitleClass = 'stove-options-title';
 
         /* Extend Define */
-        var nowStatus = $this.attr('data-status'),
-            statusDisabled = $select.attr('disabled'),
-            statusReadonly = $select.attr('readonly'),
-            uiCase = $this.attr('data-uicase'),
-            optionLength = $select.children('option').length;
+        const nowStatus = thisEl.getAttribute('data-status');
+        const statusDisabled = selectElement.disabled;
+        const statusReadonly = selectElement.hasAttribute('readonly');
+        const uiCase = thisEl.getAttribute('data-uicase');
+        const options = selectElement.options;
 
         /* Reset */
-        if (statusDisabled == 'disabled' || statusReadonly == 'readonly') return;
-        $(fnName).find('.' + dimClass + ', .' + optionLayerClass).remove();
+        if (statusDisabled || statusReadonly) return;
+        thisEl.querySelectorAll(`.${dimClass}, .${optionLayerClass}`).forEach(el => el.remove());
 
         /* Option Init */
-        $select.before('<div class="' + dimClass + '"></div>');
-        $select.after('<div class="' + optionLayerClass + '" role="dialog"></div>');
+        const dim = document.createElement('div');
+        dim.className = dimClass;
+        selectElement.before(dim);
 
-        var $dim = $this.find('.' + dimClass),
-            $optionLayer = $this.find('.' + optionLayerClass);
-        var $optionScroll = $('<div>', {
-            class: optionLayerScrollClass
-        }).appendTo($optionLayer);
-        var $optionList = $('<div>', {
-            class: optionListClass
-        }).appendTo($optionScroll);
+        const optionLayer = document.createElement('div');
+        optionLayer.className = optionLayerClass;
+        optionLayer.setAttribute('role', 'dialog');
+        selectElement.after(optionLayer);
 
-        for (var i = 0; i < optionLength; i++) {
-            var option = $select.children('option').eq(i);
-            if (option.attr('disabled') && option.attr('selected') && option.attr('hidden')) {
-                if (uiCase == 'slide') {
-                    // $('<div>', {
-                    //     class: optionTitleClass,
-                    //     text: option.text(),
-                    //     rel: option.val()
-                    // }).appendTo($optionList);
-                }
-            } else if (option.attr('disabled')) {
-                $('<button>', {
-                    class: optionClass,
-                    text: option.text(),
-                    disabled: 'disabled'
-                }).attr('data-value', option.val()).appendTo($optionList);
-            } else if (option.attr('hidden')) {
+        const optionScroll = document.createElement('div');
+        optionScroll.className = optionLayerScrollClass;
+        optionLayer.appendChild(optionScroll);
+
+        const optionList = document.createElement('div');
+        optionList.className = optionListClass;
+        optionScroll.appendChild(optionList);
+
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            if (option.disabled && option.selected && option.hidden) {
+                // 주석 처리된 부분은 생략
+            } else if (option.disabled) {
+                const button = document.createElement('button');
+                button.className = optionClass;
+                button.textContent = option.text;
+                button.disabled = true;
+                button.dataset.value = option.value;
+                optionList.appendChild(button);
+            } else if (option.hidden) {
                 // 기본 옵션(hidden)은 표시하지 않음
             } else {
-                $('<button>', {
-                    class: optionClass,
-                    text: option.text(),
-                }).attr('data-value', option.val()).appendTo($optionList);
+                const button = document.createElement('button');
+                button.className = optionClass;
+                button.textContent = option.text;
+                button.dataset.value = option.value;
+                optionList.appendChild(button);
             }
         }
 
-        var $optionBtn = $optionList.find('button');
-        // var $closeBtn = $('<button>', {
-        //     class: optionLayerCloseClass,
-        //     title: '닫기'
-        // }).appendTo($optionLayer);
+        const optionBtns = optionList.querySelectorAll('button');
 
-        var $optionTitle = $('<div>', {
-            class: optionTitleClass,
-            text: $this.find('.e-hidden-title').text()
-        }).prependTo($optionLayer);
+        const optionTitle = document.createElement('div');
+        optionTitle.className = optionTitleClass;
+        const hiddenTitle = thisEl.querySelector('.e-hidden-title');
+        if (hiddenTitle) {
+            optionTitle.textContent = hiddenTitle.textContent;
+        }
+        optionLayer.prepend(optionTitle);
 
-        setTimeout(function () {
-            $optionBtn.each(function () {
-                var thisRel = $(this).attr('data-value'),
-                    thisValue = $select.val();
-                if (thisRel == thisValue) {
-                    $(this).addClass(onClass);
-                    $(this).attr('title', '선택됨');
+
+        setTimeout(() => {
+            optionBtns.forEach(btn => {
+                const thisRel = btn.getAttribute('data-value');
+                const thisValue = selectElement.value;
+                if (thisRel === thisValue) {
+                    btn.classList.add(onClass);
+                    btn.setAttribute('title', '선택됨');
                 }
             });
         }, 0);
 
         /* Common Function */
         function open() {
-            $optionLayer.addClass('va-' + uiCase);
-            if (uiCase == 'slide') {
-                setTimeout(function () {
-                    $dim.addClass(onClass);
-                    $optionLayer.addClass(onClass);
-                    // $stage.css({ 'overflow': 'hidden' });
-                    if (window.innnerWidth > 960){
-                        $stage.css({'ocerflow' : 'hidden'})
+            optionLayer.classList.add(`va-${uiCase}`);
+            if (uiCase === 'slide') {
+                setTimeout(() => {
+                    dim.classList.add(onClass);
+                    optionLayer.classList.add(onClass);
+                    if (window.innerWidth > 960 && stage) {
+                        stage.style.overflow = 'hidden';
                     }
                 }, 0);
-                setTimeout(function () {
-                    $optionLayer.attr('tabindex', 0).focus();
+                setTimeout(() => {
+                    optionLayer.setAttribute('tabindex', '0');
+                    optionLayer.focus();
                 }, 0);
-                $dim.click(function (e) {
+
+                dim.addEventListener('click', e => {
                     close();
                     e.stopPropagation();
                 });
             }
-            $this.attr('data-status', 'open');
-        };
+            thisEl.setAttribute('data-status', 'open');
+        }
 
         function close() {
-            if (uiCase == 'slide') {
-                setTimeout(function () {
-                    $dim.remove();
-                    $optionLayer.remove();
-                    // $stage.css({ 'overflow': '' });
-                    fkSelAndPopupResetOverflow(); // 모든 팝업과 select layer 닫힘 여부 확인 후 overflow 초기화
-
-                    console.log('PUB_COM ' + '마지막 팝업 닫힐 경우 공통 초기화');
-                    
+            if (uiCase === 'slide') {
+                setTimeout(() => {
+                    dim.remove();
+                    optionLayer.remove();
+                    if (typeof fkSelAndPopupResetOverflow === 'function') {
+                         fkSelAndPopupResetOverflow(); // 모든 팝업과 select layer 닫힘 여부 확인 후 overflow 초기화
+                    } else if (stage) {
+                        stage.style.overflow = '';
+                    }
                 }, 0);
             }
-            setTimeout(function () {
-                $this.removeAttr('data-status');
+            setTimeout(() => {
+                thisEl.removeAttribute('data-status');
             }, 1);
-            return;
-        };
+        }
 
         /* Event Binding */
-        $select.on({
-            keydown: function (e) {
-                if (e.keyCode == 27) {
-                    e.stopPropagation();
-                    close();
-                }
+        selectElement.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                e.stopPropagation();
+                close();
             }
         });
 
-        $optionLayer.on({
-            click: function (e) {
+        optionLayer.addEventListener('click', e => e.stopPropagation());
+        optionLayer.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
                 e.stopPropagation();
-            },
-            keydown: function (e) {
-                if (e.keyCode == 27) {
-                    e.stopPropagation();
-                    close();
-                }
+                close();
             }
         });
 
-        // $closeBtn.on({
-        //     click: function (e) {
-        //         e.stopPropagation();
-        //         close();
-        //     },
-        //     blur: function (e) {
-        //         $optionLayer.addClass(onClass).attr('tabindex', 0).focus();
-        //     }
-        // });
-
-        $optionBtn.on({
-            click: function (e) {
+        optionBtns.forEach(btn => {
+            btn.addEventListener('click', function (e) {
                 e.stopPropagation();
-                $select.val($(this).attr('data-value')).trigger('change');
-                e.preventDefault(); //select 선택 시 기본 폼 리셋 x
+                e.preventDefault(); // select 선택 시 기본 폼 리셋 방지
+
+                selectElement.value = this.getAttribute('data-value');
+                // 'change' 이벤트를 수동으로 발생시켜 다른 리스너들이 반응하도록 함
+                selectElement.dispatchEvent(new Event('change', { 'bubbles': true }));
+
                 close();
 
-                var $fakeSlt = $this.closest('.se-select').find('.btn-fake-slt'),
-                    $fakeSltVal = $fakeSlt.find('.value');
-                var sltVal = $(this).text().toString();
+                const fakeSlt = thisEl.closest('.se-select').querySelector('.btn-fake-slt');
+                if (fakeSlt) {
+                    const fakeSltVal = fakeSlt.querySelector('.value');
+                    const sltVal = this.textContent;
 
-                $fakeSlt.focus();
-                $fakeSlt.addClass('selected');
-                $fakeSltVal.text(sltVal);
-            }
+                    fakeSlt.focus();
+                    fakeSlt.classList.add('selected');
+                    if (fakeSltVal) {
+                        fakeSltVal.textContent = sltVal;
+                    }
+                }
+            });
         });
 
         /* Init */
-        if (nowStatus == 'open') {
+        if (nowStatus === 'open') {
             close();
         } else {
             open();
         }
-        
     };
 
-
     /*
-        event
-    */
-    $(document).on('click', '.se-select .btn-fake-slt', function () {
-        if ($(this).siblings('select').prop('disabled')) return;
-        customSelect($(this).closest('.se-select').find('select'));
+     * event - Delegated Event Listener
+     */
+    document.addEventListener('click', function (e) {
+        const fakeButton = e.target.closest('.se-select .btn-fake-slt');
+        if (fakeButton) {
+            const select = fakeButton.closest('.se-select').querySelector('select');
+            if (select && select.disabled) return;
+            customSelect(select);
+        }
     });
 
 
-
     /*---------------------------------------------
-        select #셀렉트
-    ---------------------------------------------*/
-    /*
-        function
-    */
-    var seSelect = (function () {
+     * select #셀렉트
+     *---------------------------------------------*/
+    const seSelect = (function () {
         return {
-            init: function () { // 초기화
-                $('.se-select').each(function () {
-                    if ($(this).attr('data-stove') == 'select') { // 커스텀셀렉트
-                        if ($(this).find('.btn-fake-slt').length != 0) return;
-                        $(this).append('<button type="button" class="se-btn btn-fake-slt"><span class="placeholder"></span><span class="value"></span></button>');
+            init: function () {
+                document.querySelectorAll('.se-select').forEach(function (el) {
+                    if (el.getAttribute('data-stove') === 'select') {
+                        if (el.querySelector('.btn-fake-slt')) return;
 
-                        var $select = $(this).find('select'),
-                            $fakeSlt = $(this).find('.btn-fake-slt'),
-                            $fakeSltPlaceholder = $fakeSlt.find('.placeholder'),
-                            $fakeSltVal = $fakeSlt.find('.value');
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'se-btn btn-fake-slt';
+                        button.innerHTML = '<span class="placeholder"></span><span class="value"></span>';
+                        el.appendChild(button);
 
-                        if ($select.attr('disabled')) {
-                            $fakeSlt.addClass('disabled');
+                        const select = el.querySelector('select');
+                        const fakeSlt = el.querySelector('.btn-fake-slt');
+                        const fakeSltPlaceholder = fakeSlt.querySelector('.placeholder');
+                        const fakeSltVal = fakeSlt.querySelector('.value');
+
+                        if (select.disabled) {
+                            fakeSlt.classList.add('disabled');
                         }
-                        if($select.attr('readonly')){
-                            $fakeSlt.addClass('readonly');
+                        if (select.hasAttribute('readonly')) {
+                            fakeSlt.classList.add('readonly');
                         }
-                        $select.find('option').each(function () {
-                            if ($(this).attr('hidden')) {
-                                $fakeSltPlaceholder.text($(this).text());
+
+                        Array.from(select.options).forEach(function (option) {
+                            if (option.hidden) {
+                                fakeSltPlaceholder.textContent = option.text;
                             }
-                            if ($(this).attr('selected')) {
-                                $fakeSlt.addClass('selected');
-                                $fakeSltVal.text($(this).text());
+                            if (option.selected) {
+                                fakeSlt.classList.add('selected');
+                                fakeSltVal.textContent = option.text;
                             }
                         });
                     }
                 });
             },
-            // errorChk: function (_target) { // 에러감지
-            //     var $slt = $(_target),
-            //         $sltWrap = $slt.closest('.se-select'),
-            //         $fakeSlt = $sltWrap.find('.btn-fake-slt');
-                    
-
-            //     if ($slt.hasClass('has-error')) {
-            //         $fakeSlt.addClass('has-error');
-            //     } else {
-            //         $fakeSlt.removeClass('has-error');
-            //     }
-            // },
-
-            errorChk: function (_target) { // 에러 감지
-                var $slt = $(_target),
-                    $sltWrap = $slt.closest('.se-select'),
-                    $formGroup = $sltWrap.closest('.form-group'); // form-group 찾기
-            
-                if ($formGroup.hasClass('user-invalid')) {
-                    $formGroup.addClass('user-invalid');
-                } else {
-                    $formGroup.removeClass('user-invalid');
+            errorChk: function (_target) {
+                const slt = _target;
+                const sltWrap = slt.closest('.se-select');
+                const formGroup = sltWrap ? sltWrap.closest('.form-group') : null;
+                
+                if (formGroup) {
+                    if (formGroup.classList.contains('user-invalid')) {
+                        // The logic seems to re-add the class if it exists. Maybe the intent was different?
+                        // This maintains the original logic.
+                        formGroup.classList.add('user-invalid'); 
+                    } else {
+                        formGroup.classList.remove('user-invalid');
+                    }
                 }
             },
-            /**
-             * 값을 자동으로 변경한 경우 헬퍼 fn
-             * @param _target : .se-select 의 특정 ID
-             */
             valChk: function (_target) {
-                var $seSlt = $(_target);
-                var $select = $seSlt.find('select'),
-                    $fakeSlt = $seSlt.find('.btn-fake-slt'),
-                    $fakeSltVal = $fakeSlt.find('.value');
+                const seSlt = typeof _target === 'string' ? document.querySelector(_target) : _target;
+                if (!seSlt) return;
+                
+                const select = seSlt.querySelector('select');
+                const fakeSlt = seSlt.querySelector('.btn-fake-slt');
+                const fakeSltVal = fakeSlt.querySelector('.value');
 
-                if ($select.attr('disabled') || $select.prop('disabled') == true) {
-                    $fakeSlt.addClass('disabled');
+                if (!select || !fakeSlt || !fakeSltVal) return;
+
+                if (select.disabled) {
+                    fakeSlt.classList.add('disabled');
                 } else {
-                    $fakeSlt.removeClass('disabled');
+                    fakeSlt.classList.remove('disabled');
                 }
 
-                $select.find('option').each(function () {
-                    if ($(this).prop('selected') == true && $(this).prop('hidden') != true) {
-                        $fakeSlt.addClass('selected');
-                        $fakeSltVal.text($(this).text());
+                Array.from(select.options).forEach(function (option, index) {
+                    if (option.selected && !option.hidden) {
+                        fakeSlt.classList.add('selected');
+                        fakeSltVal.textContent = option.text;
                     }
-                    if ($(this).prop('selected') == true && $(this).prop('hidden') == true && $(this).index() == 0) {
-                        $fakeSlt.removeClass('selected');
-                        $fakeSltVal.text('');
+                    if (option.selected && option.hidden && index === 0) {
+                        fakeSlt.classList.remove('selected');
+                        fakeSltVal.textContent = '';
                     }
                 });
             }
-        }
+        };
     })();
 
-
     /*
-        event
-    */
-    $(document).on('change', '[data-stove="select"] select', function () {
-        seSelect.errorChk($(this));
+     * event - Delegated Event Listener for change
+     */
+    document.addEventListener('change', function (e) {
+        const select = e.target.closest('[data-stove="select"] select');
+        if (select) {
+            seSelect.errorChk(select);
+        }
     });
 
 });
