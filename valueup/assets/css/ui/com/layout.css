@@ -7,7 +7,11 @@
 ---------------------------------------------*/
 html,body { height:100%; }
 body { position: relative; -webkit-text-size-adjust: none; }
+<<<<<<< HEAD
 /* .wrap { position: relative; margin: 0 auto; display:-webkit-box; display:-ms-flexbox; display:-webkit-flex; display:flex; -webkit-box-orient:vertical; -webkit-box-direction:normal; -ms-flex-direction:column; flex-direction: column; height:100%; overflow: hidden;} */
+=======
+.wrap { position: relative; margin: 0 auto; display:-webkit-box; display:-ms-flexbox; display:-webkit-flex; display:flex; -webkit-box-orient:vertical; -webkit-box-direction:normal; -ms-flex-direction:column; flex-direction: column; height:100%; /*overflow: hidden; */}
+>>>>>>> 17fe98821b34bb667f634958e00407faad1a50bc
 .btmWrap { width:100%; height:auto; background-color: #F8F8F8;}
 .btmCont { height:100%; }
 .inner { max-width:1000px; }
@@ -19,7 +23,17 @@ body { position: relative; -webkit-text-size-adjust: none; }
 /*---------------------------------------------
 	#기본 레이아웃 _ 컨텐츠별
 ---------------------------------------------*/
+<<<<<<< HEAD
 #wrap {height:100dvh;}
+=======
+.wrap.login .contentWrap,
+.wrap.join .contentWrap
+{justify-content:center; }
+
+.wrap.join {height:100%;}
+
+#wrap.login .contentWrap { height: calc(100dvh - 110px); }
+>>>>>>> 17fe98821b34bb667f634958e00407faad1a50bc
 
 
 /*---------------------------------------------

@@ -9,6 +9,7 @@
     --ico-clear: url(../../../images/com/svg/ico_clear.svg);
     --ico-info: url(../../../images/com/svg/ico_info.svg);
     --ico-check: url(../../../images/com/svg/ico_check.svg);
+    --ico-chk: url(../../../images/com/svg/ico_chk.svg);
     --ico-se-arrow: url(../../../images/com/svg/ico_se_arrow.svg);
     --ico-file: url(../../../images/com/svg/ico_file.svg);
     --ico-date: url(../../../images/com/svg/ico_date.svg);
@@ -68,4 +69,3 @@ input.form-control.ipt-pd-r { padding:0 32px 0 15px; }
 /* scrollBtn */
 #scrollToTopBtn {position: fixed;bottom: 20px;right: 40px;z-index: 99;width: 40px;height: 40px;border: none;outline: none;background-color: rgba(0, 0, 0, 0.5); color: white;cursor: pointer;border-radius: 50%;font-size: 1.5rem;display: none;justify-content: center;align-items: center;opacity: 0.8;transition: opacity 0.3s, transform 0.3s;}
 #scrollToTopBtn:hover { opacity: 1;transform: scale(1.1);}
-
